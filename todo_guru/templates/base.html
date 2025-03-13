@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>
+            {% block title %}ToDoGuru{% endblock %}
+        </title>
+        <!-- Meta -->
+        <meta name="description"
+              content="Mental health has a significant impact on people’s lives and wellbeing. To support people with mental illnesses, we need better data to understand them.">
+        <meta name="keywords"
+              content="mental health, mental illness, wellbeing, support, data, understanding">
+        <meta name="author" content="Oscar Sabet, Code Institute">
+        <meta name="robots" content="index, follow">
+        <!-- Bootstrap 5 CSS -->
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'
+              rel='stylesheet'
+              integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH'
+              crossorigin='anonymous'>
+        <!-- Font Awesome CSS -->
+        <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css"
+              rel="stylesheet">
+        <!-- Include AOS CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <!-- Additional CSS files can be included here -->
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap"
+              rel="stylesheet">
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav id="navbar"
+             class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div id="navbar-container" class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}"><i class="xfa-solid xfa-list-check"> </i><span class="brand-1">  To<span class="brand-2">Do</span><span class="brand-3">|<span class="brand-4">Guru</span></span></span></a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarText"
+                        aria-controls="navbarText"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/' %}active{% endif %}"
+                               aria-current="page"
+                               href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/about/' %}active{% endif %}"
+                               aria-current="page"
+                               href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/tasks/' %}active{% endif %}"
+                               aria-current="page"
+                               href="{% url 'index' %}">Tasks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/tasks_board/' %}active{% endif %}"
+                               aria-current="page"
+                               href="{% url 'task_board' %}">Project Board</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/task_report/' %}active{% endif %}"
+                               aria-current="page"
+                               href="{% url 'task_report' %}">Task Statistics</a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text text-muted">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}">Logout {{ user.username }} <i class="fa-solid fa-user"></i></a>
+                        {% else %}
+                            <a href="{% url 'login' %}">Login</a>
+                            <a href="{% url 'register' %}">Register</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </nav>
+        {% block content %}
+            <!-- Content Goes here -->
+        {% endblock content %}
+        <footer class="bg-9 text-center shadow-sm">
+            <div class="container p-4">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">ToDoGuru</h5>
+                        <p>Your ultimate task management tool. Organize your tasks, set priorities, and stay on top of your to-do list.</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Links</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="{% url 'home' %}" class="text-dark">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'about' %}" class="text-dark">About</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'index' %}" class="text-dark">Tasks</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Follow Us</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="https://github.com/yourusername" class="text-dark"><i class="fab fa-github"></i> GitHub</a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/yourusername" class="text-dark"><i class="fab fa-twitter"></i> Twitter</a>
+                            </li>
+                            <li>
+                                <a href="https://facebook.com/yourusername" class="text-dark"><i class="fab fa-facebook"></i> Facebook</a>
+                            </li>
+                            <li>
+                                <a href="https://linkedin.com/in/yourusername" class="text-dark"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center p-3">© 2025 ToDoGuru. All rights reserved.</div>
+        </footer>
+        <!-- Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous'>
+        </script>
+        <!-- Font Awesome kit -->
+        <script src='https://kit.fontawesome.com/aa9af45995.js'
+                crossorigin='anonymous'></script>
+        <!-- Custom JS -->
+        {% comment %} <script src="assets/js/scripts.js"></script> {% endcomment %}
+        <!-- Additional JS files can be included here -->
+        {% block extra_js %}
+        {% endblock %}
+    </body>
+</html>
