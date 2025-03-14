@@ -9,13 +9,11 @@ from django.contrib.auth import login
 from django.contrib import messages
 
 
-# Create your views here.
 @login_required
 def list(request):
     tasks = Task.objects.filter(user=request.user).order_by("-status", "-created")
     form = TaskForm()
 
-    # Calculate the time taken and time until due date for each task
     for task in tasks:
         if task.completed_date:
             task.time_taken = task.completed_date - task.created
@@ -31,25 +29,6 @@ def list(request):
 
     context = {"tasks": tasks, "form": form}
     return render(request, "tasks/list.html", context)
-
-
-# @login_required
-# def task_board(request):
-#     order_by = request.GET.get("order_by", "status")  # Default ordering by status
-#     tasks = Task.objects.filter(user=request.user).order_by(order_by)
-#     not_started_tasks = tasks.filter(status="P")
-#     in_progress_tasks = tasks.filter(status="IP")
-#     completed_tasks = tasks.filter(status="C")
-#     return render(
-#         request,
-#         "task/task_board.html",
-#         {
-#             "not_started_tasks": not_started_tasks,
-#             "in_progress_tasks": in_progress_tasks,
-#             "completed_tasks": completed_tasks,
-#             "order_by": order_by,
-#         },
-#     )
 
 
 @login_required
@@ -72,8 +51,8 @@ def create_task(request):
             messages.success(request, "Task created successfully.")
         else:
             messages.error(request, "Failed to create task.")
-        return redirect("tasks")
-    return redirect("tasks")
+        return redirect("list")
+    return redirect("list")
 
 
 @login_required
@@ -84,10 +63,10 @@ def update_task(request, task_id):
         if form.is_valid():
             form.save()
             messages.success(request, "Task Updated successfully.")
-            return redirect("tasks")
+            return redirect("list")
         else:
             messages.error(request, "Failed to update task.")
-            return redirect("tasks")
+            return redirect("list")
     else:
         form = TaskForm(instance=task)
     return render(request, "tasks/update_task.html", {"form": form, "task": task})
@@ -100,22 +79,7 @@ def complete_task(request, task_id):
         task.status = "C" if request.POST.get("completed") else "P"
         task.save()
         messages.success(request, "Task status updated successfully.")
-    return redirect("tasks")
-
-
-# @login_required
-# def update_task(request, task_id):
-#     task = get_object_or_404(Task, id=task_id, user=request.user)
-#     form = TaskForm(instance=task)
-
-#     if request.method == "POST":
-#         form = TaskForm(request.POST, instance=task)
-#         if form.is_valid():
-#             form.save()
-#         return redirect("/tasks/")
-
-#     context = {"form": form}
-#     return render(request, "tasks/update_task.html", context)
+    return redirect("list")
 
 
 @login_required
@@ -142,18 +106,3 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, "task/register.html", {"form": form})
-
-
-# @login_required
-# def update_task(request, p_key):
-#     task = get_object_or_404(Task, id=p_key, user=request.user)
-#     form = TaskForm(instance=task)
-
-#     if request.method == "POST":
-#         form = TaskForm(request.POST, instance=task)
-#         if form.is_valid():
-#             form.save()
-#         return redirect("/tasks/")
-
-#     context = {"form": form}
-#     return render(request, "task/update_task.html", context)

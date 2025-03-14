@@ -99,8 +99,8 @@
                                  data-bs-parent="#tasks-accordion">
                                 <div class="bg-1 m-0 accordion-body row">
                                     <div class="col-lg-4">
-                                        <div class="card bg-5 rounded">
-                                            <div class="card-header">description</div>
+                                        <div class="card bg-7 rounded">
+                                            <div class="card-header text-center">description</div>
                                             <div class="card-body p-2">{{ t.description|safe }}</div>
                                         </div>
                                     </div>
@@ -118,14 +118,7 @@
                                                 {% if t.time_until_due %}<p>Time Until Due: {{ t.time_until_due|date:"d-m-y H:i" }}</p>{% endif %}
                                             </div>
                                         </div>
-                                        {% comment %} <p>Status: {{ t.get_status_display }}</p>
-                                    <p>Created: {{ t.created }}</p>
-                                    <p>Due Date: {{ t.due_date }}</p>
-                                    <p>Priority: {{ t.get_priority_display }}</p>
-                                    <p>Description: {{ t.description|safe }}</p>
-                                    <p>Category: {{ t.get_category_display }}</p>
-                                    <p>User: {{ t.user }}</p>
-                                        <p>Completed Date: {{ t.completed_date }}</p> {% endcomment %}
+                                    
                                         <div class="ms-auto">
                                             <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a>
                                             <button type="button"
