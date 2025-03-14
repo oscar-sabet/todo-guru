@@ -11,7 +11,7 @@ from django.contrib import messages
 
 # Create your views here.
 @login_required
-def tasks(request):
+def list(request):
     tasks = Task.objects.filter(user=request.user).order_by("-status", "-created")
     form = TaskForm()
 
@@ -30,7 +30,7 @@ def tasks(request):
             task.time_until_due = None
 
     context = {"tasks": tasks, "form": form}
-    return render(request, "tasks/tasks.html", context)
+    return render(request, "tasks/list.html", context)
 
 
 # @login_required
@@ -91,6 +91,16 @@ def update_task(request, task_id):
     else:
         form = TaskForm(instance=task)
     return render(request, "tasks/update_task.html", {"form": form, "task": task})
+
+
+@login_required
+def complete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
+    if request.method == "POST":
+        task.status = "C" if request.POST.get("completed") else "P"
+        task.save()
+        messages.success(request, "Task status updated successfully.")
+    return redirect("tasks")
 
 
 # @login_required

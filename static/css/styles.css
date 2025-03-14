@@ -20,6 +20,10 @@
   --red-pastel: #ffa4a4;
   --red-pastel-dark: #ed8484;
 
+  --red: #e12a2a;
+  --green: #22d25f;
+  --blue: #3273cf;
+
   --shadow: 0 0 9px rgba(0, 0, 0, 0.233);
 }
 
@@ -127,6 +131,48 @@
   font-weight: 300;
 }
 .btn-custom-2:hover {
+  background-color: white;
+  color: var(--fg);
+}
+.btn-custom-3 {
+  background-color: var(--blue);
+  color: white;
+  border: 0;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  padding: 8px 16px;
+  margin: 8px;
+  font-weight: 300;
+}
+.btn-custom-3:hover {
+  background-color: white;
+  color: var(--fg);
+}
+.btn-custom-4 {
+  background-color: var(--red);
+  color: white;
+  border: 0;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  padding: 8px 16px;
+  margin: 8px;
+  font-weight: 300;
+}
+.btn-custom-4:hover {
+  background-color: white;
+  color: var(--fg);
+}
+.btn-custom-5 {
+  background-color: var(--green);
+  color: white;
+  border: 0;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  padding: 8px 16px;
+  margin: 8px;
+  font-weight: 300;
+}
+.btn-custom-5:hover {
   background-color: white;
   color: var(--fg);
 }

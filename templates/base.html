@@ -62,7 +62,7 @@
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == '/tasks/' %}active{% endif %}"
                                aria-current="page"
-                               href="{% url 'tasks' %}">Tasks</a>
+                               href="{% url 'list' %}">Tasks</a>
                         </li>
                         {% comment %} <li class="nav-item">
                             <a class="nav-link {% if request.path == '/tasks_board/' %}active{% endif %}"
@@ -106,7 +106,7 @@
                                 <a href="{% url 'about' %}" class="text-dark">About</a>
                             </li> {% endcomment %}
                             <li>
-                                <a href="{% url 'tasks' %}" class="xtext-dark">Tasks</a>
+                                <a href="{% url 'list' %}" class="xtext-dark">Tasks</a>
                             </li>
                         </ul>
                     </div>
