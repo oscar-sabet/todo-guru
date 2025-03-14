@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Task Lists{% endblock %}
+{% block content %}
+    <main>
+        <div class="container my-5">
+            <h2 class="text-center mb-4">Task Lists by Status</h2>
+            {% comment %} <div class="mb-3">
+                <label for="order_by" class="form-label">Order by:</label>
+                <select id="order_by" class="form-select" onchange="location = this.value;">
+                    <option value="?order_by=status"
+                            {% if order_by == 'status' %}selected{% endif %}>Status</option>
+                    <option value="?order_by=category"
+                            {% if order_by == 'category' %}selected{% endif %}>Category</option>
+                    <option value="?order_by=priority"
+                            {% if order_by == 'priority' %}selected{% endif %}>Priority</option>
+                </select>
+            </div> {% endcomment %}
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="text-center">Not Started</h3>
+                    <ul class="list-group rounded">
+                        {% for task in not_started_tasks %}
+                            <li class="list-group-item bg-8">
+                                {% comment %} <h3 class="text-center card-header rounded bg-light py-1">{{ task.title }}</h3> {% endcomment %}
+                                <h5>{{ task.title }}</h5>
+                                <p>{{ task.description|safe }}</p>
+                                <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
+                                {% comment %} <form method="post" action="{% url 'update_task_status' task.id %}">
+                                    {% csrf_token %}
+                                    <select name="status" onchange="this.form.submit()">
+                                        <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
+                                        <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
+                                        <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
+                                    </select>
+                                </form> {% endcomment %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-center">In Progress</h3>
+                    <ul class="list-group">
+                        {% for task in in_progress_tasks %}
+                            <li class="list-group-item bg-4">
+                                <h5>{{ task.title }}</h5>
+                                <p>{{ task.description|safe }}</p>
+                                <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
+                                {% comment %} <form method="post" action="{% url 'update_task_status' task.id %}">
+                                    {% csrf_token %}
+                                    <select name="status" onchange="this.form.submit()">
+                                        <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
+                                        <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
+                                        <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
+                                    </select>
+                                </form> {% endcomment %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-center">Completed</h3>
+                    <ul class="list-group">
+                        {% for task in completed_tasks %}
+                            <li class="list-group-item bg-2">
+                                <h5>{{ task.title }}</h5>
+                                <p>{{ task.description|safe }}</p>
+                                <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
+                                {% comment %} <form method="post" action="{% url 'update_task_status' task.id %}">
+                                    {% csrf_token %}
+                                    <select name="status" onchange="this.form.submit()">
+                                        <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
+                                        <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
+                                        <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
+                                    </select>
+                                </form> {% endcomment %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

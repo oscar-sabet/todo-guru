@@ -32,6 +32,25 @@ def list(request):
 
 
 @login_required
+def board(request):
+    order_by = request.GET.get("order_by", "status")  # Default ordering by status
+    tasks = Task.objects.filter(user=request.user).order_by(order_by)
+    not_started_tasks = tasks.filter(status="P")
+    in_progress_tasks = tasks.filter(status="IP")
+    completed_tasks = tasks.filter(status="C")
+    return render(
+        request,
+        "tasks/board.html",
+        {
+            "not_started_tasks": not_started_tasks,
+            "in_progress_tasks": in_progress_tasks,
+            "completed_tasks": completed_tasks,
+            "order_by": order_by,
+        },
+    )
+
+
+@login_required
 def update_task_status(request, task_id):
     task = get_object_or_404(Task, id=task_id, user=request.user)
     if request.method == "POST":

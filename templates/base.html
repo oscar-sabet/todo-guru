@@ -64,11 +64,11 @@
                                aria-current="page"
                                href="{% url 'list' %}">Tasks</a>
                         </li>
-                        {% comment %} <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/tasks_board/' %}active{% endif %}"
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/board/' %}active{% endif %}"
                                aria-current="page"
-                               href="{% url 'task_board' %}">Project Board</a>
-                        </li> {% endcomment %}
+                               href="{% url 'board' %}">Project Board</a>
+                        </li>
                         {% comment %} <li class="nav-item">
                             <a class="nav-link {% if request.path == '/task_report/' %}active{% endif %}"
                                aria-current="page"
