@@ -26,8 +26,8 @@
                 class="btn btn-new-task"
                 data-bs-toggle="modal"
                 data-bs-target="#new-task">
-            +
-            {% comment %} <i class="fa-solid fa-plus"></i> {% endcomment %}
+            
+            <i class="fa-solid fa-plus"></i>
         </button>
         <!-- Modal -->
         <div class="modal fade modal-xl"
@@ -105,21 +105,26 @@
                             <div id="flush-collapse{{ t.id }}"
                                  class="accordion-collapse collapse"
                                  data-bs-parent="#tasks-accordion">
-                                <div class="bg-4 m-0 accordion-body row">
+                                <div class="bg-1 m-0 accordion-body row">
                                     <div class="col-lg-4">
                                         <div class="card bg-5 rounded">
-                                            <div class="card-header">description:</div>
+                                            <div class="card-header">description</div>
                                             <div class="card-body p-2">{{ t.description|safe }}</div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="xcol-lg-4">
-                                            <p>Created: {{ t.created|date:"d-m-y H:i" }}</p>
-                                            <p>Due:     {{ t.due_date|date:"f-j-y H:i:s" }}</p>
-                                            {% if t.time_taken %}<p>Time Taken: {{ t.time_taken|date:"f-j-y H:i" }}</p>{% endif %}
-                                            {% if t.elapsed_time %}<p>elapsed_time: {{ t.elapsed_time|date:"f-j-y H:i:s" }}</p>{% endif %}
-                                            {% if t.time_until_due %}<p>Time Until Due: {{ t.time_until_due|date:"f-j-y H:i:s" }}</p>{% endif %}
-                                            {% if t.duration %}<p>Duration: {{ t.duration }}</p>{% endif %}
+                                    <div class="col-lg-8">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <p>Created: {{ t.created|date:"d-m-y H:i" }}</p>
+                                                <p>Due:     {{ t.due_date|date:"d-m-y H:i" }}</p>
+                                                
+                                                {% if t.duration %}<p>Duration: {{ t.duration }}</p>{% endif %}
+                                            </div>
+                                            <div class="col-lg-6">
+                                                {% if t.time_taken %}<p>Time Taken: {{ t.time_taken|date:"d-m-y H:i" }}</p>{% endif %}
+                                                {% if t.elapsed_time %}<p>elapsed_time: {{ t.elapsed_time|date:"d-m-y H:i" }}</p>{% endif %}
+                                                {% if t.time_until_due %}<p>Time Until Due: {{ t.time_until_due|date:"d-m-y H:i" }}</p>{% endif %}
+                                            </div>
                                         </div>
                                         {% comment %} <p>Status: {{ t.get_status_display }}</p>
                                     <p>Created: {{ t.created }}</p>
@@ -130,9 +135,9 @@
                                     <p>User: {{ t.user }}</p>
                                         <p>Completed Date: {{ t.completed_date }}</p> {% endcomment %}
                                         <div class="ms-auto">
-                                            <a href="{% url 'update_task' t.id %}" class="btn btn-custom-blue">Update</a>
+                                            <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a>
                                             <button type="button"
-                                                    class="btn btn-custom-red"
+                                                    class="btn btn-custom-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal"
                                                     data-task-id="{{ t.id }}"
