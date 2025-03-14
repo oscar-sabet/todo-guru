@@ -19,6 +19,8 @@
 
   --red-pastel: #ffa4a4;
   --red-pastel-dark: #ed8484;
+
+  --shadow: 0 0 9px rgba(0, 0, 0, 0.233);
 }
 
 /* Custom Classes */
@@ -80,10 +82,77 @@
   color: #006aff;
 }
 /* Buttons */
-
+.btn-new-task {
+  background-color: white;
+  /* color: var(--fg); */
+  border: 0;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  /* padding: 8px 16px;
+  margin: 8px; */
+}
 /* General */
+main {
+  padding-top: 48px;
+  min-height: 100vh;
+}
 section {
   height: 500px;
 }
 
 /* Navbar */
+#navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+
+  /* left: 0; */
+  /* top: 0; */
+}
+
+/* Accordion */
+.accordion-button {
+  background-color: var(--green-pastel);
+  color: var(--fg);
+  border: 0;
+  border-radius: 50px !important;
+  /* box-shadow: 0 0 9px rgba(0, 0, 0, 0.233); */
+  margin: 8px;
+  padding: 8px;
+  /* display: flex; */
+  /* align-items: center; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* justify-content: space-between; */
+}
+.accordion-button .d-flex {
+  flex-grow: 1;
+}
+.accordion-button .d-flex:first-child {
+  justify-content: flex-start;
+}
+.accordion-button .d-flex:nth-child(2) {
+  justify-content: center;
+}
+.accordion-button .d-flex:last-child {
+  justify-content: flex-end;
+}
+
+.accordion-button::after {
+  content: '';
+  margin-left: 10px;
+  margin-right: 5px;
+}
+.accordion-button:focus {
+  box-shadow: none;
+}
+.accordion-body {
+  border-radius: 15px;
+}
+
+/* Footer */
+footer a {
+  color: white;
+}

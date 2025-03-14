@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 import dj_database_url
 
+# from django.contrib.messages import constants as messages
+
 if os.path.isfile("env.py"):
     import env
 
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    # "django.contrib.messages",
     "tasks",
     "home",
 ]
@@ -60,11 +63,13 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "allauth.account.middleware.AccountMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",  # msg middleware
+    "django.contrib.messages.middleware.MessageMiddleware",  # msg middleware
+    # "django.contrib.auth.middleware.AuthenticationMiddleware",
+    # "django.contrib.messages.middleware.MessageMiddleware", # msg middleware
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",  # clickjacking middleware
+    "allauth.account.middleware.AccountMiddleware",  # allauth middleware
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # whitenoise middleware
 ]
 
 ROOT_URLCONF = "todo_guru.urls"
@@ -170,3 +175,12 @@ ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_USERNAME_REQUIRED = True
+
+
+# MESSAGE_TAGS = {
+#     messages.DEBUG: "debug",
+#     messages.INFO: "info",
+#     messages.SUCCESS: "success",
+#     messages.WARNING: "warning",
+#     messages.ERROR: "danger",
+# }

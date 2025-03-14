@@ -6,6 +6,8 @@ from .forms import TaskForm, LoginForm, RegistrationForm
 from django.http import JsonResponse
 from django.contrib.auth import login
 
+from django.contrib import messages
+
 
 # Create your views here.
 @login_required
@@ -67,8 +69,11 @@ def create_task(request):
             task = form.save(commit=False)
             task.user = request.user  # Set the user field
             task.save()
-        return redirect("/tasks/")
-    return redirect("/tasks/")
+            messages.success(request, "Task created successfully.")
+        else:
+            messages.error(request, "Failed to create task.")
+        return redirect("tasks")
+    return redirect("tasks")
 
 
 @login_required
@@ -78,6 +83,10 @@ def update_task(request, task_id):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
+            messages.success(request, "Task Updated successfully.")
+            return redirect("tasks")
+        else:
+            messages.error(request, "Failed to update task.")
             return redirect("tasks")
     else:
         form = TaskForm(instance=task)
@@ -104,7 +113,9 @@ def delete_task(request, p_key):
     task = get_object_or_404(Task, id=p_key, user=request.user)
     if request.method == "POST":
         task.delete()
+        messages.success(request, "Task deleted successfully.")
         return JsonResponse({"success": True})
+    messages.error(request, "Failed to delete task.")
     return JsonResponse({"success": False})
 
 
@@ -114,7 +125,10 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(request, "Registration successful.")
             return redirect("home")
+        else:
+            messages.error(request, "Registration failed.")
     else:
         form = RegistrationForm()
     return render(request, "task/register.html", {"form": form})
