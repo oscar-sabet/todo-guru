@@ -34,10 +34,10 @@
     </head>
     <body>
         <!-- Navigation -->
-        {% comment %} <nav id="navbar"
+        <nav id="navbar"
              class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
             <div id="navbar-container" class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}"><i class="xfa-solid xfa-list-check"> </i><span class="brand-1">  To<span class="brand-2">Do</span><span class="brand-3">|<span class="brand-4">Guru</span></span></span></a>
+                <a class="navbar-brand" href="{% url 'home' %}"><i class="xfa-solid xfa-list-check"> </i><span class="brand-1">To<span class="brand-2">Do</span><span class="">|<span class="brand-4">Guru</span></span></span></a>
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -54,42 +54,42 @@
                                aria-current="page"
                                href="{% url 'home' %}">Home</a>
                         </li>
-                        <li class="nav-item">
+                        {% comment %} <li class="nav-item">
                             <a class="nav-link {% if request.path == '/about/' %}active{% endif %}"
                                aria-current="page"
                                href="{% url 'about' %}">About</a>
-                        </li>
+                        </li> {% endcomment %}
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == '/tasks/' %}active{% endif %}"
                                aria-current="page"
-                               href="{% url 'index' %}">Tasks</a>
+                               href="{% url 'tasks' %}">Tasks</a>
                         </li>
-                        <li class="nav-item">
+                        {% comment %} <li class="nav-item">
                             <a class="nav-link {% if request.path == '/tasks_board/' %}active{% endif %}"
                                aria-current="page"
                                href="{% url 'task_board' %}">Project Board</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> {% endcomment %}
+                        {% comment %} <li class="nav-item">
                             <a class="nav-link {% if request.path == '/task_report/' %}active{% endif %}"
                                aria-current="page"
                                href="{% url 'task_report' %}">Task Statistics</a>
-                        </li>
+                        </li> {% endcomment %}
                     </ul>
                     <span class="navbar-text text-muted">
                         {% if user.is_authenticated %}
-                            <a href="{% url 'logout' %}">Logout {{ user.username }} <i class="fa-solid fa-user"></i></a>
+                            <a href="{% url 'account_logout' %}">Logout {{ user.username }} <i class="fa-solid fa-user"></i></a>
                         {% else %}
-                            <a href="{% url 'login' %}">Login</a>
-                            <a href="{% url 'register' %}">Register</a>
+                            <a href="{% url 'account_login' %}">Login</a>
+                            <a href="{% url 'account_signup' %}">Register</a>
                         {% endif %}
                     </span>
                 </div>
             </div>
-        </nav> {% endcomment %}
+        </nav> 
         {% block content %}
             <!-- Content Goes here -->
         {% endblock content %}
-        {% comment %} <footer class="bg-9 text-center shadow-sm">
+        <footer class="bg-9 text-center shadow-sm">
             <div class="container p-4">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
@@ -102,11 +102,11 @@
                             <li>
                                 <a href="{% url 'home' %}" class="text-dark">Home</a>
                             </li>
-                            <li>
+                            {% comment %} <li>
                                 <a href="{% url 'about' %}" class="text-dark">About</a>
-                            </li>
+                            </li> {% endcomment %}
                             <li>
-                                <a href="{% url 'index' %}" class="text-dark">Tasks</a>
+                                <a href="{% url 'tasks' %}" class="text-dark">Tasks</a>
                             </li>
                         </ul>
                     </div>
@@ -130,7 +130,7 @@
                 </div>
             </div>
             <div class="text-center p-3">© 2025 ToDoGuru. All rights reserved.</div>
-        </footer> {% endcomment %}
+        </footer>
         <!-- Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

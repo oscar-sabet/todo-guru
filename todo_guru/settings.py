@@ -51,9 +51,9 @@ INSTALLED_APPS = [
 ]
 
 # Django Allauth settings
-SITE_ID = 1
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
+# SITE_ID = 1
+# LOGIN_REDIRECT_URL = "/"
+# LOGOUT_REDIRECT_URL = "/"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -155,3 +155,18 @@ SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Use database-backed se
 SESSION_COOKIE_NAME = "sessionid"
 SESSION_COOKIE_AGE = 1209600  # Two weeks in seconds
 SESSION_SAVE_EVERY_REQUEST = True
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+# Allauth settings
+SITE_ID = 1
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_USERNAME_REQUIRED = True

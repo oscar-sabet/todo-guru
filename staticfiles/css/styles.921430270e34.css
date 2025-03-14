@@ -1,0 +1,45 @@
+:root {
+  --fg: #333;
+  --bg: #ecebeb;
+
+  --yellow-pastel: #faedcb;
+  --yellow-pastel-dark: #e2d7ba;
+
+  --green-pastel: #c9e4de;
+  --green-pastel-dark: #bddbd4;
+
+  --blue-pastel: #c6def1;
+  --blue-pastel-dark: #9cc5e7;
+
+  --purple-pastel: #dbcdf0;
+  --purple-pastel-dark: #d2c5e6;
+
+  --pink-pastel: #f2c6de;
+  --orange-pastel: #eec6aa;
+
+  --red-pastel: #ffa4a4;
+  --red-pastel-dark: #ed8484;
+}
+
+/* Custom Classes */
+bg-1 {
+  background-color: var(--yellow-pastel);
+}
+bg-2 {
+  background-color: var(--green-pastel);
+}
+bg-3 {
+  background-color: var(--blue-pastel);
+}
+bg-4 {
+  background-color: var(--purple-pastel);
+}
+bg-5 {
+  background-color: var(--pink-pastel);
+}
+bg-6 {
+  background-color: var(--orange-pastel);
+}
+bg-7 {
+  background-color: var(--red-pastel);
+}

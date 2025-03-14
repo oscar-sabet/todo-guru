@@ -1,0 +1,22 @@
+:root {
+  --fg: #333;
+  --bg: #ecebeb;
+
+  --yellow-pastel: #faedcb;
+  --yellow-pastel-dark: #e2d7ba;
+
+  --green-pastel: #c9e4de;
+  --green-pastel-dark: #bddbd4;
+
+  --blue-pastel: #c6def1;
+  --blue-pastel-dark: #9cc5e7;
+
+  --purple-pastel: #dbcdf0;
+  --purple-pastel-dark: #d2c5e6;
+
+  --pink-pastel: #f2c6de;
+  --orange-pastel: #f7d9c4;
+
+  --red-pastel: #ffa4a4;
+  --red-pastel-dark: #ed8484;
+}
