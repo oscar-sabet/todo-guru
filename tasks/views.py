@@ -72,18 +72,31 @@ def create_task(request):
 
 
 @login_required
-def update_task(request, p_key):
-    task = get_object_or_404(Task, id=p_key, user=request.user)
-    form = TaskForm(instance=task)
-
+def update_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
     if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-        return redirect("/tasks/")
+            return redirect("tasks")
+    else:
+        form = TaskForm(instance=task)
+    return render(request, "tasks/update_task.html", {"form": form, "task": task})
 
-    context = {"form": form}
-    return render(request, "task/update_task.html", context)
+
+# @login_required
+# def update_task(request, task_id):
+#     task = get_object_or_404(Task, id=task_id, user=request.user)
+#     form = TaskForm(instance=task)
+
+#     if request.method == "POST":
+#         form = TaskForm(request.POST, instance=task)
+#         if form.is_valid():
+#             form.save()
+#         return redirect("/tasks/")
+
+#     context = {"form": form}
+#     return render(request, "tasks/update_task.html", context)
 
 
 @login_required
@@ -105,3 +118,18 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, "task/register.html", {"form": form})
+
+
+# @login_required
+# def update_task(request, p_key):
+#     task = get_object_or_404(Task, id=p_key, user=request.user)
+#     form = TaskForm(instance=task)
+
+#     if request.method == "POST":
+#         form = TaskForm(request.POST, instance=task)
+#         if form.is_valid():
+#             form.save()
+#         return redirect("/tasks/")
+
+#     context = {"form": form}
+#     return render(request, "task/update_task.html", context)

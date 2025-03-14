@@ -86,7 +86,7 @@
                                     {% elif t.status == "C" %}
                                         <span class="col-lg-3"><span class="status status-c">{{ t.get_status_display }}</span></span>
                                     {% endif %}
-                                    <span class="col-lg-3">Due: {{ t.due_date|date:"f-j-y" }}</span>
+                                    <span class="col-lg-3">Due: {{ t.due_date|date:"d-m-y" }}</span>
                                 </button>
                             </h2>
                             <div id="flush-collapse{{ t.id }}"
@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="xcol-lg-4">
-                                            <p>Created: {{ t.created|date:"f-j-y H:i:s" }}</p>
+                                            <p>Created: {{ t.created|date:"d-m-y H:i" }}</p>
                                             <p>Due:     {{ t.due_date|date:"f-j-y H:i:s" }}</p>
                                             {% if t.time_taken %}<p>Time Taken: {{ t.time_taken|date:"f-j-y H:i" }}</p>{% endif %}
                                             {% if t.elapsed_time %}<p>elapsed_time: {{ t.elapsed_time|date:"f-j-y H:i:s" }}</p>{% endif %}
@@ -166,7 +166,7 @@
 {% endblock %}
 {% block extra_js %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {% comment %} <script>
+    <script>
     $('#deleteModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var taskId = button.data('task-id') // Extract info from data-* attributes
@@ -193,5 +193,5 @@
             }
         });
     });
-    </script> {% endcomment %}
+    </script>
 {% endblock %}
