@@ -91,6 +91,34 @@
   /* padding: 8px 16px;
   margin: 8px; */
 }
+.btn-custom-1 {
+  background-color: white;
+  color: var(--fg);
+  border: 0;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  padding: 8px 16px;
+  margin: 8px;
+  font-weight: 300;
+}
+.btn-custom-1:hover {
+  background-color: var(--fg);
+  color: white;
+}
+.btn-custom-2 {
+  background-color: var(--fg);
+  color: white;
+  border: 0;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  padding: 8px 16px;
+  margin: 8px;
+  font-weight: 300;
+}
+.btn-custom-2:hover {
+  background-color: white;
+  color: var(--fg);
+}
 /* General */
 main {
   padding-top: 48px;
