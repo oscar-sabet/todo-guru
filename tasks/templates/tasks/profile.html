@@ -9,7 +9,7 @@
             {% if user.profile.profile_picture %}
                 <img src="{{ user.profile.profile_picture.url }}" class="img-fluid rounded-circle" alt="Profile Picture">
             {% else %}
-                <img src="https://via.placeholder.com/150" class="img-fluid rounded-circle" alt="Profile Picture">
+                <img src="{% static 'images/nobody.jpg' %}" class="img-fluid rounded-circle" alt="Profile Picture">
             {% endif %}
         </div>
         <div class="col-md-8">
