@@ -85,6 +85,7 @@
 .brand-4 {
   color: #006aff;
 }
+
 /* Buttons */
 .btn-new-task {
   background-color: var(--green-pastel);
@@ -176,10 +177,14 @@
   background-color: white;
   color: var(--fg);
 }
+
 /* General */
 main {
+  padding: 16px;
+
   padding-top: 48px;
-  min-height: 100vh;
+
+  min-height: calc(100vh - 48px);
 }
 section {
   height: 500px;
@@ -222,7 +227,27 @@ section {
 .accordion-body {
   border-radius: 15px;
 }
-/*  */
+/* Forms */
+
+input {
+  border: 0;
+  border-radius: 50%;
+  padding: 8px 16px;
+  margin: 8px;
+  box-shadow: var(--shadow);
+}
+form {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  padding: 16px;
+  margin: 16px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  background-color: var(--bg);
+}
 /* Footer */
 footer a {
   color: white;
