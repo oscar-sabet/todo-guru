@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Task
-from .forms import TaskForm, LoginForm, RegistrationForm
+from .forms import TaskForm, LoginForm, RegistrationForm, ProfileForm
 from django.http import JsonResponse
 from django.contrib.auth import login
-
 from django.contrib import messages
 
 
@@ -125,3 +124,15 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, "task/register.html", {"form": form})
+
+
+@login_required
+def profile(request):
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect("profile")
+    else:
+        form = ProfileForm(instance=request.user.profile)
+    return render(request, "tasks/profile.html", {"form": form})
