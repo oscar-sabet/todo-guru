@@ -87,7 +87,7 @@
 }
 /* Buttons */
 .btn-new-task {
-  background-color: white;
+  background-color: var(--green-pastel);
   color: var(--fg);
   border: 0;
   border-radius: 50%;

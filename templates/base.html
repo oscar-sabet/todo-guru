@@ -54,26 +54,18 @@
                                aria-current="page"
                                href="{% url 'home' %}">Home</a>
                         </li>
-                        {% comment %} <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/about/' %}active{% endif %}"
-                               aria-current="page"
-                               href="{% url 'about' %}">About</a>
-                        </li> {% endcomment %}
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/tasks/' %}active{% endif %}"
-                               aria-current="page"
-                               href="{% url 'list' %}">Tasks</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/board/' %}active{% endif %}"
-                               aria-current="page"
-                               href="{% url 'board' %}">Project Board</a>
-                        </li>
-                        {% comment %} <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/task_report/' %}active{% endif %}"
-                               aria-current="page"
-                               href="{% url 'task_report' %}">Task Statistics</a>
-                        </li> {% endcomment %}
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/tasks/' %}active{% endif %}"
+                                aria-current="page"
+                                href="{% url 'list' %}">Task List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/board/' %}active{% endif %}"
+                                aria-current="page"
+                                href="{% url 'board' %}">Project Board</a>
+                            </li>
+                        {% endif %}
                     </ul>
                     <span class="navbar-text text-muted">
                         {% if user.is_authenticated %}
@@ -100,13 +92,13 @@
                         <h5 class="text-uppercase">Links</h5>
                         <ul class="list-unstyled mb-0">
                             <li>
-                                <a href="{% url 'home' %}" class="xtext-dark">Home</a>
+                                <a href="{% url 'home' %}" class="">Home</a>
                             </li>
                             {% comment %} <li>
                                 <a href="{% url 'about' %}" class="text-dark">About</a>
                             </li> {% endcomment %}
                             <li>
-                                <a href="{% url 'list' %}" class="xtext-dark">Tasks</a>
+                                <a href="{% url 'list' %}" class="">Tasks</a>
                             </li>
                         </ul>
                     </div>

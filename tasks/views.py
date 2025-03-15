@@ -56,7 +56,7 @@ def update_task_status(request, task_id):
     if request.method == "POST":
         task.status = request.POST.get("status")
         task.save()
-    return redirect("task_board")
+    return redirect("board")
 
 
 @login_required

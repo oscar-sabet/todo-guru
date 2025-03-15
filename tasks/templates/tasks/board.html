@@ -20,19 +20,19 @@
                     <h3 class="text-center">Not Started</h3>
                     <ul class="list-group rounded">
                         {% for task in not_started_tasks %}
-                            <li class="list-group-item bg-8">
+                            <li class="list-group-item bg-7">
                                 {% comment %} <h3 class="text-center card-header rounded bg-light py-1">{{ task.title }}</h3> {% endcomment %}
                                 <h5>{{ task.title }}</h5>
                                 <p>{{ task.description|safe }}</p>
                                 <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
-                                {% comment %} <form method="post" action="{% url 'update_task_status' task.id %}">
+                                <form method="post" action="{% url 'update_task_status' task.id %}">
                                     {% csrf_token %}
                                     <select name="status" onchange="this.form.submit()">
                                         <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
                                         <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
                                         <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
                                     </select>
-                                </form> {% endcomment %}
+                                </form>
                             </li>
                         {% endfor %}
                     </ul>
@@ -41,18 +41,18 @@
                     <h3 class="text-center">In Progress</h3>
                     <ul class="list-group">
                         {% for task in in_progress_tasks %}
-                            <li class="list-group-item bg-4">
+                            <li class="list-group-item bg-1">
                                 <h5>{{ task.title }}</h5>
                                 <p>{{ task.description|safe }}</p>
                                 <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
-                                {% comment %} <form method="post" action="{% url 'update_task_status' task.id %}">
+                                <form method="post" action="{% url 'update_task_status' task.id %}">
                                     {% csrf_token %}
                                     <select name="status" onchange="this.form.submit()">
                                         <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
                                         <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
                                         <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
                                     </select>
-                                </form> {% endcomment %}
+                                </form>
                             </li>
                         {% endfor %}
                     </ul>
@@ -65,14 +65,14 @@
                                 <h5>{{ task.title }}</h5>
                                 <p>{{ task.description|safe }}</p>
                                 <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
-                                {% comment %} <form method="post" action="{% url 'update_task_status' task.id %}">
+                                <form method="post" action="{% url 'update_task_status' task.id %}">
                                     {% csrf_token %}
                                     <select name="status" onchange="this.form.submit()">
                                         <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
                                         <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
                                         <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
                                     </select>
-                                </form> {% endcomment %}
+                                </form>
                             </li>
                         {% endfor %}
                     </ul>

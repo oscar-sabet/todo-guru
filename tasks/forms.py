@@ -10,7 +10,7 @@ class TaskForm(forms.ModelForm):
         fields = "__all__"
         exclude = ["user", "created", "completed_date"]
         widgets = {
-            "due_date": forms.DateInput(attrs={"type": "date"}),
+            "due_date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
             "description": forms.Textarea(
                 attrs={
                     "cols": 25,

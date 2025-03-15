@@ -48,15 +48,14 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    # "django.contrib.messages",
+    "crispy_forms",
+    "crispy_bootstrap5",
     "tasks",
     "home",
 ]
 
-# Django Allauth settings
-# SITE_ID = 1
-# LOGIN_REDIRECT_URL = "/"
-# LOGOUT_REDIRECT_URL = "/"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -65,8 +64,6 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",  # msg middleware
     "django.contrib.messages.middleware.MessageMiddleware",  # msg middleware
-    # "django.contrib.auth.middleware.AuthenticationMiddleware",
-    # "django.contrib.messages.middleware.MessageMiddleware", # msg middleware
     "django.middleware.clickjacking.XFrameOptionsMiddleware",  # clickjacking middleware
     "allauth.account.middleware.AccountMiddleware",  # allauth middleware
     "whitenoise.middleware.WhiteNoiseMiddleware",  # whitenoise middleware
