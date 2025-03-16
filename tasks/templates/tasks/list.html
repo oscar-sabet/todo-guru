@@ -109,46 +109,66 @@
                                  class="accordion-collapse collapse"
                                  data-bs-parent="#tasks-accordion">
                                 <div class="bg-1 m-0 accordion-body row">
-                                    <div class="col-lg-4">
-                                        <div class="card bg-7 rounded">
-                                            <div class="card-header text-center">description</div>
-                                            <div class="card-body p-2">{{ t.description|safe }}</div>
+                                    <div class="col-12 p-0">
+                                        <div class="card bg-7 p-2 rounded">
+                                            <h5 class="card-title">Description</h5>
+                                            {% comment %} <div class="card-header text-center">description</div> {% endcomment %}
+                                            <div class="card-body xp-2">{{ t.description|safe }}</div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <form method="post" action="{% url 'complete_task' t.id %}" class="text-center">
-                                            {% csrf_token %}
-                                            <label for="completed">Mark Complete</label>
-                                            <input type="checkbox" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
-                                        </form>
-                                    </div>
+                                    
                                     
                                     <div class="col-lg-12">
-                                        <div class="row">
-                                            <div class="col">
-                                                <p>Created: {{ t.created|date:"d-m-y H:i" }}</p>
+                                        <div class="row align-content-center d-flex align-items-center">
+                                            <div class="col align-content-center d-flex flex-column rounded bg-4">
+                                                {% comment %} Created: {{ t.created|date:"d-m-y H:i" }} {% endcomment %}
+                                                <span><strong>Created Date:</strong> {{ t.created|date:"d-m-y" }}</span>
+                                                <span><strong>Created Time:</strong> {{ t.created|date:"H:i" }}</span>
+                                            </div>
+                                            <div class="col align-content-center d-flex flex-column rounded bg-6 ms-1 border">
+                                                <span><strong>Due Date:</strong> {{ t.due_date|date:"d-m-y" }}</span>
+                                                <span><strong>Due Time:</strong> {{ t.due_date|date:"H:i" }}</span>
+                                                {% comment %} Due:     {{ t.due_date|date:"d-m-y H:i" }} {% endcomment %}
+                                            </div>
+                                            {% comment %} <div class="col">
+                                                Time:     {{ t.due_date|date:"H:i" }}
+                                            </div> {% endcomment %}
+                                            
+                                            {% comment %} <div class="col">
+                                                <div class="due-date bg-4 d-flex flex-column text-center">
+                                                    <span>{{ t.due_date|date:"D" }}</span>
+                                                    <span>{{ t.due_date|date:"M" }}</span>
+                                                    <span></span>
+                                                </div>   
+                                                Due 
+                                            </div> {% endcomment %}
+                                            {% comment %} <div class="col">
+                                                {% if t.duration %}Duration: {{ t.duration }}{% endif %}
+                                            </div> {% endcomment %}
+                                            {% comment %} <div class="col">
+                                                {% if t.time_taken %}Time Taken: {{ t.time_taken|date:"d-m-y H:i" }}{% endif %}
                                             </div>
                                             <div class="col">
-                                                <p>Due:     {{ t.due_date|date:"d-m-y H:i" }}</p>
+                                                {% if t.elapsed_time %}elapsed_time: {{ t.elapsed_time|date:"d-m-y H:i" }}{% endif %}
                                             </div>
                                             <div class="col">
-                                                {% if t.duration %}<p>Duration: {{ t.duration }}</p>{% endif %}
-                                            </div>
-                                            <div class="col">
-                                                {% if t.time_taken %}<p>Time Taken: {{ t.time_taken|date:"d-m-y H:i" }}</p>{% endif %}
-                                            </div>
-                                            <div class="col">
-                                                {% if t.elapsed_time %}<p>elapsed_time: {{ t.elapsed_time|date:"d-m-y H:i" }}</p>{% endif %}
-                                            </div>
-                                            <div class="col">
-                                                {% if t.time_until_due %}<p>Time Until Due: {{ t.time_until_due|date:"d-m-y H:i" }}</p>{% endif %}
-                                            </div>
+                                                {% if t.time_until_due %}Time Until Due: {{ t.time_until_due|date:"d-m-y H:i" }}{% endif %}
+                                            </div> {% endcomment %}
                                         
-                                    
-                                        <div class=" col xms-auto">
+                                    <div class=" col text-end">
+                                            {% comment %} <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a> {% endcomment %}
+                                         </div>
+                                         <div class=" col text-end">
+                                            {% comment %} <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a> {% endcomment %}
+                                         </div>
+                                         <div class=" col text-end">
+                                            {% comment %} <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a> {% endcomment %}
+                                         </div>
+                                        <div class=" col text-end">
+                                            {% comment %} <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a> {% endcomment %}
+                                         </div>
+                                        <div class="col text-end"> 
                                             <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a>
-                                        </div>
-                                        <div class="col">
                                             <button type="button"
                                                     class="btn btn-custom-2"
                                                     data-bs-toggle="modal"
@@ -156,6 +176,15 @@
                                                     data-task-id="{{ t.id }}"
                                                     data-task-title="{{ t.title }}">Delete</button>
                                         </div>
+                                        <div class="col">
+                                                <form method="post" action="{% url 'complete_task' t.id %}" class="text-end p-0 m-0">
+                                                    {% csrf_token %}
+                                                    <span>
+                                                        <label for="completed">Mark Complete
+                                                        <input type="checkbox" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}></label>
+                                                    </span>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
