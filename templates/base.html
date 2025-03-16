@@ -65,9 +65,9 @@
                                 aria-current="page"
                                 href="{% url 'board' %}">Project Board</a>
                             </li>
-                            <li>
+                            {% comment %} <li>
                                 <a href="{% url 'account_logout' %}">Logout {{ user.username }} <i class="fa-solid fa-user"></i></a>
-                            </li>
+                            </li> {% endcomment %}
                         {% endif %}
                     </ul>
                     <span class="navbar-text text-muted">
