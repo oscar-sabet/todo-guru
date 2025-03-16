@@ -63,7 +63,6 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-custom-4" data-bs-dismiss="modal">Close</button>
-                            {% comment %} <input type="submit" value="Create Task" class="btn btn-custom-3">Save changes</button> {% endcomment %}
                             <input type="submit" value="Create Task" class="btn btn-custom-3">
                         </div>
                     </form>
@@ -103,12 +102,7 @@
                                         <span class="col-lg-3"><span class="status status-c">{{ t.get_status_display }}</span></span>
                                     {% endif %}
                                     <span class="col-lg-2">Due: {{ t.due_date|date:"d-m-y" }}</span>
-                                    <span class="col-lg-1">
-                                        <form method="post" action="{% url 'complete_task' t.id %}">
-                                            {% csrf_token %}
-                                            <input type="checkbox" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
-                                        </form>
-                                    </span>
+                                    
                                 </button>
                             </h2>
                             <div id="flush-collapse{{ t.id }}"
@@ -121,29 +115,47 @@
                                             <div class="card-body p-2">{{ t.description|safe }}</div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-4">
+                                        <form method="post" action="{% url 'complete_task' t.id %}" class="text-center">
+                                            {% csrf_token %}
+                                            <label for="completed">Mark Complete</label>
+                                            <input type="checkbox" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
+                                        </form>
+                                    </div>
+                                    
+                                    <div class="col-lg-12">
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col">
                                                 <p>Created: {{ t.created|date:"d-m-y H:i" }}</p>
+                                            </div>
+                                            <div class="col">
                                                 <p>Due:     {{ t.due_date|date:"d-m-y H:i" }}</p>
-                                                
+                                            </div>
+                                            <div class="col">
                                                 {% if t.duration %}<p>Duration: {{ t.duration }}</p>{% endif %}
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col">
                                                 {% if t.time_taken %}<p>Time Taken: {{ t.time_taken|date:"d-m-y H:i" }}</p>{% endif %}
+                                            </div>
+                                            <div class="col">
                                                 {% if t.elapsed_time %}<p>elapsed_time: {{ t.elapsed_time|date:"d-m-y H:i" }}</p>{% endif %}
+                                            </div>
+                                            <div class="col">
                                                 {% if t.time_until_due %}<p>Time Until Due: {{ t.time_until_due|date:"d-m-y H:i" }}</p>{% endif %}
                                             </div>
-                                        </div>
+                                        
                                     
-                                        <div class="ms-auto">
+                                        <div class=" col xms-auto">
                                             <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a>
+                                        </div>
+                                        <div class="col">
                                             <button type="button"
                                                     class="btn btn-custom-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal"
                                                     data-task-id="{{ t.id }}"
                                                     data-task-title="{{ t.title }}">Delete</button>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

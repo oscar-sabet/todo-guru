@@ -17,17 +17,44 @@
             </div> {% endcomment %}
             <div class="row">
                 <div class="col-md-4">
-                    <h3 class="text-center">Not Started</h3>
+                     <h3 class="text-center">Not Started</h3>
                     <ul class="list-group rounded">
                         {% for task in not_started_tasks %}
                             <li class="list-group-item bg-7">
                                 {% comment %} <h3 class="text-center card-header rounded bg-light py-1">{{ task.title }}</h3> {% endcomment %}
                                 <h5>{{ task.title }}</h5>
+                                <div class="row">
+                                    {% comment %} <div class="col-3">
+                                        <a href="{% url 'update_task' task.id %}" class="btn btn-sm btn-primary">Edit</a>
+                                    </div> {% endcomment %}
+                                    <div class="col-3 bg-4 rounded">
+                                        <div class="due-date d-flex flex-column text-center">
+                                            <span class="p-0 xm-0 display-6 due-hour">{{ task.due_date|date:"d" }}</span>
+                                            <span class="p-0 xm-0 display-6 due-min"><xstrong>{{ task.due_date|date:"M" }}</xstrong></span>
+                                            {% comment %} <span>Due</span> {% endcomment %}
+                                        </div>   
+                                        Month
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="due-date">
+                                            <span>{{ task.due_date|date:"D" }}</span>
+                                            <span>{{ task.due_date|date:"M" }}</span>
+                                            <span>Due</span>
+                                        </div>    
+                                    </div>
+                                    <div class="col-3 bg-4 rounded">
+                                        <div class="due-date d-flex flex-column text-center">
+                                            <span class="p-0 xm-0 display-6 due-hour">{{ task.due_date|date:"H" }}</span>
+                                            <span class="p-0 xm-0 display-6 due-min"><strong>{{ task.due_date|date:"i" }}</strong></span>
+                                            {% comment %} <span>Due</span> {% endcomment %}
+                                        </div>   
+                                        Time
+                                    </div>
                                 <p>{{ task.description|safe }}</p>
                                 <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
-                                <form method="post" action="{% url 'update_task_status' task.id %}">
+                                <form method="post" action="{% url 'update_task_status' task.id %}" class="p-0 text-end">
                                     {% csrf_token %}
-                                    <select name="status" onchange="this.form.submit()">
+                                    <select name="status" onchange="this.form.submit()" class="xp-0 m-0">
                                         <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
                                         <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
                                         <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
@@ -35,7 +62,8 @@
                                 </form>
                             </li>
                         {% endfor %}
-                    </ul>
+                    </ul> 
+                    
                 </div>
                 <div class="col-md-4">
                     <h3 class="text-center">In Progress</h3>

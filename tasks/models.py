@@ -12,7 +12,7 @@ class Task(models.Model):
         ("P", "Pending"),
         ("IP", "In Progress"),
         ("C", "Completed"),
-        ("A", "Archived"),
+        # ("A", "Archived"),
     ]
 
     PRIORITY_CHOICES = [
@@ -25,7 +25,7 @@ class Task(models.Model):
         ("W", "Work"),
         ("P", "Personal"),
         ("H", "Home"),
-        ("O", "Other"),
+        # ("O", "Other"),
     ]
 
     title = models.CharField(max_length=200)
@@ -38,7 +38,7 @@ class Task(models.Model):
     due_date = models.DateTimeField(blank=True, null=True)
     completed_date = models.DateTimeField(blank=True, null=True)
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default="M")
-    category = models.CharField(max_length=1, choices=CATEGORY_CHOICES, default="O")
+    category = models.CharField(max_length=1, choices=CATEGORY_CHOICES, default="P")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):

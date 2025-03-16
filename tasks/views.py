@@ -63,12 +63,15 @@ def update_task_status(request, task_id):
 def create_task(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
+        print("Form is valid2")
         if form.is_valid():
+            print("Form is valid")
             task = form.save(commit=False)
             task.user = request.user  # Set the user field
             task.save()
             messages.success(request, "Task created successfully.")
         else:
+            print(form.errors)
             messages.error(request, "Failed to create task.")
         return redirect("list")
     return redirect("list")
@@ -141,8 +144,8 @@ def profile(request):
     return render(request, "tasks/profile.html", {"form": form})
 
 
-from .forms import ProfileForm
-from .models import Profile
+# from .forms import ProfileForm
+# from .models import Profile
 
 
 # @login_required
