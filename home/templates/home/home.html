@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<main>
+
     <header class="bg-2">
         <div class="container">
             <div class="row align-items-center">
@@ -56,26 +56,26 @@
             </div>
         </div>
     </section>
-    <section id="cloud" class="bg-3 xpy-5 d-flex align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 d-flex align-items-center text-end">
-                    <div>
-                        <h2 class="mb-4 display-5">Access Your Tasks Anywhere</h2>
-                        <p class="lead">
-                            With ToDoGuru, you can access your tasks from anywhere, at any time. Stay organized and manage your to-do list on the go.
-                        </p>
-                        <a href="{% url 'account_signup' %}" class="btn btn-custom-blue btn-lg">Sign Up Now</a>
-                    </div>
+    <section id="streamline" class="py-0 bg-1 d-flex align-items-center">
+        <div class="streamline">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-lg-end">
+                    <img src="{% static 'images/Todo-Cloud-Get-Organized-Working.png' %}"
+                         alt="streamline your workflow"
+                         class="img-fluid mb-6">
                 </div>
-                <div class="col-md-6 text-start">
-                    <img src="{% static 'images/Todo-cloud-Real-time-Sync.png' %}"
-                         alt="cloud storage"
-                         class="img-fluid">
+                <div class="col-md-6 d-flex align-items-center">
+                    <div>
+                        <h2 class=" mb-4 display-5">Streamline Your Workflow</h2>
+                        <p class="lead">
+                            With ToDoGuru, you can streamline your task management process, increase productivity, and achieve your goals faster. Join thousands of satisfied users today!
+                        </p>
+                        <a href="{% url 'account_signup' %}" class="btn btn-custom-1 xbtn-lg">Join Now</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> 
     <section id="testimonials" class="xbg-8 xpy-5 d-flex align-items-center">
         <div class="container">
             <h2 class="text-center mb-4 display-5">What Our Users Say</h2>
@@ -96,7 +96,7 @@
                     <div class="card mb-4">
                         <div class="card-body text-center">
                             <p class="card-text">
-                                "I love the priority setting feature. It helps me focus on the most important tasks and meet my deadlines."
+                                "I love the priority setting feature. It helps me focus on important tasks and meet my deadlines."
                             </p>
                             <footer class="blockquote-footer">
                                 John Smith
@@ -119,40 +119,31 @@
             </div>
         </div>
     </section>
-    <section id="streamline" class="py-0 bg-1 d-flex align-items-center">
-        <div class="streamline">
-            {% comment %} <h2 class="text-center mb-4 display-5">About Us</h2>  {% endcomment %}
-            <div class="row">
-                <div class="col-md-6 text-end">
-                    <img src="{% static 'images/Todo-Cloud-Get-Organized-Working.png' %}"
-                         alt="streamline your workflow"
-                         class="img-fluid mb-6">
-                </div>
-                <div class="col-md-6 d-flex align-items-center">
-                    {% comment %} <h3>Who We Are</h3>
-                    <p>
-                        ToDoGuru is a task management tool designed to help you stay organized, set priorities, and achieve your goals. Our user-friendly interface makes it easy to manage your tasks and track your progress.
+    <section id="cloud" class="bg-3 xpy-5 d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 align-items-center text-center text-lg-end">
+                    <h2 class="mb-4 display-5">Access Your Tasks Anywhere</h2>
+                    <p class="lead">
+                        With ToDoGuru, you can access your tasks from anywhere, at any time. Stay organized and manage your to-do list on the go.
                     </p>
-                    <h3>Our Mission</h3>
-                    <p> 
-                        Our mission is to provide you with the tools you need to manage your tasks effectively and increase your productivity. We are committed to helping you achieve your objectives and reach your full potential.
-                    </p> {% endcomment %}
+                    <a href="{% url 'account_signup' %}" class="btn btn-custom-1 xbtn-lg">Sign Up Now</a>
+                </div>
+                <div class="col-md-6 d-flex align-items-center text-center text-lg-start">
                     <div>
-                        <h2 class=" mb-4 display-5">Streamline Your Workflow</h2>
-                        <p class="lead">
-                            With ToDoGuru, you can streamline your task management process, increase productivity, and achieve your goals faster. Join thousands of satisfied users today!
-                        </p>
-                        <a href="{% url 'account_signup' %}" class="btn btn-custom-blue btn-lg">Join Now</a>
+                        <img src="{% static 'images/Todo-cloud-Real-time-Sync.png' %}"
+                            alt="cloud storage"
+                            class="img-fluid">
                     </div>
                 </div>
             </div>
         </div>
-    </section> 
-    <section id="cta" class="h-auto bg-4 py-6 d-flex align-items-center">
+    </section>
+    <section id="cta" class=" bg-4 py-6 d-flex align-items-center">
         <div class="container text-center">
             <h2 class="mb-4">Ready to Get Started?</h2>
             <a href="{% url 'account_signup' %}" class="btn btn-custom-1 xbtn-lg">Sign Up Now</a>
         </div>
     </section>
-    </main>
+    
 {% endblock content %}
