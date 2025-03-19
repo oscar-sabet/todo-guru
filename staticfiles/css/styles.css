@@ -58,6 +58,9 @@
 .bg-9 {
   background-color: var(--orange-pastel);
 }
+.bg-10 {
+  background-color: white;
+}
 /* Foreground Colors */
 .fg-1 {
   color: var(--yellow-pastel);
@@ -144,8 +147,8 @@
   z-index: 1000;
 }
 .btn-new-task:hover {
-  background-color: #c6def1;
-  color: white;
+  background-color: white;
+  color: var(--fg);
 }
 .btn-custom-1 {
   background-color: white;
@@ -183,7 +186,6 @@
   box-shadow: var(--shadow);
   padding: 8px 16px;
   margin: 8px;
-  font-weight: 300;
 }
 .btn-custom-3:hover {
   background-color: white;
@@ -244,9 +246,9 @@ section {
   top: 0;
 }
 /* NavTabs */
-/* .nav {
-  display: flex;
-} */
+.nav .nav-link {
+  color: var(--fg);
+}
 .nav-item {
   display: flex;
   flex-grow: 1;

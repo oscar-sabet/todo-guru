@@ -9,20 +9,6 @@ from django.contrib.auth import login
 from django.contrib import messages
 
 
-# @login_required
-# def task_list(request):
-#     print(request)
-#     sort_by = request.GET.get("sort", "created")
-#     print(f"Sort by ->  {sort_by}")
-#     valid_sort_fields = ["status", "category", "priority", "due_date", "created"]
-
-#     if sort_by not in valid_sort_fields:
-#         sort_by = "created"
-
-#     tasks = Task.objects.filter(user=request.user).order_by(sort_by)
-#     return render(request, "tasks/list.html", {"tasks": tasks})
-
-
 @login_required
 def list(request):
     sort_by = request.GET.get("sort", "created")
@@ -143,9 +129,11 @@ def update_task(request, task_id):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            messages.success(request, "Task Updated successfully.")
+            messages.success(request, "Task updated successfully.")
             return redirect("list")
         else:
+            print(request.POST)
+            print(form.errors)
             messages.error(request, "Failed to update task.")
             return redirect("list")
     else:
@@ -201,21 +189,3 @@ def profile(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, "tasks/profile.html", {"form": form})
-
-
-# from .forms import ProfileForm
-# from .models import Profile
-
-
-# @login_required
-# def profile(request):
-#     # Ensure the profile is created if it does not exist
-#     profile, created = Profile.objects.get_or_create(user=request.user)
-#     if request.method == "POST":
-#         form = ProfileForm(request.POST, request.FILES, instance=profile)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("profile")
-#     else:
-#         form = ProfileForm(instance=profile)
-#     return render(request, "tasks/profile.html", {"form": form})

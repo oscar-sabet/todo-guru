@@ -147,8 +147,8 @@
   z-index: 1000;
 }
 .btn-new-task:hover {
-  background-color: white;
-  color: var(--fg);
+  background-color: #c6def1;
+  color: white;
 }
 .btn-custom-1 {
   background-color: white;
@@ -186,6 +186,7 @@
   box-shadow: var(--shadow);
   padding: 8px 16px;
   margin: 8px;
+  font-weight: 300;
 }
 .btn-custom-3:hover {
   background-color: white;

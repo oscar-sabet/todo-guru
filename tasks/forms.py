@@ -7,8 +7,9 @@ from django.contrib.auth.models import User
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = "__all__"
-        exclude = ["user", "created", "completed_date", "status"]
+        # fields = "__all__"
+        fields = ["title", "description", "due_date", "priority", "category", "status"]
+        exclude = ["user", "created", "completed_date"]  # , "status"]
         widgets = {
             "due_date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
             "description": forms.Textarea(
