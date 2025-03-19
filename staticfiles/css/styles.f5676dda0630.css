@@ -96,7 +96,7 @@
 .sh-st {
   box-shadow: var(--shadow);
 }
-.badge {
+/* .badge {
   display: inline-block;
   border-radius: 50%;
   width: 1.5rem;
@@ -124,8 +124,7 @@
 .badge-yellow {
   background-color: #f7e700;
   color: var(--bg);
-}
-*/
+} */
 
 /* Buttons */
 .btn-new-task {

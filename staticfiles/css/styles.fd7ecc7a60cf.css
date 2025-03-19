@@ -101,7 +101,7 @@
   border-radius: 50%;
   width: 1.5rem;
   height: 1.5rem;
-  line-height: 1rem;
+  /* line-height: 1.5rem; */
   text-align: center;
   vertical-align: middle;
 }
@@ -109,24 +109,6 @@
   background-color: var(--fg);
   color: var(--bg);
 }
-.badge-green {
-  background-color: #00d74b;
-  color: var(--bg);
-}
-.badge-red {
-  background-color: #f31d1d;
-  color: var(--bg);
-}
-.badge-blue {
-  background-color: #006aff;
-  color: var(--bg);
-}
-.badge-yellow {
-  background-color: #f7e700;
-  color: var(--bg);
-}
-*/
-
 /* Buttons */
 .btn-new-task {
   background-color: var(--green-pastel);

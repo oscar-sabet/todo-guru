@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row p-1">
         <!-- Sidebar -->
-        <div class="col-md-3 vh-100 bg-3 sidebar p-3">
+        <div class="col-md-3 bg-3 sidebar p-3">
             <div class="user-info text-center mb-4">
                 {% if user.profile.profile_picture %}
                     <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded-circle mb-2" width="100">
@@ -16,6 +16,56 @@
                 <h4>{{ user.username }}</h4>
                 <p>{{ user.email }}</p>
             </div>
+            <h5>Tasks Statistics</h5>
+            <ul class="list-group mb-2">
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Total Tasks:</span>
+                        <span class="badge text-bg-primary">{{ tasks.count }}</span>
+                    </div>
+                </li>
+            </ul>
+            <ul class="list-group mb-2">
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Completed Tasks</span>
+                        <span class="badge text-bg-success">{{ completed_tasks }}</span>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Tasks In Progress:</span>
+                        <span class="badge text-bg-warning">{{ in_progress_tasks }}</span>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Tasks Pending:</span>
+                        <span class="badge bg-danger rounded-pill">{{ pending_tasks }}</span>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="list-group mb-2">
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Low Priority:</span>
+                        <span class="badge text-bg-success">{{ low_priority_tasks }}</span>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Medium Priority:</span>
+                        <span class="badge text-bg-warning">{{ medium_priority_tasks }}</span>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>High Priority:</span>
+                        <span class="badge bg-danger">{{ high_priority_tasks }}</span>
+                    </div>
+                </li>
+            </ul>
             <div>
                 <h5>Filter Tasks</h5>
                 <form method="get" action="{% url 'list' %}">

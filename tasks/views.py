@@ -40,6 +40,20 @@ def list(request):
 
     tasks = Task.objects.filter(user=request.user)
 
+    tasks.count = tasks.count()
+    tasks.completed_tasks = tasks.filter(status="C").count()
+    tasks.pending_tasks = tasks.filter(status="P").count()
+    tasks.in_progress_tasks = tasks.filter(status="IP").count()
+    tasks.low_priority_tasks = tasks.filter(priority="L").count()
+
+    completed_tasks = tasks.filter(status="C").count()
+    pending_tasks = tasks.filter(status="P").count()
+    in_progress_tasks = tasks.filter(status="IP").count()
+
+    low_priority_tasks = tasks.filter(priority="L").count()
+    medium_priority_tasks = tasks.filter(priority="M").count()
+    high_priority_tasks = tasks.filter(priority="H").count()
+
     if status_filter:
         tasks = tasks.filter(status=status_filter)
     if category_filter:
@@ -63,7 +77,16 @@ def list(request):
         else:
             task.time_until_due = None
 
-    context = {"tasks": tasks, "form": form}
+    context = {
+        "tasks": tasks,
+        "form": form,
+        "completed_tasks": completed_tasks,
+        "pending_tasks": pending_tasks,
+        "in_progress_tasks": in_progress_tasks,
+        "low_priority_tasks": low_priority_tasks,
+        "medium_priority_tasks": medium_priority_tasks,
+        "high_priority_tasks": high_priority_tasks,
+    }
     return render(request, "tasks/list.html", context)
 
 
