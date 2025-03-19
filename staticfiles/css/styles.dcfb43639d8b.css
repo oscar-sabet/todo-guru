@@ -26,7 +26,6 @@
   --blue: #3273cf;
 
   --shadow: 0 0 9px rgba(0, 0, 0, 0.233);
-  --shadow-hover: 0 0 13px rgba(0, 0, 0, 0.349);
 }
 
 /* Custom Classes */
@@ -56,7 +55,7 @@
   background-color: var(--bg);
 }
 .bg-9 {
-  background-color: var(--orange-pastel);
+  background-color: var(--blue-pastel-light);
 }
 /* Foreground Colors */
 .fg-1 {
@@ -123,7 +122,7 @@
   box-shadow: var(--shadow);
   padding: 8px 16px;
   margin: 8px;
-  /* font-weight: 300; */
+  font-weight: 300;
 }
 .btn-custom-1:hover {
   background-color: var(--fg);
@@ -165,7 +164,7 @@
   box-shadow: var(--shadow);
   padding: 8px 16px;
   margin: 8px;
-  /* font-weight: 300; */
+  font-weight: 300;
 }
 .btn-custom-4:hover {
   background-color: white;
@@ -304,9 +303,6 @@ button form,
 button form input {
   padding: 0;
   margin: auto;
-}
-.sidebar select:hover {
-  box-shadow: var(--shadow-hover);
 }
 /* Footer */
 footer a {

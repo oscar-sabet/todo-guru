@@ -3,255 +3,298 @@
 
 {% block title %}Task List{% endblock %}
 {% block content %}
-        <h2>ToDoGuru</h2>
-        <!-- Messages -->
-        <div class="container mt-3">
-            {% if messages %}
-                <div class="alert-container">
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+<div class="container">
+    <div class="row p-1">
+        <!-- Sidebar -->
+        <div class="col-md-3 vh-100 bg-3 sidebar p-3">
+            <div class="user-info text-center mb-4">
+                {% if user.profile.profile_picture %}
+                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded-circle mb-2" width="100">
+                {% else %}
+                    <img src="https://via.placeholder.com/100" alt="Profile Picture" class="img-thumbnail rounded-circle mb-2" width="100">
+                {% endif %}
+                <h4>{{ user.username }}</h4>
+                <p>{{ user.email }}</p>
             </div>
-        <!-- Button trigger modal -->
-        <button type="button"
-                class="btn btn-new-task"
-                data-bs-toggle="modal"
-                data-bs-target="#new-task">
-            
-            <i class="fa-solid fa-plus"></i>
-        </button>
-        <!-- Modal -->
-        <div class="modal fade modal-xl"
-             id="new-task"
-             tabindex="-1"
-             aria-labelledby="new-task-label"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title text-center fs-5" id="new-task-label">Create New Task</h1>
-                        <button type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+            <div>
+                <h5>Filter Tasks</h5>
+                <form method="get" action="{% url 'list' %}">
+                    <div class="form-group mb-2">
+                        <label for="status-filter">Status</label>
+                        <select id="status-filter" name="status" class="form-control" onchange="this.form.submit()">
+                            <option value="" {% if request.GET.status == "" %}selected{% endif %}>All</option>
+                            <option value="P" {% if request.GET.status == "P" %}selected{% endif %}>Pending</option>
+                            <option value="IP" {% if request.GET.status == "IP" %}selected{% endif %}>In Progress</option>
+                            <option value="C" {% if request.GET.status == "C" %}selected{% endif %}>Completed</option>
+                        </select>
                     </div>
-                    <div class="modal-body">
-                        <form method="post" action="{% url 'create_task' %}">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    {{ form.title|as_crispy_field }}
-                                </div>
-                                <div class="col-lg-6">
-                                    {{ form.due_date|as_crispy_field }}
-                                </div>
-                                <div class="col-lg-6">
-                                    {{ form.priority|as_crispy_field }}
-                                </div>
-                                <div class="col-lg-6">
-                                    {{ form.category|as_crispy_field }}
-                                </div>
-                                <div class="col-12">
-                                    {{ form.description|as_crispy_field }}
+                    <div class="form-group mb-2">
+                        <label for="category-filter">Category</label>
+                        <select id="category-filter" name="category" class="form-control" onchange="this.form.submit()">
+                            <option value="" {% if request.GET.category == "" %}selected{% endif %}>All</option>
+                            <option value="W" {% if request.GET.category == "W" %}selected{% endif %}>Work</option>
+                            <option value="P" {% if request.GET.category == "P" %}selected{% endif %}>Personal</option>
+                            <option value="H" {% if request.GET.category == "H" %}selected{% endif %}>Home</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="priority-filter">Priority</label>
+                        <select id="priority-filter" name="priority" class="form-control" onchange="this.form.submit()">
+                            <option value="" {% if request.GET.priority == "" %}selected{% endif %}>All</option>
+                            <option value="L" {% if request.GET.priority == "L" %}selected{% endif %}>Low</option>
+                            <option value="M" {% if request.GET.priority == "M" %}selected{% endif %}>Medium</option>
+                            <option value="H" {% if request.GET.priority == "H" %}selected{% endif %}>High</option>
+                        </select>
+                    </div>
+                    {% comment %} <button type="submit" class="btn btn-primary w-100">Filter</button> {% endcomment %}
+                </form>
+            </div>
+            <h5>Sort Tasks By</h5>
+            <form method="get" action="{% url 'list' %}">
+                <!-- Include current filter parameters -->
+                <input type="hidden" name="status" value="{{ request.GET.status }}">
+                <input type="hidden" name="category" value="{{ request.GET.category }}">
+                <input type="hidden" name="priority" value="{{ request.GET.priority }}">
+                <div class="form-group mb-2">
+                    <label for="sort-select">Sort By</label>
+                    <select id="sort-select" name="sort" class="form-control" onchange="this.form.submit()">
+                        <option value="created" {% if request.GET.sort == "created" %}selected{% endif %}>Created Date</option>
+                        <option value="due_date" {% if request.GET.sort == "due_date" %}selected{% endif %}>Due Date</option>
+                        <option value="status" {% if request.GET.sort == "status" %}selected{% endif %}>Status</option>
+                        <option value="category" {% if request.GET.sort == "category" %}selected{% endif %}>Category</option>
+                        <option value="priority" {% if request.GET.sort == "priority" %}selected{% endif %}>Priority</option>
+                    </select>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="direction-select">Direction</label>
+                    <select id="direction-select" name="direction" class="form-control" onchange="this.form.submit()">
+                        <option value="asc" {% if request.GET.direction == "asc" %}selected{% endif %}>Ascending</option>
+                        <option value="desc" {% if request.GET.direction == "desc" %}selected{% endif %}>Descending</option>
+                    </select>
+                </div>
+            </form>
+            <a href="{% url 'list' %}" class="btn btn-custom-4 w-100 mt-2 ms-0">Clear Filters</a>
+        </div>
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <h2>ToDoGuru</h2>
+            <!-- Messages -->
+            <div class="container mt-3">
+                {% if messages %}
+                    <div class="alert-container">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button"
+                    class="btn btn-new-task"
+                    data-bs-toggle="modal"
+                    data-bs-target="#new-task">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+            <!-- Modal -->
+            <div class="modal fade modal-xl"
+                 id="new-task"
+                 tabindex="-1"
+                 aria-labelledby="new-task-label"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title text-center fs-5" id="new-task-label">Create New Task</h1>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="{% url 'create_task' %}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        {{ form.title|as_crispy_field }}
+                                    </div>
+                                    <div class="col-lg-6">
+                                        {{ form.due_date|as_crispy_field }}
+                                    </div>
+                                    <div class="col-lg-6">
+                                        {{ form.priority|as_crispy_field }}
+                                    </div>
+                                    <div class="col-lg-6">
+                                        {{ form.category|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12">
+                                        {{ form.description|as_crispy_field }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-custom-4" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" value="Create Task" class="btn btn-custom-3">
-                        </div>
-                    </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-custom-4" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" value="Create Task" class="btn btn-custom-3">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="m-4">
-            <div class="accordion accordion-flush" id="tasks-accordion">
-                {% for t in tasks %}
-                    <div class="accordion-item border-0 xshadow-lg">
-                        <h2 class="accordion-header colors">
-                            <button class="m-0 my-1 accordion-button collapsed container-fluid "
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapse{{ t.id }}"
-                                    aria-expanded="false"
-                                    aria-controls="flush-collapse{{ t.id }}">
-                                <div class="row w-100">
-                                    <span class="col-lg-3">
-                                    &nbsp;{{ t.title }}</span>
-                                    <span class="col-lg-3">Priority:
-                                        {% if t.priority == 'H' %}
-                                            High  <i class="fa-solid fa-exclamation-circle text-danger me-2 "></i>
-                                        {% elif t.priority == 'M' %}
-                                            Medium  <i class="fa-solid fa-exclamation-triangle text-warning me-2"></i>
-                                        {% elif t.priority == 'L' %}
-                                            Low  <i class="fa-solid fa-check-circle text-success me-2"></i>
-                                        {% else %}
-                                            <i class="fa-solid fa-circle text-muted me-2"></i>
+            <div class="m-4">
+                <div class="accordion accordion-flush" id="tasks-accordion">
+                    {% for t in tasks %}
+                        <div class="accordion-item border-0 xshadow-lg">
+                            <h2 class="accordion-header colors">
+                                <button class="m-0 my-1 accordion-button collapsed shadow-sm container-fluid "
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapse{{ t.id }}"
+                                        aria-expanded="false"
+                                        aria-controls="flush-collapse{{ t.id }}">
+                                    <div class="row w-100">
+                                        <span class="col-lg-3">
+                                        &nbsp;{{ t.title }}</span>
+                                        <span class="col-lg-3">Priority:
+                                            {% if t.priority == 'H' %}
+                                                High  <i class="fa-solid fa-exclamation-circle text-danger me-2 "></i>
+                                            {% elif t.priority == 'M' %}
+                                                Medium  <i class="fa-solid fa-exclamation-triangle text-warning me-2"></i>
+                                            {% elif t.priority == 'L' %}
+                                                Low  <i class="fa-solid fa-check-circle text-success me-2"></i>
+                                            {% else %}
+                                                <i class="fa-solid fa-circle text-muted me-2"></i>
+                                            {% endif %}
+                                        </span>
+                                        {% if t.status == "P" %}
+                                            <span class="col-lg-3"><span class="status status-p">{{ t.get_status_display }}</span></span>
+                                        {% elif t.status == "IP" %}
+                                            <span class="col-lg-3"><span class="status status-ip">{{ t.get_status_display }}</span></span>
+                                        {% elif t.status == "C" %}
+                                            <span class="col-lg-3"><span class="status status-c">{{ t.get_status_display }}</span></span>
                                         {% endif %}
-                                    </span>
-                                    {% if t.status == "P" %}
-                                        <span class="col-lg-3"><span class="status status-p">{{ t.get_status_display }}</span></span>
-                                    {% elif t.status == "IP" %}
-                                        <span class="col-lg-3"><span class="status status-ip">{{ t.get_status_display }}</span></span>
-                                    {% elif t.status == "C" %}
-                                        <span class="col-lg-3"><span class="status status-c">{{ t.get_status_display }}</span></span>
-                                    {% endif %}
-                                    <span class="col-lg-2">Due: {{ t.due_date|date:"d-m-y" }}</span>
-                                    
+                                        <span class="col-lg-2">Due: {{ t.due_date|date:"d-m-y" }}</span>
+                                    </div>
                                 </button>
                             </h2>
                             <div id="flush-collapse{{ t.id }}"
                                  class="accordion-collapse collapse"
                                  data-bs-parent="#tasks-accordion">
-                                <div class="bg-1 m-0 accordion-body row">
-                                    <div class="col-12 p-0">
-                                        <div class="card bg-7 p-2 rounded">
-                                            <h5 class="card-title">Description</h5>
-                                            {% comment %} <div class="card-header text-center">description</div> {% endcomment %}
-                                            <div class="card-body xp-2">{{ t.description|safe }}</div>
+                                <div class="bg-1 m-0 accordion-body row shadow-sm">
+                                    <div class="col-lg-4">
+                                        <div class="card bg-7 rounded">
+                                            <div class="card-header text-center">description</div>
+                                            <div class="card-body p-2">{{ t.description|safe }}</div>
                                         </div>
                                     </div>
-                                    
-                                    
+                                    <div class="col-lg-4">
+                                        <form method="post" action="{% url 'complete_task' t.id %}" class="text-center">
+                                            {% csrf_token %}
+                                            <label for="completed">Mark Complete</label>
+                                            <input type="checkbox" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
+                                        </form>
+                                    </div>
                                     <div class="col-lg-12">
-                                        <div class="row align-content-center d-flex align-items-center">
-                                            <div class="col align-content-center d-flex flex-column rounded bg-4">
-                                                {% comment %} Created: {{ t.created|date:"d-m-y H:i" }} {% endcomment %}
-                                                <span><strong>Created Date:</strong> {{ t.created|date:"d-m-y" }}</span>
-                                                <span><strong>Created Time:</strong> {{ t.created|date:"H:i" }}</span>
-                                            </div>
-                                            <div class="col align-content-center d-flex flex-column rounded bg-6 ms-1 border">
-                                                <span><strong>Due Date:</strong> {{ t.due_date|date:"d-m-y" }}</span>
-                                                <span><strong>Due Time:</strong> {{ t.due_date|date:"H:i" }}</span>
-                                                {% comment %} Due:     {{ t.due_date|date:"d-m-y H:i" }} {% endcomment %}
-                                            </div>
-                                            {% comment %} <div class="col">
-                                                Time:     {{ t.due_date|date:"H:i" }}
-                                            </div> {% endcomment %}
-                                            
-                                            {% comment %} <div class="col">
-                                                <div class="due-date bg-4 d-flex flex-column text-center">
-                                                    <span>{{ t.due_date|date:"D" }}</span>
-                                                    <span>{{ t.due_date|date:"M" }}</span>
-                                                    <span></span>
-                                                </div>   
-                                                Due 
-                                            </div> {% endcomment %}
-                                            {% comment %} <div class="col">
-                                                {% if t.duration %}Duration: {{ t.duration }}{% endif %}
-                                            </div> {% endcomment %}
-                                            {% comment %} <div class="col">
-                                                {% if t.time_taken %}Time Taken: {{ t.time_taken|date:"d-m-y H:i" }}{% endif %}
+                                        <div class="row align-content-center">
+                                            <div class="col">
+                                                <p>Created: {{ t.created|date:"d-m-y H:i" }}</p>
                                             </div>
                                             <div class="col">
-                                                {% if t.elapsed_time %}elapsed_time: {{ t.elapsed_time|date:"d-m-y H:i" }}{% endif %}
+                                                <p>Due:     {{ t.due_date|date:"d-m-y H:i" }}</p>
                                             </div>
                                             <div class="col">
-                                                {% if t.time_until_due %}Time Until Due: {{ t.time_until_due|date:"d-m-y H:i" }}{% endif %}
-                                            </div> {% endcomment %}
-                                        
-                                    <div class=" col text-end">
-                                            {% comment %} <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a> {% endcomment %}
-                                         </div>
-                                         <div class=" col text-end">
-                                            {% comment %} <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a> {% endcomment %}
-                                         </div>
-                                         <div class=" col text-end">
-                                            {% comment %} <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a> {% endcomment %}
-                                         </div>
-                                        <div class=" col text-end">
-                                            {% comment %} <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a> {% endcomment %}
-                                         </div>
-                                        <div class="col text-end"> 
-                                            <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a>
-                                            <button type="button"
-                                                    class="btn btn-custom-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#deleteModal"
-                                                    data-task-id="{{ t.id }}"
-                                                    data-task-title="{{ t.title }}">Delete</button>
-                                        </div>
-                                        <div class="col">
-                                                <form method="post" action="{% url 'complete_task' t.id %}" class="text-end p-0 m-0">
-                                                    {% csrf_token %}
-                                                    <span>
-                                                        <label for="completed">Mark Complete
-                                                        <input type="checkbox" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}></label>
-                                                    </span>
-                                                </form>
+                                                {% if t.duration %}<p>Duration: {{ t.duration }}</p>{% endif %}
+                                            </div>
+                                            <div class="col">
+                                                {% if t.time_taken %}<p>Time Taken: {{ t.time_taken|date:"d-m-y H:i" }}</p>{% endif %}
+                                            </div>
+                                            <div class="col">
+                                                {% if t.elapsed_time %}<p>elapsed_time: {{ t.elapsed_time|date:"d-m-y H:i" }}</p>{% endif %}
+                                            </div>
+                                            <div class="col">
+                                                {% if t.time_until_due %}<p>Time Until Due: {{ t.time_until_due|date:"d-m-y H:i" }}</p>{% endif %}
+                                            </div>
+                                            <div class="col xms-auto">
+                                                <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a>
+                                            </div>
+                                            <div class="col">
+                                                <button type="button"
+                                                        class="btn btn-custom-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal"
+                                                        data-task-id="{{ t.id }}"
+                                                        data-task-title="{{ t.title }}">Delete</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <!-- Delete Confirmation Modal -->
-        <div class="modal fade"
-             id="deleteModal"
-             tabindex="-1"
-             role="dialog"
-             aria-labelledby="deleteModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Delete Task</h5>
-                        <button type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete the task "<span id="taskTitle"></span>"?
-                    </div>
-                    <div class="modal-footer">
-                        <form id="deleteForm" method="post">
-                            {% csrf_token %}
-                            <input type="submit" value="Confirm Delete" class="btn btn-danger">
-                        </form>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
+    </div>
+</div>
+<!-- Delete Confirmation Modal -->
+<div class="modal fade"
+     id="deleteModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Task</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the task "<span id="taskTitle"></span>"?
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Confirm Delete" class="btn btn-danger">
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
+    </div>
+</div>
 {% endblock %}
 {% block extra_js %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $('#deleteModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var taskId = button.data('task-id') // Extract info from data-* attributes
-        var taskTitle = button.data('task-title') // Extract info from data-* attributes
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$('#deleteModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var taskId = button.data('task-id') // Extract info from data-* attributes
+    var taskTitle = button.data('task-title') // Extract info from data-* attributes
 
-        var modal = $(this)
-        modal.find('#taskTitle').text(taskTitle)
-        modal.find('#deleteForm').attr('action', '{% url "delete_task" 0 %}'.replace('0', taskId))
-    })
+    var modal = $(this)
+    modal.find('#taskTitle').text(taskTitle)
+    modal.find('#deleteForm').attr('action', '{% url "delete_task" 0 %}'.replace('0', taskId))
+})
 
-    $('#deleteForm').on('submit', function (event) {
-        event.preventDefault();
-        var form = $(this);
-        var actionUrl = form.attr('action');
-        $.ajax({
-            type: 'POST',
-            url: actionUrl,
-            data: form.serialize(),
-            success: function (response) {
-                if (response.success) {
-                    $('#deleteModal').modal('hide');
-                    $('#task-' + actionUrl.split('/').slice(-2, -1)).remove();
-                }
+$('#deleteForm').on('submit', function (event) {
+    event.preventDefault();
+    var form = $(this);
+    var actionUrl = form.attr('action');
+    $.ajax({
+        type: 'POST',
+        url: actionUrl,
+        data: form.serialize(),
+        success: function (response) {
+            if (response.success) {
+                $('#deleteModal').modal('hide');
+                $('#task-' + actionUrl.split('/').slice(-2, -1)).remove();
             }
-        });
+        }
     });
-    </script>
+});
+</script>
 {% endblock %}

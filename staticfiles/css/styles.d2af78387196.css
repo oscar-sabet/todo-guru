@@ -26,7 +26,7 @@
   --blue: #3273cf;
 
   --shadow: 0 0 9px rgba(0, 0, 0, 0.233);
-  --shadow-hover: 0 0 13px rgba(0, 0, 0, 0.349);
+  --shadow-hover: 0 0 9px rgba(0, 0, 0, 0.349);
 }
 
 /* Custom Classes */

@@ -26,7 +26,6 @@
   --blue: #3273cf;
 
   --shadow: 0 0 9px rgba(0, 0, 0, 0.233);
-  --shadow-hover: 0 0 13px rgba(0, 0, 0, 0.349);
 }
 
 /* Custom Classes */
@@ -306,7 +305,7 @@ button form input {
   margin: auto;
 }
 .sidebar select:hover {
-  box-shadow: var(--shadow-hover);
+  background-color: #c9c9c9;
 }
 /* Footer */
 footer a {

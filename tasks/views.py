@@ -9,9 +9,45 @@ from django.contrib.auth import login
 from django.contrib import messages
 
 
+# @login_required
+# def task_list(request):
+#     print(request)
+#     sort_by = request.GET.get("sort", "created")
+#     print(f"Sort by ->  {sort_by}")
+#     valid_sort_fields = ["status", "category", "priority", "due_date", "created"]
+
+#     if sort_by not in valid_sort_fields:
+#         sort_by = "created"
+
+#     tasks = Task.objects.filter(user=request.user).order_by(sort_by)
+#     return render(request, "tasks/list.html", {"tasks": tasks})
+
+
 @login_required
 def list(request):
-    tasks = Task.objects.filter(user=request.user).order_by("-status", "-created")
+    sort_by = request.GET.get("sort", "created")
+    sort_direction = request.GET.get("direction", "asc")
+    status_filter = request.GET.get("status")
+    category_filter = request.GET.get("category")
+    priority_filter = request.GET.get("priority")
+    valid_sort_fields = ["status", "category", "priority", "due_date", "created"]
+
+    if sort_by not in valid_sort_fields:
+        sort_by = "created"
+
+    if sort_direction == "desc":
+        sort_by = f"-{sort_by}"
+
+    tasks = Task.objects.filter(user=request.user)
+
+    if status_filter:
+        tasks = tasks.filter(status=status_filter)
+    if category_filter:
+        tasks = tasks.filter(category=category_filter)
+    if priority_filter:
+        tasks = tasks.filter(priority=priority_filter)
+
+    tasks = tasks.order_by(sort_by)
     form = TaskForm()
 
     for task in tasks:

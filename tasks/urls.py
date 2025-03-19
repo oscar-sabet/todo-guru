@@ -20,4 +20,5 @@ urlpatterns = [
         views.update_task_status,
         name="update_task_status",
     ),
+    # path("tasks/", views.task_list, name="task_list"),
 ]

@@ -65,7 +65,7 @@ The project Board can be found here.
 
 The deployed Heroku project link can be found here.
 
-[Deployed Link]()
+[Deployed Link](https://todo-guru-2-3e966323d05c.herokuapp.com/)
 
 ## Sources
 

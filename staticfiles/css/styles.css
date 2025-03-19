@@ -10,6 +10,7 @@
 
   --blue-pastel: #c6def1;
   --blue-pastel-dark: #9cc5e7;
+  --blue-pastel-light: #f3e9ddea;
 
   --purple-pastel: #dbcdf0;
   --purple-pastel-dark: #d2c5e6;
@@ -25,6 +26,7 @@
   --blue: #3273cf;
 
   --shadow: 0 0 9px rgba(0, 0, 0, 0.233);
+  --shadow-hover: 0 0 13px rgba(0, 0, 0, 0.349);
 }
 
 /* Custom Classes */
@@ -49,6 +51,12 @@
 }
 .bg-7 {
   background-color: var(--red-pastel);
+}
+.bg-8 {
+  background-color: var(--bg);
+}
+.bg-9 {
+  background-color: var(--orange-pastel);
 }
 /* Foreground Colors */
 .fg-1 {
@@ -115,7 +123,7 @@
   box-shadow: var(--shadow);
   padding: 8px 16px;
   margin: 8px;
-  font-weight: 300;
+  /* font-weight: 300; */
 }
 .btn-custom-1:hover {
   background-color: var(--fg);
@@ -157,7 +165,7 @@
   box-shadow: var(--shadow);
   padding: 8px 16px;
   margin: 8px;
-  font-weight: 300;
+  /* font-weight: 300; */
 }
 .btn-custom-4:hover {
   background-color: white;
@@ -238,7 +246,9 @@ section {
   border-radius: 15px;
 }
 /* Forms */
-
+.forms-container {
+  padding: 24px;
+}
 input,
 select {
   border: 0;
@@ -294,6 +304,9 @@ button form,
 button form input {
   padding: 0;
   margin: auto;
+}
+.sidebar select:hover {
+  box-shadow: var(--shadow-hover);
 }
 /* Footer */
 footer a {
