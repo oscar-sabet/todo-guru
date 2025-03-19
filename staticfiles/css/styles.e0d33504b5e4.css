@@ -125,6 +125,7 @@
   background-color: #f7e700;
   color: var(--bg);
 }
+*/
 
 /* Buttons */
 .btn-new-task {
@@ -244,10 +245,7 @@ section {
   top: 0;
 }
 /* NavTabs */
-/* .nav {
-  display: flex;
-} */
-.nav-item {
+.nav-link {
   display: flex;
   flex-grow: 1;
 }
@@ -297,9 +295,6 @@ select {
   box-shadow: var(--shadow);
   /* outline: none;
   border: 0; */
-}
-.tab-content select {
-  margin: 0;
 }
 /* input:hover,
 select:hover,

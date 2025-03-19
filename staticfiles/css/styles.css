@@ -125,7 +125,6 @@
   background-color: #f7e700;
   color: var(--bg);
 }
-*/
 
 /* Buttons */
 .btn-new-task {
@@ -244,7 +243,14 @@ section {
   /* left: 0; */
   top: 0;
 }
-
+/* NavTabs */
+/* .nav {
+  display: flex;
+} */
+.nav-item {
+  display: flex;
+  flex-grow: 1;
+}
 /* Card */
 .due-hour,
 .due-min {
@@ -291,6 +297,9 @@ select {
   box-shadow: var(--shadow);
   /* outline: none;
   border: 0; */
+}
+.tab-content select {
+  margin: 0;
 }
 /* input:hover,
 select:hover,

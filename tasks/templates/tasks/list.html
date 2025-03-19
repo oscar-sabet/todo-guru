@@ -6,128 +6,146 @@
 <div class="container">
     <div class="row p-1">
         <!-- Sidebar -->
-        <div class="col-md-3 bg-3 sidebar p-3">
+        <div class="col-md-4 col-lg-3 bg-3 sidebar rounded p-3">
             <div class="user-info text-center mb-4">
                 {% if user.profile.profile_picture %}
-                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded-circle mb-2" width="100">
+                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded-circle w-75 mb-2" width="100">
                 {% else %}
                     <img src="https://via.placeholder.com/100" alt="Profile Picture" class="img-thumbnail rounded-circle mb-2" width="100">
                 {% endif %}
                 <h4>{{ user.username }}</h4>
                 <p>{{ user.email }}</p>
             </div>
-            <h5>Tasks Statistics</h5>
-            <ul class="list-group mb-2">
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between mb-1">
-                        <span>Total Tasks:</span>
-                        <span class="badge text-bg-primary">{{ tasks.count }}</span>
-                    </div>
+
+            <ul class="nav nav-pills mb-3 rounded-pill bg-7" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active rounded-pill w-100" id="pills-sort-tab" data-bs-toggle="pill" data-bs-target="#pills-sort" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Sorting</button>
                 </li>
-            </ul>
-            <ul class="list-group mb-2">
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between">
-                        <span>Completed Tasks</span>
-                        <span class="badge text-bg-success">{{ completed_tasks }}</span>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between">
-                        <span>Tasks In Progress:</span>
-                        <span class="badge text-bg-warning">{{ in_progress_tasks }}</span>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between">
-                        <span>Tasks Pending:</span>
-                        <span class="badge bg-danger rounded-pill">{{ pending_tasks }}</span>
-                    </div>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill w-100" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Statistics</button>
                 </li>
             </ul>
 
-            <ul class="list-group mb-2">
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between">
-                        <span>Low Priority:</span>
-                        <span class="badge text-bg-success">{{ low_priority_tasks }}</span>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-sort" role="tabpanel" aria-labelledby="pills-sort-tab" tabindex="0">
+                        <div>
+                        <h5>Filter Tasks</h5>
+                        <form method="get" action="{% url 'list' %}">
+                            <div class="form-group mb-2">
+                                <label for="status-filter">Status</label>
+                                <select id="status-filter" name="status" class="form-control" onchange="this.form.submit()">
+                                    <option value="" {% if request.GET.status == "" %}selected{% endif %}>All</option>
+                                    <option value="P" {% if request.GET.status == "P" %}selected{% endif %}>Pending</option>
+                                    <option value="IP" {% if request.GET.status == "IP" %}selected{% endif %}>In Progress</option>
+                                    <option value="C" {% if request.GET.status == "C" %}selected{% endif %}>Completed</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="category-filter">Category</label>
+                                <select id="category-filter" name="category" class="form-control" onchange="this.form.submit()">
+                                    <option value="" {% if request.GET.category == "" %}selected{% endif %}>All</option>
+                                    <option value="W" {% if request.GET.category == "W" %}selected{% endif %}>Work</option>
+                                    <option value="P" {% if request.GET.category == "P" %}selected{% endif %}>Personal</option>
+                                    <option value="H" {% if request.GET.category == "H" %}selected{% endif %}>Home</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="priority-filter">Priority</label>
+                                <select id="priority-filter" name="priority" class="form-control" onchange="this.form.submit()">
+                                    <option value="" {% if request.GET.priority == "" %}selected{% endif %}>All</option>
+                                    <option value="L" {% if request.GET.priority == "L" %}selected{% endif %}>Low</option>
+                                    <option value="M" {% if request.GET.priority == "M" %}selected{% endif %}>Medium</option>
+                                    <option value="H" {% if request.GET.priority == "H" %}selected{% endif %}>High</option>
+                                </select>
+                            </div>
+                            {% comment %} <button type="submit" class="btn btn-primary w-100">Filter</button> {% endcomment %}
+                        </form>
                     </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between">
-                        <span>Medium Priority:</span>
-                        <span class="badge text-bg-warning">{{ medium_priority_tasks }}</span>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between">
-                        <span>High Priority:</span>
-                        <span class="badge bg-danger">{{ high_priority_tasks }}</span>
-                    </div>
-                </li>
-            </ul>
-            <div>
-                <h5>Filter Tasks</h5>
-                <form method="get" action="{% url 'list' %}">
-                    <div class="form-group mb-2">
-                        <label for="status-filter">Status</label>
-                        <select id="status-filter" name="status" class="form-control" onchange="this.form.submit()">
-                            <option value="" {% if request.GET.status == "" %}selected{% endif %}>All</option>
-                            <option value="P" {% if request.GET.status == "P" %}selected{% endif %}>Pending</option>
-                            <option value="IP" {% if request.GET.status == "IP" %}selected{% endif %}>In Progress</option>
-                            <option value="C" {% if request.GET.status == "C" %}selected{% endif %}>Completed</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="category-filter">Category</label>
-                        <select id="category-filter" name="category" class="form-control" onchange="this.form.submit()">
-                            <option value="" {% if request.GET.category == "" %}selected{% endif %}>All</option>
-                            <option value="W" {% if request.GET.category == "W" %}selected{% endif %}>Work</option>
-                            <option value="P" {% if request.GET.category == "P" %}selected{% endif %}>Personal</option>
-                            <option value="H" {% if request.GET.category == "H" %}selected{% endif %}>Home</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="priority-filter">Priority</label>
-                        <select id="priority-filter" name="priority" class="form-control" onchange="this.form.submit()">
-                            <option value="" {% if request.GET.priority == "" %}selected{% endif %}>All</option>
-                            <option value="L" {% if request.GET.priority == "L" %}selected{% endif %}>Low</option>
-                            <option value="M" {% if request.GET.priority == "M" %}selected{% endif %}>Medium</option>
-                            <option value="H" {% if request.GET.priority == "H" %}selected{% endif %}>High</option>
-                        </select>
-                    </div>
-                    {% comment %} <button type="submit" class="btn btn-primary w-100">Filter</button> {% endcomment %}
-                </form>
+                    <h5>Sort Tasks By</h5>
+                    <form method="get" action="{% url 'list' %}">
+                        <!-- Include current filter parameters -->
+                        <input type="hidden" name="status" value="{{ request.GET.status }}">
+                        <input type="hidden" name="category" value="{{ request.GET.category }}">
+                        <input type="hidden" name="priority" value="{{ request.GET.priority }}">
+                        <div class="form-group mb-2">
+                            <label for="sort-select">Sort By</label>
+                            <select id="sort-select" name="sort" class="form-control" onchange="this.form.submit()">
+                                <option value="created" {% if request.GET.sort == "created" %}selected{% endif %}>Created Date</option>
+                                <option value="due_date" {% if request.GET.sort == "due_date" %}selected{% endif %}>Due Date</option>
+                                <option value="status" {% if request.GET.sort == "status" %}selected{% endif %}>Status</option>
+                                <option value="category" {% if request.GET.sort == "category" %}selected{% endif %}>Category</option>
+                                <option value="priority" {% if request.GET.sort == "priority" %}selected{% endif %}>Priority</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="direction-select">Direction</label>
+                            <select id="direction-select" name="direction" class="form-control" onchange="this.form.submit()">
+                                <option value="asc" {% if request.GET.direction == "asc" %}selected{% endif %}>Ascending</option>
+                                <option value="desc" {% if request.GET.direction == "desc" %}selected{% endif %}>Descending</option>
+                            </select>
+                        </div>
+                    </form>
+                    <a href="{% url 'list' %}" class="btn btn-custom-4 w-100 mt-2 ms-0">Clear Filters</a>
+                </div>
+            {% comment %} </div> {% endcomment %}
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                    <h5>Tasks Statistics</h5>
+                    <ul class="list-group mb-2">
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Total Tasks:</span>
+                                <span class="badge text-bg-primary">{{ tasks.count }}</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="list-group mb-2">
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <span>Completed Tasks</span>
+                                <span class="badge text-bg-success">{{ completed_tasks }}</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <span>Tasks In Progress:</span>
+                                <span class="badge text-bg-warning">{{ in_progress_tasks }}</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <span>Tasks Pending:</span>
+                                <span class="badge bg-danger rounded-pill">{{ pending_tasks }}</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="list-group mb-2">
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <span>Low Priority:</span>
+                                <span class="badge text-bg-success">{{ low_priority_tasks }}</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <span>Medium Priority:</span>
+                                <span class="badge text-bg-warning">{{ medium_priority_tasks }}</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <span>High Priority:</span>
+                                <span class="badge bg-danger">{{ high_priority_tasks }}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>                
             </div>
-            <h5>Sort Tasks By</h5>
-            <form method="get" action="{% url 'list' %}">
-                <!-- Include current filter parameters -->
-                <input type="hidden" name="status" value="{{ request.GET.status }}">
-                <input type="hidden" name="category" value="{{ request.GET.category }}">
-                <input type="hidden" name="priority" value="{{ request.GET.priority }}">
-                <div class="form-group mb-2">
-                    <label for="sort-select">Sort By</label>
-                    <select id="sort-select" name="sort" class="form-control" onchange="this.form.submit()">
-                        <option value="created" {% if request.GET.sort == "created" %}selected{% endif %}>Created Date</option>
-                        <option value="due_date" {% if request.GET.sort == "due_date" %}selected{% endif %}>Due Date</option>
-                        <option value="status" {% if request.GET.sort == "status" %}selected{% endif %}>Status</option>
-                        <option value="category" {% if request.GET.sort == "category" %}selected{% endif %}>Category</option>
-                        <option value="priority" {% if request.GET.sort == "priority" %}selected{% endif %}>Priority</option>
-                    </select>
-                </div>
-                <div class="form-group mb-2">
-                    <label for="direction-select">Direction</label>
-                    <select id="direction-select" name="direction" class="form-control" onchange="this.form.submit()">
-                        <option value="asc" {% if request.GET.direction == "asc" %}selected{% endif %}>Ascending</option>
-                        <option value="desc" {% if request.GET.direction == "desc" %}selected{% endif %}>Descending</option>
-                    </select>
-                </div>
-            </form>
-            <a href="{% url 'list' %}" class="btn btn-custom-4 w-100 mt-2 ms-0">Clear Filters</a>
+
         </div>
         <!-- Main Content -->
-        <div class="col-md-9">
-            <h2>ToDoGuru</h2>
+        <div class="col-md-8 col-lg-9">
+            <h2 class="m-4">Tasks List</h2>
             <!-- Messages -->
             <div class="container mt-3">
                 {% if messages %}
@@ -204,9 +222,9 @@
                                         aria-expanded="false"
                                         aria-controls="flush-collapse{{ t.id }}">
                                     <div class="row w-100">
-                                        <span class="col-lg-3">
-                                        &nbsp;{{ t.title }}</span>
-                                        <span class="col-lg-3">Priority:
+                                        <span class="col-lg-5 ps-4">
+                                        {{ t.id }}. {{ t.title }}</span>
+                                        {% comment %} <span class="col-lg-3 d-none d-lg-inline-block">Priority:
                                             {% if t.priority == 'H' %}
                                                 High  <i class="fa-solid fa-exclamation-circle text-danger me-2 "></i>
                                             {% elif t.priority == 'M' %}
@@ -216,15 +234,15 @@
                                             {% else %}
                                                 <i class="fa-solid fa-circle text-muted me-2"></i>
                                             {% endif %}
-                                        </span>
+                                        </span> {% endcomment %}
                                         {% if t.status == "P" %}
-                                            <span class="col-lg-3"><span class="status status-p">{{ t.get_status_display }}</span></span>
+                                            <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-p"><i class="fa-solid fa-exclamation-circle text-danger me-2 "></i>{{ t.get_status_display }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
                                         {% elif t.status == "IP" %}
-                                            <span class="col-lg-3"><span class="status status-ip">{{ t.get_status_display }}</span></span>
+                                            <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-ip"><i class="fa-solid fa-exclamation-triangle text-warning me-2"></i>{{ t.get_status_display }}</span></span>
                                         {% elif t.status == "C" %}
-                                            <span class="col-lg-3"><span class="status status-c">{{ t.get_status_display }}</span></span>
+                                            <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-c"><i class="fa-solid fa-check-circle text-success me-2"></i>{{ t.get_status_display }}</span></span>
                                         {% endif %}
-                                        <span class="col-lg-2">Due: {{ t.due_date|date:"d-m-y" }}</span>
+                                        <span class="col-lg-4 text-end d-none d-lg-inline">Due: {{ t.due_date|date:"d-m-y" }}</span>
                                     </div>
                                 </button>
                             </h2>
