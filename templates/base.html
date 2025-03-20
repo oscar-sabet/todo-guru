@@ -22,6 +22,16 @@
         <!-- Font Awesome CSS -->
         <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css"
               rel="stylesheet">
+        <!-- Favicon -->
+        {% comment %} <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest"> {% endcomment %}
+
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
         <!-- Include AOS CSS -->
         <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
         <!-- Custom CSS -->
@@ -37,6 +47,7 @@
         <nav id="navbar"
              class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div id="navbar-container" class="container-fluid">
+                <a class="" href="{% url 'home' %}"><img src="{% static 'favicons/favicon-32x32.png' %}" class="logo p-1 rounded-5" alt="ToDo|Guru Logo"></a>
                 <a class="navbar-brand" href="{% url 'home' %}"><i class="xfa-solid xfa-list-check"> </i><span class="brand-1">To<span class="brand-2">Do</span><span class="">|<span class="brand-4">Guru</span></span></span></a>
                 <button class="navbar-toggler"
                         type="button"
@@ -50,18 +61,18 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/' %}active{% endif %}"
+                            <a class="nav-link brand-1 {% if request.path == '/' %}active{% endif %}"
                                aria-current="page"
                                href="{% url 'home' %}">Home</a>
                         </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link {% if request.path == '/tasks/' %}active{% endif %}"
+                                <a class="nav-link brand-2 {% if request.path == '/tasks/list/' %}active{% endif %}"
                                 aria-current="page"
                                 href="{% url 'list' %}">Task List</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {% if request.path == '/board/' %}active{% endif %}"
+                                <a class="nav-link brand-4 {% if request.path == '/tasks/board/' %}active{% endif %}"
                                 aria-current="page"
                                 href="{% url 'board' %}">Project Board</a>
                             </li>

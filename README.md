@@ -69,6 +69,7 @@ The deployed Heroku project link can be found here.
 
 ## Sources
 
+Guru logo - https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&position=1&origin=tag&related_id=3174915
 ## Full Screenshots
 
 ### Create New Task

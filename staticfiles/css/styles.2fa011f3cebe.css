@@ -393,10 +393,12 @@ footer a {
 
 .hover-card .default-content {
   transform: translateY(0);
+  background-color: lightblue; /* Temporary style for debugging */
 }
 
 .hover-card .hover-content {
-  transform: translateY(79%);
+  transform: translateY(95%);
+  background-color: lightgreen; /* Temporary style for debugging */
 }
 
 .hover-card:hover .default-content {

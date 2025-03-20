@@ -56,10 +56,15 @@ def list(request):
             task.elapsed_time = None
         else:
             task.elapsed_time = timezone.now() - task.created
+            print("elapsed_time -> ", task.elapsed_time)
             task.time_taken = None
+            print("Task created -> ", task.created)
+            print("Current time -> ", timezone.now())
+            print("Task elapsed time -> ", task.elapsed_time)
 
         if task.due_date:
             task.time_until_due = task.due_date - timezone.now()
+
         else:
             task.time_until_due = None
 
@@ -72,6 +77,7 @@ def list(request):
         "low_priority_tasks": low_priority_tasks,
         "medium_priority_tasks": medium_priority_tasks,
         "high_priority_tasks": high_priority_tasks,
+        "aaa": timezone.now() - task.created,
     }
     return render(request, "tasks/list.html", context)
 
