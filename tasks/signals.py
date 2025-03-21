@@ -8,7 +8,7 @@ from .models import Profile
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         profile = Profile.objects.create(user=instance)
-        profile.profile_picture = "static/images/nobody.jpg"
+        profile.profile_picture = "placeholder"
         profile.save()
 
 

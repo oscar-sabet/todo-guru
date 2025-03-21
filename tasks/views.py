@@ -182,15 +182,76 @@ def register(request):
     return render(request, "task/register.html", {"form": form})
 
 
+# @login_required
+# def profile(request):
+#     # Ensure the profile is created if it does not exist
+#     profile, created = Profile.objects.get_or_create(user=request.user)
+#     if request.method == "POST":
+#         form = ProfileForm(request.POST, request.FILES, instance=profile)
+#         if form.is_valid():
+#             form.save()
+#             return redirect("profile")
+#     else:
+#         form = ProfileForm(instance=profile)
+#     return render(request, "tasks/profile.html", {"form": form})
+
+
 @login_required
 def profile(request):
-    # Ensure the profile is created if it does not exist
     profile, created = Profile.objects.get_or_create(user=request.user)
+    tasks = Task.objects.filter(user=request.user)
+
+    # Calculate statistics
+    total_tasks = tasks.count()
+    completed_tasks = tasks.filter(status="C").count()
+    pending_tasks = tasks.filter(status="P").count()
+    in_progress_tasks = tasks.filter(status="IP").count()
+    low_priority_tasks = tasks.filter(priority="L").count()
+    medium_priority_tasks = tasks.filter(priority="M").count()
+    high_priority_tasks = tasks.filter(priority="H").count()
+
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
+            messages.success(request, "Profile updated successfully.")
             return redirect("profile")
     else:
         form = ProfileForm(instance=profile)
-    return render(request, "tasks/profile.html", {"form": form})
+
+    context = {
+        "form": form,
+        "profile": profile,
+        "tasks": tasks,
+        "total_tasks": total_tasks,
+        "completed_tasks": completed_tasks,
+        "pending_tasks": pending_tasks,
+        "in_progress_tasks": in_progress_tasks,
+        "account_created": request.user.date_joined,
+        "last_login": request.user.last_login,
+    }
+
+    return render(
+        request,
+        "tasks/profile.html",
+        context,
+    )
+
+
+# @login_required
+# def profile(request):
+#     profile, created = Profile.objects.get_or_create(user=request.user)
+#     tasks = Task.objects.filter(user=request.user)
+#     if request.method == "POST":
+#         form = ProfileForm(request.POST, request.FILES, instance=profile)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, "Profile updated successfully.")
+#             return redirect("profile")
+#     else:
+#         form = ProfileForm(instance=profile)
+#     return render(
+#         request,
+#         "tasks/profile.html",
+#         {"form": form, "profile": profile, "tasks": tasks},
+#     )

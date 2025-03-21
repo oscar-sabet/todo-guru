@@ -55,21 +55,26 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
+                        {% comment %} <li class="nav-item">
                             <a class="nav-link brand-1 {% if request.path == '/' %}active{% endif %}"
                                aria-current="page"
                                href="{% url 'home' %}">Home</a>
-                        </li>
+                        </li> {% endcomment %}
                         {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link brand-2 {% if request.path == '/tasks/list/' %}active{% endif %}"
+                                <a class="nav-link brand-1 {% if request.path == '/tasks/list/' %}active{% endif %}"
                                 aria-current="page"
                                 href="{% url 'list' %}">Task List</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link brand-4 {% if request.path == '/tasks/board/' %}active{% endif %}"
+                                <a class="nav-link brand-2 {% if request.path == '/tasks/board/' %}active{% endif %}"
                                 aria-current="page"
                                 href="{% url 'board' %}">Project Board</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link brand-4 {% if request.path == '/tasks/profile/' %}active{% endif %}"
+                                aria-current="page"
+                                href="{% url 'profile' %}">Profile</a>
                             </li>
                             {% comment %} <li>
                                 <a href="{% url 'account_logout' %}">Logout {{ user.username }} <i class="fa-solid fa-user"></i></a>

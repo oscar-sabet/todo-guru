@@ -4,7 +4,115 @@
 {% block title %}Profile{% endblock %}
 {% block content %}
 <div class="container mt-4">
-    <h2>User Profile</h2>
+    <div class="row">
+    <!-- Sidebar -->
+        <div class="col-md-4 col-lg-3 bg-3 sidebar rounded shadow-sm p-3">
+            <div class="user-info text-center mb-4">
+                {% if "placeholder" in user.profile.profile_picture.url %}
+                    <img src="{% static 'images/nobody.jpg' %}" alt="Profile Picture placeholder" class="img-thumbnail rounded-circle w-75 mb-2" width="100">
+                {% elif  user.profile.profile_picture.url %}
+                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded-circle w-75 mb-2" width="100">
+                {% endif %}
+                <h4>{{ user.username }}</h4>
+                <p>{{ user.email }}</p>
+            </div>
+            
+
+            <!-- Account Statistics-->
+            <div>
+                <h5>Statistics</h5>
+                <h6>Account</h6>
+                <ul class="list-group mb-2">
+                    
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span>Created:</span>
+                            <span class="xbadge xtext-bg-success">{{ account_created|date:"d/m/y - H:i" }}</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span>Last Login:</span>
+                            <span class="xbadge xtext-bg-warning">{{ last_login|date:"d/m/y - H:i" }}</span>
+                        </div>
+                    </li>
+                    
+                </ul>
+
+                <h6>Tasks</h5>
+                <ul class="list-group mb-2">
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span>Total Tasks:</span>
+                            <span class="badge text-bg-primary">{{ tasks.count }}</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span>Completed:</span>
+                            <span class="badge text-bg-success">{{ completed_tasks }}</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span>In Progress:</span>
+                            <span class="badge text-bg-warning">{{ in_progress_tasks }}</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <span>Pending:</span>
+                            <span class="badge bg-danger rounded-pill">{{ pending_tasks }}</span>
+                        </div>
+                    </li>
+                </ul>
+
+                
+            </div>
+            <!-- Edit profile picture -->
+            <div class="text-end">
+                <button type="button" class="btn btn-primary rounded-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Edit Profile Picture
+                </button>
+            </div>
+            
+        </div>
+
+    <!-- Modal Edit Profile-->
+    <!-- Button trigger modal -->
+        
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit profile picture</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- Modal Body -->
+            <form method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_profile_picture" class="form-label">Profile Picture</label>
+                            {{ form.profile_picture }}
+                        </div>
+                        {% comment %} <button type="submit" class="btn btn-primary">Save changes</button> {% endcomment %}
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary rounded-5" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary rounded-5">Save changes</button>
+                    
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+    <!-- Main Content -->
+    {% comment %} <h2>User Profile</h2>
     <div class="row">
         <div class="col-md-4 text-center">
             {% if user.profile.profile_picture %}
@@ -24,6 +132,37 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Save changes</button>
             </form>
+        </div>
+    </div> {% endcomment %}
+    {% comment %} <div class="row mt-4"> {% endcomment %}
+        <div class="col-md-12 col-lg-9">
+            <div class="user-history-bg rounded shadow-sm p-1 pb-0">
+                <h3 class="p-1">Account History</h3>
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th class="border-0">Title</th>
+                            <th class="border-0">Status</th>
+                            <th class="border-0">Priority</th>
+                            <th class="border-0">Created</th>
+                            <th class="border-0">Due Date</th>
+                            <th class="border-0">Completed Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                            <tr>
+                                <td class="border-0">{{ task.title }}</td>
+                                <td class="border-0">{{ task.get_status_display }}</td>
+                                <td class="border-0">{{ task.get_priority_display }}</td>
+                                <td class="border-0">{{ task.created }}</td>
+                                <td class="border-0">{{ task.due_date }}</td>
+                                <td class="border-0">{{ task.completed_date }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
