@@ -269,8 +269,8 @@
                                                         <div class="default-content bg-1">
                                                             <span>
                                                                 <span class="">Time Until Due: </span>
-                                                                <i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}
+                                                                {% comment %} <i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }} {% endcomment %}
+                                                                {% comment %} <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }} {% endcomment %}
                                                             </span>
                                                         </div>
 
