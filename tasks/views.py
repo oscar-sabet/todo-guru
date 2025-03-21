@@ -77,7 +77,6 @@ def list(request):
         "low_priority_tasks": low_priority_tasks,
         "medium_priority_tasks": medium_priority_tasks,
         "high_priority_tasks": high_priority_tasks,
-        "aaa": timezone.now() - task.created,
     }
     return render(request, "tasks/list.html", context)
 
