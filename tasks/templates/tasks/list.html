@@ -12,7 +12,7 @@
                 {% if user.profile.profile_picture %}
                     <img src="{{ user.Profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded-circle w-75 mb-2" width="100">
                 {% else %}
-                    <img src="https://via.placeholder.com/100" alt="Profile Picture" class="img-thumbnail rounded-circle mb-2" width="100">
+                    <img src='{& "images/nobody.2430c203144c.jpg"&}' alt="Profile Picture" class="img-thumbnail rounded-circle mb-2" width="100">
                 {% endif %}
                 <h4>{{ user.username }}</h4>
                 <p>{{ user.email }}</p>
