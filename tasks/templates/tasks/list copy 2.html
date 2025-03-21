@@ -211,7 +211,6 @@
                 <div class="accordion accordion-flush" id="tasks-accordion">
                     {% for t in tasks %}
                         <div class="accordion-item border-0">
-
                             <h2 class="accordion-header colors">
                                 <button class="m-0 my-1 accordion-button collapsed shadow-sm container-fluid "
                                         type="button"
@@ -228,72 +227,122 @@
                                         {% elif t.status == "C" %}
                                             <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-c"><i class="fa-solid fa-check-circle text-success me-2"></i>{{ t.get_status_display }}</span></span>
                                         {% endif %}
+                                        {% comment %} <p><i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }}</p>
+                                                        <p><i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}</p> {% endcomment %}
+
                                         <span class="col-lg-4 text-end d-none d-lg-inline"><i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }} - <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}</span>
+                                        {% comment %} <span class="col-lg-4 text-end d-none d-lg-inline"><i class="fa-solid fa-clock"></i> {{ t.due_date|date:"H:i" }} - <i class="fa-solid fa-calendar-days"></i> {{ t.due_date|date:"d-m-y" }} </span> {% endcomment %}
 
                                     </div>
                                 </button>
                             </h2>
-
                             <div id="flush-collapse{{ t.id }}"
                                  class="accordion-collapse collapse"
                                  data-bs-parent="#tasks-accordion">
-                                <div class="bg-1 m-0 accordion-body pb-2 row shadow-sm">
+                                <div class="bg-1 m-0 accordion-body row shadow-sm">
                                     {% if t.description %}
                                         <div class="col-lg-12">
                                             <div class="card bg-8 rounded">
-                                                <div class="card-body p-2">    
-                                                    <h5 class="card-title">Description</h5>
-                                                    <p>{{ t.description|safe }}</p>
-                                                </div>
+                                                {% comment %} <div class="card-header text-center">description</div> {% endcomment %}
+                                                <div class="card-body p-2">{{ t.description|safe }}</div>
                                             </div>
                                         </div>
                                     {% endif %}
-
+                                    {% comment %} <div class="col-lg-4">
+                                        <form method="post" action="{% url 'complete_task' t.id %}" class="text-center">
+                                            {% csrf_token %}
+                                            <label for="completed-{{ t.id }}">Mark Complete</label>
+                                            <input type="checkbox" id="completed-{{ t.id }}" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
+                                        </form>
+                                    </div> {% endcomment %}
                                     <div class="col-lg-12">
-                                        <div class="row">
-                                            
-                                                <div class="col-12 text-end mt-2 p-0">
-                                                    <a href="{% url 'update_task' t.id %}" class="btn btn-primary rounded-5 col">Update</a>
-                                                    <button type="button"
-                                                            class="btn btn-danger rounded-5 col"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteModal"
-                                                            data-task-id="{{ t.id }}"
-                                                            data-task-title="{{ t.title }}">Delete</button>
-                                                </div>
-
-                                            <div class="col-12 bg-1 xm-1 pt-2 rounded hover-card">
-                                                <div class="row">
-                                                    <div class="content col-8">
-
-                                                        <div class="default-content bg-1">
-                                                            <span>
-                                                                <span class="">Time Until Due: </span>
-                                                                <i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}
-                                                            </span>
-                                                        </div>
-
-                                                        <div class="hover-content bg-1">
-                                                            <span>
-                                                                <span class="">Date Until Due: </span>
-                                                                <i class="fa-solid fa-calendar-days"></i> {{ t.due_date|date:"d-m-y" }}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.due_date|date:"H:i" }}
-                                                            </span>
-                                                        </div>
-
+                                        <div class="row align-content-center">
+                                            {% comment %} <div class="col">
+                                                <p>Created: {{ t.created|date:"d-m-y H:i" }}</p>
+                                            </div> {% endcomment %}
+                                            {% comment %} <div class="col bg-6 m-1 pt-2 rounded">
+                                                <span class="">
+                                                    <h6 class="text-center rounded-5 bg-10 p-1">Date Created</h6>
+                                                    <p><i class="fa-solid fa-calendar-days"></i> {{ t.created|date:"d-m-y" }}</p>
+                                                    <p><i class="fa-solid fa-clock"></i> {{ t.created|date:"H:i" }}</p>
+                                                </span>
+                                            </div> {% endcomment %}
+                                            {% comment %} <div class="col bg-6 m-1 pt-2 rounded">
+                                                <span class="">
+                                                    <h6 class="text-center rounded-5 bg-10 p-1">Date Due</h6>
+                                                    <p><i class="fa-solid fa-calendar-days"></i> {{ t.due_date|date:"d-m-y" }}</p>
+                                                    <p><i class="fa-solid fa-clock"></i> {{ t.due_date|date:"H:i" }}</p>
+                                                </span>
+                                            </div>
+                                            <div class="col bg-6 m-1 pt-2 rounded">
+                                                <span class="">
+                                                    <h6 class="text-center rounded-5 bg-10 p-1">Time Until Due</h6>
+                                                    <p><i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }}</p>
+                                                    <p><i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}</p>
+                                                </span>
+                                            </div> {% endcomment %}
+                                            {% comment %} <div class="col bg-6 m-1 pt-2 rounded hover-card">
+                                                <div class="content">
+                                                    <div class="xdefault-content mb-5">
+                                                        <h6 class="text-center rounded-5 bg-10 p-1">Time Taken</h6>
+                                                        <p><i class="fa-solid fa-calendar-days"></i> {{ t.elapsed_time }} aaa {{ aaa }} t.a {{ t.aaa }}</p>
+                                                        <p><i class="fa-solid fa-clock"></i> {{ t.elapsed_time|format_timedelta_hours }}</p>
                                                     </div>
-                                                    <form method="post" action="{% url 'complete_task' t.id %}" class="text-end col-4 p-0">
-                                                        {% csrf_token %}
-                                                        <label for="completed-{{ t.id }}">Complete</label>
-                                                        <input type="checkbox" id="completed-{{ t.id }}" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
-                                                    </form>
+                                                    <div class="hover-content bg-6">
+                                                        <h6 class="text-center rounded-5 bg-10 p-1">Show Date Created</h6>
+                                                    <p><i class="fa-solid fa-calendar-days"></i> {{ t.created|date:"d-m-y" }}</p>
+                                                    <p><i class="fa-solid fa-clock"></i> {{ t.created|date:"H:i" }}</p>
+                                                    </div>
+                                                </div>
+                                            </div> {% endcomment %}
+
+                                            <div class="col bg-6 m-1 pt-2 rounded hover-card">
+                                                <div class="content">
+                                                    <div class="xdefault-content mb-5">
+                                                        <h6 class="text-center rounded-5 bg-10 p-1">Time Until Due</h6>
+                                                        <p><i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }}</p>
+                                                        <p><i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}</p>
+                                                    </div>
+                                                    <div class="hover-content bg-6">
+                                                        <h6 class="text-center rounded-5 bg-10 p-1">Show Date Due</h6>
+                                                        <p><i class="fa-solid fa-calendar-days"></i> {{ t.due_date|date:"d-m-y" }}</p>
+                                                        <p><i class="fa-solid fa-clock"></i> {{ t.due_date|date:"H:i" }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        
+                                            
+                                            {% comment %} <div class="col">
+                                                {% if t.duration %}<p>Duration: {{ t.duration }}</p>{% endif %}
+                                            </div> {% endcomment %}
+                                            {% comment %} <div class="col">
+                                                {% if t.time_taken %}<p>Time Taken: {{ t.time_taken|date:"d-m-y H:i" }}</p>{% endif %}
+                                            </div> {% endcomment %}
+                                            {% comment %} <div class="col">
+                                                {% if t.elapsed_time %}<p>elapsed_time: {{ t.elapsed_time|date:"d-m-y H:i" }}</p>{% endif %}
+                                            </div> {% endcomment %}
+                                            {% comment %} <div class="col">
+                                                {% if t.time_until_due %}<p>Time Until Due: {{ t.time_until_due|date:"d-m-y H:i" }}</p>{% endif %}
+                                            </div> {% endcomment %}
+                                            
+                                            <div class="col text-end ">
+                                                <form method="post" action="{% url 'complete_task' t.id %}" class="text-center">
+                                                    {% csrf_token %}
+                                                    <label for="completed-{{ t.id }}">Complete</label>
+                                                    <input type="checkbox" id="completed-{{ t.id }}" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
+                                                </form>
+                                                <a href="{% url 'update_task' t.id %}" class="btn btn-custom-2">Update</a>
+                                            {% comment %} </div>
+                                            <div class="col"> {% endcomment %}
+                                                <button type="button"
+                                                        class="btn btn-custom-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal"
+                                                        data-task-id="{{ t.id }}"
+                                                        data-task-title="{{ t.title }}">Delete</button>
+                                                
+                                            </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

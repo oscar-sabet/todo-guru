@@ -56,11 +56,11 @@ def list(request):
             task.elapsed_time = None
         else:
             task.elapsed_time = timezone.now() - task.created
-            print("elapsed_time -> ", task.elapsed_time)
+            # print("elapsed_time -> ", task.elapsed_time)
             task.time_taken = None
-            print("Task created -> ", task.created)
-            print("Current time -> ", timezone.now())
-            print("Task elapsed time -> ", task.elapsed_time)
+            # print("Task created -> ", task.created)
+            # print("Current time -> ", timezone.now())
+            # print("Task elapsed time -> ", task.elapsed_time)
 
         if task.due_date:
             task.time_until_due = task.due_date - timezone.now()
