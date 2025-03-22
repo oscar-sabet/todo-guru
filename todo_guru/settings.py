@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import cloudinary
 
 # from django.contrib.messages import constants as messages
 
@@ -34,7 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", ".herokuapp.com"]
 
-
+cloudinary.config(cloudinary_url=os.environ.get("CLOUDINARY_URL"))
 # Application definition
 
 INSTALLED_APPS = [
