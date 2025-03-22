@@ -88,6 +88,8 @@ def board(request):
     not_started_tasks = tasks.filter(status="P")
     in_progress_tasks = tasks.filter(status="IP")
     completed_tasks = tasks.filter(status="C")
+    total_tasks = tasks.count()
+
     return render(
         request,
         "tasks/board.html",
@@ -96,6 +98,7 @@ def board(request):
             "in_progress_tasks": in_progress_tasks,
             "completed_tasks": completed_tasks,
             "order_by": order_by,
+            "total_tasks": total_tasks,
         },
     )
 
@@ -206,9 +209,6 @@ def profile(request):
     completed_tasks = tasks.filter(status="C").count()
     pending_tasks = tasks.filter(status="P").count()
     in_progress_tasks = tasks.filter(status="IP").count()
-    low_priority_tasks = tasks.filter(priority="L").count()
-    medium_priority_tasks = tasks.filter(priority="M").count()
-    high_priority_tasks = tasks.filter(priority="H").count()
 
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)

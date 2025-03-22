@@ -96,22 +96,6 @@
         {% block content %}
             <!-- Content Goes here -->
         {% endblock content %}
-        <!-- Toast Container -->
-        <div aria-live="polite" aria-atomic="true" class="position-relative">
-            <div class="toast-container position-fixed bottom-0 xmt-5 end-0 p-3 ">
-                {% for message in messages %}
-                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
-                        <div class="toast-header text-center bg-dark">
-                            <strong class="me-auto text-primary">{{ message.tags|title }}</strong>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body bg-dark text-white rounded-bottom">
-                            {{ message }}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
         </main>
         <footer class="bg-dark text-light text-center shadow-sm">
             <div class="container p-4">
@@ -163,16 +147,6 @@
         <!-- Font Awesome kit -->
         <script src='https://kit.fontawesome.com/aa9af45995.js'
                 crossorigin='anonymous'></script>
-        <!-- bootstrap toast-->
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-                var toastList = toastElList.map(function (toastEl) {
-                    return new bootstrap.Toast(toastEl)
-                })
-                toastList.forEach(toast => toast.show())
-            });
-        </script>
         <!-- Custom JS -->
         {% comment %} <script src="assets/js/scripts.js"></script> {% endcomment %}
         <!-- Additional JS files can be included here -->

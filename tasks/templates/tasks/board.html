@@ -1,8 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Task Lists{% endblock %}
 {% block content %}
-    <main>
-        <div class="container my-5">
+    <button class="btn btn-primary rounded-5 toggle-sidebar-btn" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
+                            Toggle Sidebar
+                        </button>
+        <div class="container xmy-5">
             <h2 class="text-center mb-4">Task Lists by Status</h2>
             {% comment %} <div class="mb-3">
                 <label for="order_by" class="form-label">Order by:</label>
@@ -16,96 +19,133 @@
                 </select>
             </div> {% endcomment %}
             <div class="row">
-                <div class="col-md-4">
-                     <h3 class="text-center">Not Started</h3>
-                    <ul class="list-group rounded">
-                        {% for task in not_started_tasks %}
-                            <li class="list-group-item bg-7">
-                                {% comment %} <h3 class="text-center card-header rounded bg-light py-1">{{ task.title }}</h3> {% endcomment %}
-                                <h5>{{ task.title }}</h5>
-                                <div class="row">
-                                    {% comment %} <div class="col-3">
-                                        <a href="{% url 'update_task' task.id %}" class="btn btn-sm btn-primary">Edit</a>
-                                    </div> {% endcomment %}
-                                    <div class="col-3 bg-4 rounded">
-                                        <div class="due-date d-flex flex-column text-center">
-                                            <span class="p-0 xm-0 display-6 due-hour">{{ task.due_date|date:"d" }}</span>
-                                            <span class="p-0 xm-0 display-6 due-min"><xstrong>{{ task.due_date|date:"M" }}</xstrong></span>
-                                            {% comment %} <span>Due</span> {% endcomment %}
-                                        </div>   
-                                        Month
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="due-date">
-                                            <span>{{ task.due_date|date:"D" }}</span>
-                                            <span>{{ task.due_date|date:"M" }}</span>
-                                            <span>Due</span>
-                                        </div>    
-                                    </div>
-                                    <div class="col-3 bg-4 rounded">
-                                        <div class="due-date d-flex flex-column text-center">
-                                            <span class="p-0 xm-0 display-6 due-hour">{{ task.due_date|date:"H" }}</span>
-                                            <span class="p-0 xm-0 display-6 due-min"><strong>{{ task.due_date|date:"i" }}</strong></span>
-                                            {% comment %} <span>Due</span> {% endcomment %}
-                                        </div>   
-                                        Time
-                                    </div>
-                                <p>{{ task.description|safe }}</p>
-                                <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
-                                <form method="post" action="{% url 'update_task_status' task.id %}" class="p-0 text-end">
-                                    {% csrf_token %}
-                                    <select name="status" onchange="this.form.submit()" class="xp-0 m-0">
-                                        <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
-                                        <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
-                                        <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
-                                    </select>
-                                </form>
+                <!-- Toggle Button -->
+                
+                <!-- Sidebar -->
+                {% comment %} <div class=""> {% endcomment %}
+                    {% comment %} <div class="col-12 text-start xmb-3"> {% endcomment %}
+                        
+                    {% comment %} </div> {% endcomment %}
+                    <div class="col-md-4 col-lg-3 xd-none xd-lg-inline bg-3 sidebar rounded shadow-sm p-3 collapse-horizontal show" id="sidebar">
+                        <div class="user-info text-center mb-4">
+                            {% if "placeholder" in user.profile.profile_picture.url %}
+                                <img src="{% static 'images/nobody.jpg' %}" alt="Profile Picture placeholder" class="img-thumbnail rounded-circle w-75 mb-2" width="100">
+                            {% elif  user.profile.profile_picture.url %}
+                                <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded-circle w-75 mb-2" width="100">
+                            {% endif %}
+                            <h4>{{ user.username }}</h4>
+                            <p>{{ user.email }}</p>
+                            <div class="collapse-toggle">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
+                                    Toggle Sidebar
+                                </button>
+                            </div>
+                        </div>
+
+                        <h6>Tasks</h5>
+                        <ul class="list-group mb-2">
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <span>Total Tasks:</span>
+                                    <span class="badge text-bg-primary">{{ total_tasks }}</span>
+                                </div>
                             </li>
-                        {% endfor %}
-                    </ul> 
-                    
-                </div>
-                <div class="col-md-4">
-                    <h3 class="text-center">In Progress</h3>
-                    <ul class="list-group">
-                        {% for task in in_progress_tasks %}
-                            <li class="list-group-item bg-1">
-                                <h5>{{ task.title }}</h5>
-                                <p>{{ task.description|safe }}</p>
-                                <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
-                                <form method="post" action="{% url 'update_task_status' task.id %}">
-                                    {% csrf_token %}
-                                    <select name="status" onchange="this.form.submit()">
-                                        <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
-                                        <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
-                                        <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
-                                    </select>
-                                </form>
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <span>Completed:</span>
+                                    <span class="badge text-bg-success">{{ completed_tasks.count }}</span>
+                                </div>
                             </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h3 class="text-center">Completed</h3>
-                    <ul class="list-group">
-                        {% for task in completed_tasks %}
-                            <li class="list-group-item bg-2">
-                                <h5>{{ task.title }}</h5>
-                                <p>{{ task.description|safe }}</p>
-                                <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
-                                <form method="post" action="{% url 'update_task_status' task.id %}">
-                                    {% csrf_token %}
-                                    <select name="status" onchange="this.form.submit()">
-                                        <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
-                                        <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
-                                        <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
-                                    </select>
-                                </form>
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <span>In Progress:</span>
+                                    <span class="badge text-bg-warning">{{ in_progress_tasks.count }}</span>
+                                </div>
                             </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <span>Pending:</span>
+                                    <span class="badge bg-danger rounded-pill">{{ not_started_tasks.count }}</span>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                {% comment %} </div> {% endcomment %}
+
+                <!-- Task Lists -->
+                {% comment %} <div class="row"> {% endcomment %}
+                    <div class="col-md-4 col-lg-3">
+                        <h3 class="text-center">Not Started</h3>
+                        <ul class="list-group rounded">
+                            {% for task in not_started_tasks %}
+                                <li class="list-group-item list-group-flush bg-7">
+                                    {% comment %} <h3 class="text-center card-header rounded bg-light py-1">{{ task.title }}</h3> {% endcomment %}
+                                    <h5>{{ task.title }}</h5>
+                                    <div class="row">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Due Date:</span> 
+                                        <span>{{ task.due_date|date:"H:i d-m-y" }}<span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Priority:</span> 
+                                        <span>{{ task.get_priority_display }}<span>
+                                    </div>
+                                    {% comment %} <span>Priority: {{ task.get_priority_display }}</span> {% endcomment %}
+                                    <form method="post" action="{% url 'update_task_status' task.id %}" class="p-0 text-end">
+                                        {% csrf_token %}
+                                        <select name="status" onchange="this.form.submit()" class="xp-0 m-0">
+                                            <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
+                                            <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
+                                            <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
+                                        </select>
+                                    </form>
+                                    
+                                </li>
+                            {% endfor %}
+                        </ul> 
+                        
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <h3 class="text-center">In Progress</h3>
+                        <ul class="list-group list-group-flush">
+                            {% for task in in_progress_tasks %}
+                                <li class="list-group-item bg-1 rounded mb-1">
+                                    <h5>{{ task.title }}</h5>
+                                    <p>{{ task.description|safe }}</p>
+                                    <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
+                                    <form method="post" action="{% url 'update_task_status' task.id %}">
+                                        {% csrf_token %}
+                                        <select name="status" onchange="this.form.submit()">
+                                            <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
+                                            <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
+                                            <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
+                                        </select>
+                                    </form>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-lg-3">
+                        <h3 class="text-center">Completed</h3>
+                        <ul class="list-group">
+                            {% for task in completed_tasks %}
+                                <li class="list-group-item bg-2">
+                                    <h5>{{ task.title }}</h5>
+                                    <p>{{ task.description|safe }}</p>
+                                    <p>Due Date: {{ task.due_date|date:"d-m-y H:i" }}</p>
+                                    <form method="post" action="{% url 'update_task_status' task.id %}">
+                                        {% csrf_token %}
+                                        <select name="status" onchange="this.form.submit()">
+                                            <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
+                                            <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
+                                            <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
+                                        </select>
+                                    </form>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+            {% comment %} </div> {% endcomment %}
         </div>
-    </main>
 {% endblock %}
