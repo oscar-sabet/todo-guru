@@ -116,11 +116,12 @@ def update_task_status(request, task_id):
 def create_task(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
-        print("Form is valid2")
+        # print("Form is valid2")
         if form.is_valid():
-            print("Form is valid")
+            # print("Form is valid")
             task = form.save(commit=False)
-            task.user = request.user  # Set the user field
+            task.user = request.user
+            task.status = "P"
             task.save()
             messages.success(request, "Task created successfully.")
         else:
@@ -160,8 +161,8 @@ def complete_task(request, task_id):
 
 
 @login_required
-def delete_task(request, p_key):
-    task = get_object_or_404(Task, id=p_key, user=request.user)
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id, user=request.user)
     if request.method == "POST":
         task.delete()
         messages.success(request, "Task deleted successfully.")

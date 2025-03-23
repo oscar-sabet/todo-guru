@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row p-1">
         <!-- Sidebar -->
-        <div class="col-md-4 col-lg-3 bg-3 sidebar rounded shadow-sm p-3 mt-4">
+        <div class="col-md-4 col-lg-3 col-xl-3 bg-3 sidebar rounded shadow-sm p-3 xmt-4">
             <div class="user-info text-center mb-4">
                 {% if "placeholder" in user.profile.profile_picture.url %}
                     <img src="{% static 'images/nobody.jpg' %}" alt="Profile Picture placeholder" class="img-thumbnail rounded-circle w-75 mb-2" width="100">
@@ -142,10 +142,10 @@
             </div>
         </div>
         <!-- Main Content -->
-        <div class="col-md-8 col-lg-9">
+        <div class="col-md-8 col-lg-9 col-xl-9">
             <h2 class="m-4">Tasks List</h2>
             <!-- Messages -->
-            <div class="container mt-3">
+            {% comment %} <div class="container mt-3">
                 {% if messages %}
                     <div class="alert-container">
                         {% for message in messages %}
@@ -156,7 +156,7 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-            </div>
+            </div> {% endcomment %}
             <!-- Button trigger modal -->
             <button type="button"
                     class="btn btn-new-task"
@@ -183,8 +183,11 @@
                             <form method="post" action="{% url 'create_task' %}">
                                 {% csrf_token %}
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         {{ form.title|as_crispy_field }}
+                                    </div>
+                                    <div class="col-lg-6">
+                                        {{ form.status|as_crispy_field }}
                                     </div>
                                     <div class="col-lg-6">
                                         {{ form.due_date|as_crispy_field }}
@@ -201,59 +204,90 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-custom-4" data-bs-dismiss="modal">Close</button>
-                                <input type="submit" value="Create Task" class="btn btn-custom-3">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" value="Create Task" class="btn btn-primary">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="m-4">
-                <div class="accordion accordion-flush" id="tasks-accordion">
-                    {% for t in tasks %}
-                        <div class="accordion-item border-0">
+            <!-- Task List -->
+            <div class="xm-4">
+                <div class="xm-4">
+                    <div class="accordion accordion-flush" id="tasks-accordion">
+                        {% for t in tasks %}
+                            <div class="accordion-item border-0">
 
-                            <h2 class="accordion-header colors">
-                                <button class="m-0 my-1 accordion-button collapsed shadow-sm container-fluid "
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapse{{ t.id }}"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapse{{ t.id }}">
-                                    <div class="row w-100">
-                                        <span class="col-lg-5 ps-4">{{ t.title }}</span>
-                                        {% if t.status == "P" %}
-                                            <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-p"><i class="fa-solid fa-exclamation-circle text-danger me-2 "></i>{{ t.get_status_display }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
-                                        {% elif t.status == "IP" %}
-                                            <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-ip"><i class="fa-solid fa-exclamation-triangle text-warning me-2"></i>{{ t.get_status_display }}</span></span>
-                                        {% elif t.status == "C" %}
-                                            <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-c"><i class="fa-solid fa-check-circle text-success me-2"></i>{{ t.get_status_display }}</span></span>
-                                        {% endif %}
-                                        <span class="col-lg-4 text-end d-none d-lg-inline"><i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }} - <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}</span>
+                                <h2 class="accordion-header colors">
+                                    <button class="m-0 my-1 accordion-button collapsed shadow-sm container-fluid "
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapse{{ t.id }}"
+                                            aria-expanded="false"
+                                            aria-controls="flush-collapse{{ t.id }}">
+                                        <div class="row w-100">
+                                            <span class="col-lg-5 ps-4">{{ t.title }}</span>
+                                            {% if t.status == "P" %}
+                                                <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-p"><i class="fa-solid fa-exclamation-circle text-danger me-2 "></i>{{ t.get_status_display }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                                            {% elif t.status == "IP" %}
+                                                <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-ip"><i class="fa-solid fa-exclamation-triangle text-warning me-2"></i>{{ t.get_status_display }}</span></span>
+                                            {% elif t.status == "C" %}
+                                                <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-c"><i class="fa-solid fa-check-circle text-success me-2"></i>{{ t.get_status_display }}</span></span>
+                                            {% endif %}
+                                            <span class="col-lg-4 text-end d-none d-lg-inline">
+                                                {% if t.time_until_due|format_timedelta_days != "0d" %}
+                                                    <i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }} |  
+                                                {% endif %}
+                                                <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}</span>
 
-                                    </div>
-                                </button>
-                            </h2>
+                                        </div>
+                                    </button>
+                                </h2>
 
-                            <div id="flush-collapse{{ t.id }}"
-                                 class="accordion-collapse collapse"
-                                 data-bs-parent="#tasks-accordion">
-                                <div class="bg-1 m-0 accordion-body pb-2 row shadow-sm">
-                                    {% if t.description %}
-                                        <div class="col-lg-12">
-                                            <div class="card bg-8 rounded">
-                                                <div class="card-body p-2">    
-                                                    <h5 class="card-title">Description</h5>
-                                                    <p>{{ t.description|safe }}</p>
+                                <div id="flush-collapse{{ t.id }}"
+                                    class="accordion-collapse collapse"
+                                    data-bs-parent="#tasks-accordion">
+                                    <div class="bg-1 m-0 accordion-body pb-2 row shadow-sm">
+                                        {% if t.description %}
+                                            <div class="col-lg-12">
+                                                <div class="card bg-8 rounded">
+                                                    <div class="card-body p-2">    
+                                                        <h5 class="card-title">Description</h5>
+                                                        <p>{{ t.description|safe }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    {% endif %}
+                                        {% endif %}
 
-                                    <div class="col-lg-12">
-                                        <div class="row">
-                                            
-                                                <div class="col-12 text-end mt-2 p-0">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                
+                                                <div class="col-12 col-lg-5 bg-1 xm-1 pt-2 rounded align-content-end hover-card">
+                                                    <div class="content xcol-8">
+                                                        <div class="xdefault-content align-content-end bg-1">
+                                                            <span>
+                                                                <span class="">Due: </span>
+                                                                <i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }}
+                                                                <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="hover-content align-content-end bg-1">
+                                                            <span>
+                                                                <span class="">Date: </span>
+                                                                <i class="fa-solid fa-calendar-days"></i> {{ t.due_date|date:"d-m-y" }}
+                                                                <i class="fa-solid fa-clock"></i> {{ t.due_date|date:"H:i" }}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <form method="post" action="{% url 'complete_task' t.id %}" aria-label="Basic checkbox toggle button group" class="text-end align-content-end rounded-5 col-12 col-lg-3 p-0">
+                                                    {% csrf_token %}
+                                                    <input type="checkbox" class="btn-check" id="completed-{{ t.id }}" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
+                                                    <label for="completed-{{ t.id }}" class="btn rounded-5 btn-outline-success">Mark Complete</label>
+                                                </form>
+                                                
+                                                <div class="col-12 col-lg-4 text-end mt-2 p-0">
                                                     <a href="{% url 'update_task' t.id %}" class="btn btn-primary rounded-5 col">Update</a>
                                                     <button type="button"
                                                             class="btn btn-danger rounded-5 col"
@@ -263,42 +297,14 @@
                                                             data-task-title="{{ t.title }}">Delete</button>
                                                 </div>
 
-                                            <div class="col-12 bg-1 xm-1 pt-2 rounded hover-card">
-                                                <div class="row">
-                                                    <div class="content col-8">
-
-                                                        <div class="default-content bg-1">
-                                                            <span>
-                                                                <span class="">Time Until Due: </span>
-                                                                {% comment %} <i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }} {% endcomment %}
-                                                                {% comment %} <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }} {% endcomment %}
-                                                            </span>
-                                                        </div>
-
-                                                        <div class="hover-content bg-1">
-                                                            <span>
-                                                                <span class="">Date Until Due: </span>
-                                                                <i class="fa-solid fa-calendar-days"></i> {{ t.due_date|date:"d-m-y" }}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.due_date|date:"H:i" }}
-                                                            </span>
-                                                        </div>
-
-                                                    </div>
-                                                    <form method="post" action="{% url 'complete_task' t.id %}" class="text-end col-4 p-0">
-                                                        {% csrf_token %}
-                                                        <label for="completed-{{ t.id }}">Complete</label>
-                                                        <input type="checkbox" id="completed-{{ t.id }}" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
-                                                    </form>
-                                                </div>
                                             </div>
-                                        
                                         </div>
-                                    </div>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

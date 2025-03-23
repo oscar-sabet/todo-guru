@@ -35,7 +35,7 @@
     <p>{% blocktrans %}If you have not created an account yet, then please
     <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
     {% endif %}
-  {% comment %} </div> {% endcomment %}
+  </div>
   <form class="login col-12" method="POST" action="{% url 'account_login' %}">
     {% csrf_token %}
     {{ form.login|as_crispy_field }}
