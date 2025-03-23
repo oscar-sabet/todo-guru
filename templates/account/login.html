@@ -35,19 +35,20 @@
     <p>{% blocktrans %}If you have not created an account yet, then please
     <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
     {% endif %}
+  
+    <form class="login col-12" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {{ form.login|as_crispy_field }}
+      {{ form.password|as_crispy_field }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <div class="text-end">
+        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <button class="primaryAction btn-custom-1" type="submit">{% trans "Sign In" %}</button>
+      </div>
+    </form>
   </div>
-  <form class="login col-12" method="POST" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    {{ form.login|as_crispy_field }}
-    {{ form.password|as_crispy_field }}
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    <div class="text-end">
-      <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-      <button class="primaryAction btn-custom-1" type="submit">{% trans "Sign In" %}</button>
-    </div>
-  </form>
 </div>
 
 {% endblock content %}
