@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Task, Profile
-from django.contrib.auth.models import User
-from .forms import TaskForm, LoginForm, RegistrationForm, ProfileForm
+
+# from django.contrib.auth.models import User
+from .forms import TaskForm, RegistrationForm, ProfileForm  # , LoginForm
 from django.http import JsonResponse
 from django.contrib.auth import login
 from django.contrib import messages
@@ -53,14 +54,12 @@ def list(request):
     for task in tasks:
         if task.completed_date:
             task.time_taken = task.completed_date - task.created
+            print("time taken -> ", task.time_taken)
             task.elapsed_time = None
         else:
             task.elapsed_time = timezone.now() - task.created
-            # print("elapsed_time -> ", task.elapsed_time)
+            print("elapsed time -> ", task.elapsed_time)
             task.time_taken = None
-            # print("Task created -> ", task.created)
-            # print("Current time -> ", timezone.now())
-            # print("Task elapsed time -> ", task.elapsed_time)
 
         if task.due_date:
             task.time_until_due = task.due_date - timezone.now()
@@ -186,20 +185,6 @@ def register(request):
     return render(request, "task/register.html", {"form": form})
 
 
-# @login_required
-# def profile(request):
-#     # Ensure the profile is created if it does not exist
-#     profile, created = Profile.objects.get_or_create(user=request.user)
-#     if request.method == "POST":
-#         form = ProfileForm(request.POST, request.FILES, instance=profile)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("profile")
-#     else:
-#         form = ProfileForm(instance=profile)
-#     return render(request, "tasks/profile.html", {"form": form})
-
-
 @login_required
 def profile(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
@@ -237,22 +222,3 @@ def profile(request):
         "tasks/profile.html",
         context,
     )
-
-
-# @login_required
-# def profile(request):
-#     profile, created = Profile.objects.get_or_create(user=request.user)
-#     tasks = Task.objects.filter(user=request.user)
-#     if request.method == "POST":
-#         form = ProfileForm(request.POST, request.FILES, instance=profile)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, "Profile updated successfully.")
-#             return redirect("profile")
-#     else:
-#         form = ProfileForm(instance=profile)
-#     return render(
-#         request,
-#         "tasks/profile.html",
-#         {"form": form, "profile": profile, "tasks": tasks},
-#     )

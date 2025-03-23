@@ -200,7 +200,8 @@
                 </div>
             </div>
             <!-- Task List -->
-            <div class="">                <div class="xm-4">
+            <div class="xm-4">
+                <div class="xm-4">
                     <div class="accordion accordion-flush" id="tasks-accordion">
                         {% for t in tasks %}
                             <div class="accordion-item border-0">
@@ -236,7 +237,7 @@
                                     data-bs-parent="#tasks-accordion">
                                     <div class="bg-1 m-0 accordion-body pb-2 row shadow-sm">
                                         {% if t.description %}
-                                            <div class="col-lg-12 p-0">
+                                            <div class="col-lg-12">
                                                 <div class="card bg-8 rounded">
                                                     <div class="card-body p-2">    
                                                         <h5 class="card-title">Description</h5>
@@ -247,27 +248,10 @@
                                         {% endif %}
 
                                         <div class="col-lg-12">
-                                            <div class="row pt-2">
-                                                <!-- Buttons -->
-                                                <form method="post" action="{% url 'complete_task' t.id %}" aria-label="Basic checkbox toggle button group" class="text-sm-start align-content-end rounded-5 col-12 col-sm-6 p-0">
-                                                    {% csrf_token %}
-                                                    <input type="checkbox" class="btn-check" id="completed-{{ t.id }}" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
-                                                    <label for="completed-{{ t.id }}" class="btn rounded-5 btn-outline-success">Mark Complete</label>
-                                                </form>
-                                                
-                                                <div class="col-12 col-sm-6 text-sm-end mt-2 p-0">
-                                                    <a href="{% url 'update_task' t.id %}" class="btn btn-primary rounded-5 col">Update</a>
-                                                    <button type="button"
-                                                            class="btn btn-danger rounded-5 col"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteModal"
-                                                            data-task-id="{{ t.id }}"
-                                                            data-task-title="{{ t.title }}">
-                                                    Delete</button>
-                                                </div>
-                                                <!-- Times -->
-                                                <div class="col-12 row bg-1 p-0 pt-2 rounded align-content-end hover-card">
-                                                    <div class="content col-md-6 text-md-end text-start">
+                                            <div class="row">
+
+                                                <div class="col-12 col-lg-5 bg-1 xm-1 pt-2 rounded align-content-end hover-card">
+                                                    <div class="content xcol-8">
                                                         <div class="xdefault-content align-content-end bg-1">
                                                             <span>
                                                                 <span class="">Due: </span>
@@ -283,42 +267,23 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <div class="content col-md-6 text-md-end text-start">
-                                                        <div class="xdefault-content align-content-end bg-1">
-                                                        {% if t.time_taken %}
-                                                            <span>
-                                                                <span class="">Taken: </span>
-                                                                {% if t.time_taken|format_timedelta_days == "0d" %}
-                                                                    <i class="fa-solid fa-calendar-days"></i> {{ t.time_taken|format_timedelta_days }}
-                                                                {% endif %}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.time_taken|format_timedelta_hours }}
-                                                            </span>
-                                                        </div>
-                                                        <div class="hover-content align-content-end bg-1">
-                                                            <span>
-                                                                <span class="">Created: </span>
-                                                                <i class="fa-solid fa-calendar-days"></i> {{ t.created|date:"d-m-y" }}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.created|date:"H:i" }}
-                                                            </span>
-                                                        {% else %}
-                                                            <span>
-                                                                <span class="">Elapsed: </span>
-                                                                <i class="fa-solid fa-calendar-days"></i> {{ t.elapsed_time|format_timedelta_days }}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.elapsed_time|format_timedelta_hours }}
-                                                            </span>
-                                                        </div>
-                                                        <div class="hover-content align-content-end bg-1">
-                                                            <span>
-                                                                <span class="">Created: </span>
-                                                                <i class="fa-solid fa-calendar-days"></i> {{ t.created|date:"d-m-y" }}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.created|date:"H:i" }}
-                                                            </span>
-                                                        {% endif %}
-                                                        </div>
-
-                                                    </div>
                                                 </div>
                                                 
+                                                <form method="post" action="{% url 'complete_task' t.id %}" aria-label="Basic checkbox toggle button group" class="text-end align-content-end rounded-5 col-12 col-lg-3 p-0">
+                                                    {% csrf_token %}
+                                                    <input type="checkbox" class="btn-check" id="completed-{{ t.id }}" name="completed" onchange="this.form.submit()" {% if t.status == 'C' %}checked{% endif %}>
+                                                    <label for="completed-{{ t.id }}" class="btn rounded-5 btn-outline-success">Mark Complete</label>
+                                                </form>
+                                                
+                                                <div class="col-12 col-lg-4 text-end mt-2 p-0">
+                                                    <a href="{% url 'update_task' t.id %}" class="btn btn-primary rounded-5 col">Update</a>
+                                                    <button type="button"
+                                                            class="btn btn-danger rounded-5 col"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteModal"
+                                                            data-task-id="{{ t.id }}"
+                                                            data-task-title="{{ t.title }}">Delete</button>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -328,6 +293,7 @@
                             </div>
                         {% endfor %}
                     </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,18 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# from django_summernote.fields import SummernoteTextField
 from django.utils import timezone
 from cloudinary.models import CloudinaryField
 
 
-# Create your models here.
 class Task(models.Model):
     STATUS_CHOICES = [
         ("P", "Pending"),
         ("IP", "In Progress"),
         ("C", "Completed"),
-        # ("A", "Archived"),
     ]
 
     PRIORITY_CHOICES = [
@@ -25,21 +22,17 @@ class Task(models.Model):
         ("W", "Work"),
         ("P", "Personal"),
         ("H", "Home"),
-        # ("O", "Other"),
     ]
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    # description = models.TextField(blank=True, null=True)
-    # description = SummernoteTextField()
     description = models.TextField(blank=True, null=True)
-
-    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default="P")
     created = models.DateTimeField(auto_now_add=True)
     due_date = models.DateTimeField(blank=True, null=True)
     completed_date = models.DateTimeField(blank=True, null=True)
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default="P")
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default="M")
     category = models.CharField(max_length=1, choices=CATEGORY_CHOICES, default="P")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         if self.status == "C" and self.completed_date is None:
