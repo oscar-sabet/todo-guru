@@ -15,8 +15,8 @@ Website project by Oscar Sabet
   - [Databases](#databases)
     - [Interaction with Models](#interaction-with-models)
     - [Interaction with Templates](#interaction-with-templates)
-    - [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
     - [Explanation](#explanation)
+    - [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
     - [Relationships](#relationships)
   - [Development](#development)
   - [Deployment](#deployment)
@@ -91,9 +91,7 @@ In Django, models are Python classes that define the structure of your database 
 
 Django templates are used to render HTML pages dynamically. When you query the database for model instances (e.g., retrieving a list of tasks), the data is passed to the template context. The template then uses this data to generate the HTML content. For example, the task list page retrieves tasks from the database and displays them in a structured format using the template.
 
-### Entity Relationship Diagram (ERD)
 
-![ToDo|Guru Wireframe](readme/erd.png)
 
 ### Explanation
 
@@ -119,6 +117,10 @@ Django templates are used to render HTML pages dynamically. When you query the d
      - `category`: A character field with choices for task category.
      - `user`: A foreign key linking to the `User` model.
 
+### Entity Relationship Diagram (ERD)
+
+![ToDo|Guru Wireframe](readme/erd.png)
+
 ### Relationships
 
 - **User to Profile**: One-to-One relationship.
@@ -129,6 +131,23 @@ This ERD provides a visual representation of the relationships between the model
 ## Development
 
 ## Deployment
+
+Deploying the application to heroku involved several steps.
+
+1. **Preparing my project for heroku**
+   - My project was uploaded to a github repository
+   - Gunicorn was installed and configured
+   - ensure all dependencies are listed in `requirements.txt` and the python version is listed in `.python-version`
+   - configure static files and settings.py, paying special attention to disabling debugging and any other settings related to security.
+   - set up and configure environmental files eg. `env.py`
+   - create a `Procfile`. This file tells Heroku how to run your application.
+   - ensure that any files that contain secret keys or other sensitive information eg. `env.py` is added to `.gitignore` and is not present in your github repo
+  
+2. **Deploying to Heroku**
+   - Create heroku app
+   - Link github repository & Code Institute PostGres database
+   - Add environmental variables to heroku, such as, secret keys.
+   - Deploy the application
 
 ## Testing
 
@@ -195,7 +214,6 @@ apps
 
 toast alerts
 
-
 ## Repository
 
 The Github repo can be found here.
@@ -216,3 +234,5 @@ Guru logo - https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&pos
 ## Full Screenshots
 
 ### Create New Task
+
+how you used ai for automated tests (using automated tests optional)
