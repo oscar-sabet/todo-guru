@@ -9,9 +9,9 @@
         </title>
         <!-- Meta -->
         <meta name="description"
-              content="Mental health has a significant impact on people’s lives and wellbeing. To support people with mental illnesses, we need better data to understand them.">
+              content="ToDo|Guru is a task management application that helps users organize, manage, and track their tasks efficiently.">
         <meta name="keywords"
-              content="mental health, mental illness, wellbeing, support, data, understanding">
+              content="task management, to-do list, task tracker, productivity, task organizer, ToDo|Guru">
         <meta name="author" content="Oscar Sabet, Code Institute">
         <meta name="robots" content="index, follow">
         <!-- Bootstrap 5 CSS -->
@@ -31,8 +31,7 @@
         <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-        <!-- Additional CSS files can be included here -->
-        <!-- Google Fonts -->
+        <!-- Additional CSS files can be included here --> 
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Raleway:wght@400;600&display=swap"
               rel="stylesheet">
         {% block extra_head %}{% endblock %}
@@ -55,11 +54,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        {% comment %} <li class="nav-item">
-                            <a class="nav-link brand-1 {% if request.path == '/' %}active{% endif %}"
-                               aria-current="page"
-                               href="{% url 'home' %}">Home</a>
-                        </li> {% endcomment %}
                         {% if user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link brand-1 {% if request.path == '/tasks/list/' %}active{% endif %}"
@@ -76,9 +70,6 @@
                                 aria-current="page"
                                 href="{% url 'profile' %}">Profile</a>
                             </li>
-                            {% comment %} <li>
-                                <a href="{% url 'account_logout' %}">Logout {{ user.username }} <i class="fa-solid fa-user"></i></a>
-                            </li> {% endcomment %}
                         {% endif %}
                     </ul>
                     <span class="navbar-text text-muted">
@@ -138,8 +129,6 @@
                 toastList.forEach(toast => toast.show())
             });
         </script>
-        <!-- Custom JS -->
-        <!-- Additional JS files can be included here -->
         {% block extra_js %}
         {% endblock %}
     </body>

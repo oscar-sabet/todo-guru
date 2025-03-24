@@ -207,7 +207,7 @@
                             <div class="accordion-item border-0">
 
                                 <h2 class="accordion-header colors">
-                                    <button class="m-0 my-1 accordion-button collapsed shadow-sm container-fluid "
+                                    <a class="m-0 my-1 accordion-button collapsed shadow-sm text-decoration-none container-fluid "
                                             type="button"
                                             data-bs-toggle="collapse"
                                             data-bs-target="#flush-collapse{{ t.id }}"
@@ -237,7 +237,7 @@
                                                 <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}</span>
 
                                         </div>
-                                    </button>
+                                    </a>
                                 </h2>
 
                                 <div id="flush-collapse{{ t.id }}"
