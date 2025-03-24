@@ -8,7 +8,14 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         # fields = "__all__"
-        fields = ["title", "description", "due_date", "priority", "category", "status"]
+        fields = [
+            "title",
+            "description",
+            "due_date",
+            "priority",
+            "category",
+            "status"
+            ]
         exclude = ["user", "created", "completed_date"]  # , "status"]
         widgets = {
             "due_date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
@@ -26,7 +33,9 @@ class RegistrationForm(UserCreationForm):
     email = forms.EmailField(
         required=True, widget=forms.EmailInput(attrs={"class": "form-control"})
     )
-    username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={"class": "form-control"})
+                               )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={"class": "form-control"})
     )
@@ -40,7 +49,9 @@ class RegistrationForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "form-control"})
+        )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={"class": "form-control"})
     )

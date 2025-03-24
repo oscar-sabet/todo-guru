@@ -30,9 +30,21 @@ class Task(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     due_date = models.DateTimeField(blank=True, null=True)
     completed_date = models.DateTimeField(blank=True, null=True)
-    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default="P")
-    priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default="M")
-    category = models.CharField(max_length=1, choices=CATEGORY_CHOICES, default="P")
+    status = models.CharField(
+        max_length=2,
+        choices=STATUS_CHOICES,
+        default="P"
+        )
+    priority = models.CharField(
+        max_length=1,
+        choices=PRIORITY_CHOICES,
+        default="M"
+        )
+    category = models.CharField(
+        max_length=1,
+        choices=CATEGORY_CHOICES,
+        default="P"
+        )
 
     def save(self, *args, **kwargs):
         if self.status == "C" and self.completed_date is None:

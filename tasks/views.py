@@ -2,10 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Task, Profile
-
-# from django.contrib.auth.models import User
-from .forms import TaskForm, RegistrationForm, ProfileForm  # , LoginForm
-from django.http import JsonResponse
+from .forms import TaskForm, RegistrationForm, ProfileForm
 from django.contrib.auth import login
 from django.contrib import messages
 
@@ -17,7 +14,13 @@ def list(request):
     status_filter = request.GET.get("status")
     category_filter = request.GET.get("category")
     priority_filter = request.GET.get("priority")
-    valid_sort_fields = ["status", "category", "priority", "due_date", "created"]
+    valid_sort_fields = [
+        "status",
+        "category",
+        "priority",
+        "due_date",
+        "created"
+        ]
 
     if sort_by not in valid_sort_fields:
         sort_by = "created"
@@ -79,7 +82,7 @@ def list(request):
 
 @login_required
 def board(request):
-    order_by = request.GET.get("order_by", "status")  # Default ordering by status
+    order_by = request.GET.get("order_by", "status")
     tasks = Task.objects.filter(user=request.user).order_by(order_by)
     not_started_tasks = tasks.filter(status="P")
     in_progress_tasks = tasks.filter(status="IP")
@@ -143,7 +146,11 @@ def update_task(request, task_id):
             return redirect("list")
     else:
         form = TaskForm(instance=task)
-    return render(request, "tasks/update_task.html", {"form": form, "task": task})
+    return render(
+        request,
+        "tasks/update_task.html",
+        {"form": form, "task": task}
+        )
 
 
 @login_required
