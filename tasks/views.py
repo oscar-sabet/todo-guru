@@ -54,16 +54,13 @@ def list(request):
     for task in tasks:
         if task.completed_date:
             task.time_taken = task.completed_date - task.created
-            print("time taken -> ", task.time_taken)
             task.elapsed_time = None
         else:
             task.elapsed_time = timezone.now() - task.created
-            print("elapsed time -> ", task.elapsed_time)
             task.time_taken = None
 
         if task.due_date:
             task.time_until_due = task.due_date - timezone.now()
-
         else:
             task.time_until_due = None
 
@@ -161,13 +158,18 @@ def complete_task(request, task_id):
 
 @login_required
 def delete_task(request, task_id):
+    print(f"Delete task -> {task_id}")
+    print(f"User -> {request.user}")
+    print(f"Task -> {Task.objects.filter(id=task_id, user=request.user)}")
+
     task = get_object_or_404(Task, id=task_id, user=request.user)
+    print(f"Task -> {task}")
     if request.method == "POST":
         task.delete()
         messages.success(request, "Task deleted successfully.")
-        return JsonResponse({"success": True})
+        return redirect("list")
     messages.error(request, "Failed to delete task.")
-    return JsonResponse({"success": False})
+    return redirect("list")
 
 
 def register(request):

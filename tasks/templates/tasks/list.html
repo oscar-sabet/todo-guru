@@ -140,17 +140,18 @@
                     </ul>
                 </div>                
             </div>
+
         </div>
         <!-- Main Content -->
         <div class="col-md-8 col-lg-9 col-xl-9">
-            <h2 class="m-4">Tasks List</h2>
+            <h2 class="m-2">Tasks List</h2>
 
             <!-- Button trigger modal -->
             <button type="button"
-                    class="btn btn-new-task"
+                    class="btn btn-success rounded-pill shadow-sm btn-new-task"
                     data-bs-toggle="modal"
                     data-bs-target="#new-task">
-                <i class="fa-solid fa-plus"></i>
+                New Task <i class="fa-solid fa-plus"></i>
             </button>
             <!-- Modal Create -->
             <div class="modal fade modal-xl"
@@ -192,7 +193,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-danger rounded-pill" data-bs-dismiss="modal">Close</button>
                                 <input type="submit" value="Create Task" class="btn btn-primary">
                             </div>
                         </form>
@@ -200,7 +201,7 @@
                 </div>
             </div>
             <!-- Task List -->
-            <div class="">                <div class="xm-4">
+            <div class="">                
                     <div class="accordion accordion-flush" id="tasks-accordion">
                         {% for t in tasks %}
                             <div class="accordion-item border-0">
@@ -267,24 +268,24 @@
                                                 </div>
                                                 <!-- Times -->
                                                 <div class="col-12 row bg-1 p-0 pt-2 rounded align-content-end hover-card">
-                                                    <div class="content col-md-6 text-md-end text-start">
-                                                        <div class="xdefault-content align-content-end bg-1">
+                                                    <div class="content col-md-6 text-md-end text-start p-0">
+                                                        <div class="text-start bg-1">
                                                             <span>
                                                                 <span class="">Due: </span>
                                                                 <i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }}
                                                                 <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}
                                                             </span>
                                                         </div>
-                                                        <div class="hover-content align-content-end bg-1">
+                                                        <div class="hover-content text-start bg-1">
                                                             <span>
                                                                 <span class="">Date: </span>
                                                                 <i class="fa-solid fa-calendar-days"></i> {{ t.due_date|date:"d-m-y" }}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.due_date|date:"H:i" }}
+                                                                {% comment %} <i class="fa-solid fa-clock"></i> {{ t.due_date|date:"H:i" }} {% endcomment %}
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <div class="content col-md-6 text-md-end text-start">
-                                                        <div class="xdefault-content align-content-end bg-1">
+                                                    <div class="content col-md-6 text-md-end text-start p-0">
+                                                        <div class=" bg-1">
                                                         {% if t.time_taken %}
                                                             <span>
                                                                 <span class="">Taken: </span>
@@ -298,7 +299,7 @@
                                                             <span>
                                                                 <span class="">Created: </span>
                                                                 <i class="fa-solid fa-calendar-days"></i> {{ t.created|date:"d-m-y" }}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.created|date:"H:i" }}
+                                                                {% comment %} <i class="fa-solid fa-clock"></i> {{ t.created|date:"H:i" }} {% endcomment %}
                                                             </span>
                                                         {% else %}
                                                             <span>
@@ -309,9 +310,9 @@
                                                         </div>
                                                         <div class="hover-content align-content-end bg-1">
                                                             <span>
-                                                                <span class="">Created: </span>
+                                                                <span class="">Start: </span>
                                                                 <i class="fa-solid fa-calendar-days"></i> {{ t.created|date:"d-m-y" }}
-                                                                <i class="fa-solid fa-clock"></i> {{ t.created|date:"H:i" }}
+                                                                {% comment %} <i class="fa-solid fa-clock"></i> {{ t.created|date:"H:i" }} {% endcomment %}
                                                             </span>
                                                         {% endif %}
                                                         </div>
@@ -374,22 +375,5 @@ $('#deleteModal').on('show.bs.modal', function (event) {
     modal.find('#taskTitle').text(taskTitle)
     modal.find('#deleteForm').attr('action', '{% url "delete_task" 0 %}'.replace('0', taskId))
 })
-
-$('#deleteForm').on('submit', function (event) {
-    event.preventDefault();
-    var form = $(this);
-    var actionUrl = form.attr('action');
-    $.ajax({
-        type: 'POST',
-        url: actionUrl,
-        data: form.serialize(),
-        success: function (response) {
-            if (response.success) {
-                $('#deleteModal').modal('hide');
-                $('#task-' + actionUrl.split('/').slice(-2, -1)).remove();
-            }
-        }
-    });
-});
 </script>
 {% endblock %}
