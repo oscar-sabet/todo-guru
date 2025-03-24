@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
+
 {% block title %}ToDo|Guru - Profile{% endblock %}
 {% block content %}
 <div class="container mt-4">
@@ -61,7 +62,7 @@
                     <li class="list-group-item">
                         <div class="d-flex justify-content-between">
                             <span>Pending:</span>
-                            <span class="badge bg-danger rounded-pill">{{ pending_tasks }}</span>
+                            <span class="badge bg-danger">{{ pending_tasks }}</span>
                         </div>
                     </li>
                 </ul>
