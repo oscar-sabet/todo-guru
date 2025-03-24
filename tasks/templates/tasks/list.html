@@ -113,7 +113,7 @@
                         <li class="list-group-item">
                             <div class="d-flex justify-content-between">
                                 <span>Pending:</span>
-                                <span class="badge bg-danger rounded-pill">{{ pending_tasks }}</span>
+                                <span class="badge bg-danger">{{ pending_tasks }}</span>
                             </div>
                         </li>
                     </ul>
@@ -214,7 +214,15 @@
                                             aria-expanded="false"
                                             aria-controls="flush-collapse{{ t.id }}">
                                         <div class="row w-100">
-                                            <span class="col-lg-5 ps-4">{{ t.title }}</span>
+                                            <span class="col-lg-5 ps-4">
+                                                {% if t.category == "W" %}
+                                                    <i class="fa-solid fa-briefcase text-danger"></i>
+                                                {% elif t.category == "P" %}
+                                                    <i class="fa-solid fa-user text-warning"></i>
+                                                {% elif t.category == "H" %}
+                                                    <i class="fa-solid fa-home text-success"></i>
+                                                {% endif %}
+                                                {{ t.title }}</span>
                                             {% if t.status == "P" %}
                                                 <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-p"><i class="fa-solid fa-exclamation-circle text-danger me-2 "></i>{{ t.get_status_display }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
                                             {% elif t.status == "IP" %}
