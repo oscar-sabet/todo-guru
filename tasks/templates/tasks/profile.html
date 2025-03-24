@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
-{% block title %}Profile{% endblock %}
+{% block title %}ToDo|Guru - Profile{% endblock %}
 {% block content %}
 <div class="container mt-4">
-    <div class="row">
+    <div class="row mb-2">
     <!-- Sidebar -->
         <div class="col-md-4 col-lg-3 bg-3 sidebar rounded shadow-sm p-3">
             <div class="user-info text-center mb-4">
@@ -17,7 +17,6 @@
                 <p>{{ user.email }}</p>
             </div>
             
-
             <!-- Account Statistics-->
             <div>
                 <h5>Statistics</h5>
@@ -67,103 +66,75 @@
                     </li>
                 </ul>
 
-                
             </div>
             <!-- Edit profile picture -->
-            <div class="text-end">
-                <button type="button" class="btn btn-primary rounded-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="">
+                <button type="button" class="btn btn-primary rounded-5 w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Edit Profile Picture
                 </button>
             </div>
-            
         </div>
 
-    <!-- Modal Edit Profile-->
-    <!-- Button trigger modal -->
-        
-
-        <!-- Modal -->
+        <!-- Modal Edit Profile-->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit profile picture</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <!-- Modal Body -->
-            <form method="post" enctype="multipart/form-data">
-                <div class="modal-body">
-                    
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="id_profile_picture" class="form-label">Profile Picture</label>
-                            {{ form.profile_picture }}
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit profile picture</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Modal Body -->
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="id_profile_picture" class="form-label">Profile Picture</label>
+                                {{ form.profile_picture }}
+                            </div>
                         </div>
-                        {% comment %} <button type="submit" class="btn btn-primary">Save changes</button> {% endcomment %}
-                    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger rounded-5" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary rounded-5">Save changes</button>
+                        </div>
+                    </form>
+
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary rounded-5" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary rounded-5">Save changes</button>
-                    
-                </div>
-            </form>
             </div>
-        </div>
         </div>
     <!-- Main Content -->
-    {% comment %} <h2>User Profile</h2>
-    <div class="row">
-        <div class="col-md-4 text-center">
-            {% if user.profile.profile_picture %}
-                <img src="{{ user.profile.profile_picture.url }}" class="img-fluid rounded-circle mb-3" alt="Profile Picture">
-            {% else %}
-                <img src="{% static 'images/nobody.jpg' %}" class="img-fluid rounded-circle mb-3" alt="Profile Picture">
-            {% endif %}
-            <h4>{{ user.username }}</h4>
-            <p>{{ user.email }}</p>
-        </div>
-        <div class="col-md-8">
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="id_profile_picture" class="form-label">Profile Picture</label>
-                    {{ form.profile_picture }}
-                </div>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </form>
-        </div>
-    </div> {% endcomment %}
-    {% comment %} <div class="row mt-4"> {% endcomment %}
-        <div class="col-md-12 col-lg-9">
+
+        <div class="col-md-8 col-lg-9">
             <div class="user-history-bg rounded shadow-sm p-1 pb-0">
                 <h3 class="p-1">Account History</h3>
-                <table class="table table-striped mb-0">
-                    <thead>
-                        <tr>
-                            <th class="border-0">Title</th>
-                            <th class="border-0">Status</th>
-                            <th class="border-0">Priority</th>
-                            <th class="border-0">Created</th>
-                            <th class="border-0">Due Date</th>
-                            <th class="border-0">Completed Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for task in tasks %}
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
                             <tr>
-                                <td class="border-0">{{ task.title }}</td>
-                                <td class="border-0">{{ task.get_status_display }}</td>
-                                <td class="border-0">{{ task.get_priority_display }}</td>
-                                <td class="border-0">{{ task.created }}</td>
-                                <td class="border-0">{{ task.due_date }}</td>
-                                <td class="border-0">{{ task.completed_date }}</td>
+                                <th class="border-0">Title</th>
+                                <th class="border-0">Status</th>
+                                <th class="border-0">Priority</th>
+                                <th class="border-0">Created</th>
+                                <th class="border-0">Due Date</th>
+                                <th class="border-0">Completed Date</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                                <tr>
+                                    <td class="border-0">{{ task.title }}</td>
+                                    <td class="border-0">{{ task.get_status_display }}</td>
+                                    <td class="border-0">{{ task.get_priority_display }}</td>
+                                    <td class="border-0">{{ task.created }}</td>
+                                    <td class="border-0">{{ task.due_date }}</td>
+                                    <td class="border-0">{{ task.completed_date }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
     </div>
 </div>
 {% endblock %}

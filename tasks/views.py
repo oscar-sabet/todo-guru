@@ -9,6 +9,21 @@ from django.contrib import messages
 
 @login_required
 def list(request):
+    """
+    Display a list of tasks for the logged-in user, with sorting and filtering
+    options.
+
+    This view handles the display of tasks for the currently logged-in user.
+    It supports sorting by various fields, filtering by status, category, and
+    priority and calculates various statistics about the tasks.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered HTML page displaying the list of tasks and
+        statistics.
+    """
     sort_by = request.GET.get("sort", "created")
     sort_direction = request.GET.get("direction", "asc")
     status_filter = request.GET.get("status")
@@ -82,6 +97,22 @@ def list(request):
 
 @login_required
 def board(request):
+    """
+    Display a board view of tasks for the logged-in user, categorized by
+    status.
+
+    This view handles the display of tasks for the currently logged-in user in
+    a board format.
+    Tasks are categorized by their status (not started, in progress,
+    completed) and can be ordered by a specified field.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered HTML page displaying the board view of
+        tasks.
+"""
     order_by = request.GET.get("order_by", "status")
     tasks = Task.objects.filter(user=request.user).order_by(order_by)
     not_started_tasks = tasks.filter(status="P")
@@ -104,6 +135,20 @@ def board(request):
 
 @login_required
 def update_task_status(request, task_id):
+    """
+    Update the status of a specific task for the logged-in user.
+
+    This view handles updating the status of a specific task for the currently
+    logged-in user. The new status is provided via a POST request.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        task_id (int): The ID of the task to be updated.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the board view after updating the
+        task status.
+    """
     task = get_object_or_404(Task, id=task_id, user=request.user)
     if request.method == "POST":
         task.status = request.POST.get("status")
@@ -113,6 +158,19 @@ def update_task_status(request, task_id):
 
 @login_required
 def create_task(request):
+    """
+    Create a new task for the logged-in user.
+
+    This view handles the creation of a new task for the currently logged-in
+    user. The task details are provided via a POST request.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the list view after creating the
+        task.
+    """
     if request.method == "POST":
         form = TaskForm(request.POST)
         # print("Form is valid2")
@@ -132,6 +190,21 @@ def create_task(request):
 
 @login_required
 def update_task(request, task_id):
+    """
+    Update an existing task for the logged-in user.
+
+    This view handles updating an existing task for the currently logged-in
+    user. The task details are provided via a POST request.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        task_id (int): The ID of the task to be updated.
+
+    Returns:
+        HttpResponse: The rendered HTML page for updating the task.
+        HttpResponseRedirect: Redirects to the list view after updating the
+        task.
+    """
     task = get_object_or_404(Task, id=task_id, user=request.user)
     if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
@@ -155,6 +228,20 @@ def update_task(request, task_id):
 
 @login_required
 def complete_task(request, task_id):
+    """
+    Mark a task as completed or pending for the logged-in user.
+
+    This view handles marking a specific task as completed or pending for the
+    currently logged-in user. The new status is provided via a POST request.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        task_id (int): The ID of the task to be updated.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the list view after updating the
+        task status.
+    """
     task = get_object_or_404(Task, id=task_id, user=request.user)
     if request.method == "POST":
         task.status = "C" if request.POST.get("completed") else "P"
@@ -165,6 +252,20 @@ def complete_task(request, task_id):
 
 @login_required
 def delete_task(request, task_id):
+    """
+    Delete a specific task for the logged-in user.
+
+    This view handles deleting a specific task for the currently logged-in
+    user. The task is deleted via a POST request.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        task_id (int): The ID of the task to be deleted.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the list view after deleting the
+        task.
+    """
     print(f"Delete task -> {task_id}")
     print(f"User -> {request.user}")
     print(f"Task -> {Task.objects.filter(id=task_id, user=request.user)}")
@@ -180,6 +281,21 @@ def delete_task(request, task_id):
 
 
 def register(request):
+    """
+    Register a new user.
+
+    This view handles the registration of a new user. The user details are
+    provided via a POST request. If the registration is successful,
+    the user is logged in and redirected to the home page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered HTML page for registration.
+        HttpResponseRedirect: Redirects to the home page after successful
+        registration.
+    """
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -196,6 +312,20 @@ def register(request):
 
 @login_required
 def profile(request):
+    """
+    Display and update the profile of the logged-in user.
+
+    This view handles the display and update of the profile for the currently
+    logged-in user. It also calculates various statistics about the user's
+    tasks.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered HTML page displaying and updating the
+        profile.
+    """
     profile, created = Profile.objects.get_or_create(user=request.user)
     tasks = Task.objects.filter(user=request.user)
 
