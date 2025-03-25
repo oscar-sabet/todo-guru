@@ -19,15 +19,14 @@ Website project by Oscar Sabet
         - [Profile](#profile)
         - [Profile mobile](#profile-mobile)
     - [User Stories](#user-stories)
-      - [Example One](#example-one)
-      - [Example Two](#example-two)
+      - [Example](#example)
     - [Project board](#project-board)
   - [Database](#database)
-    - [Interaction with Models](#interaction-with-models)
-    - [Interaction with Templates](#interaction-with-templates)
-    - [Explanation](#explanation)
-    - [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
-    - [Relationships](#relationships)
+      - [Interaction with Models](#interaction-with-models)
+      - [Interaction with Templates](#interaction-with-templates)
+      - [Explanation](#explanation)
+      - [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
+      - [Relationships](#relationships)
     - [AI Usage](#ai-usage)
       - [Key Decisions](#key-decisions)
       - [Bug Identification and Resolution](#bug-identification-and-resolution)
@@ -45,9 +44,7 @@ Website project by Oscar Sabet
     - [tasks/list.html](#taskslisthtml)
     - [tasks/board.html](#tasksboardhtml)
     - [tasks/update\_task.html](#tasksupdate_taskhtml)
-    - [tasks/register.html](#tasksregisterhtml)
     - [tasks/profile.html](#tasksprofilehtml)
-    - [tasks/login.html](#tasksloginhtml)
   - [Repository](#repository)
   - [Sources](#sources)
   - [Future Developments](#future-developments)
@@ -69,6 +66,7 @@ Website project by Oscar Sabet
       - [Models](#models)
       - [Signals](#signals)
       - [urls](#urls)
+  - [Testing Screenshots](#testing-screenshots)
   - [Full Screenshots](#full-screenshots)
     - [Home](#home-1)
       - [Home Desktop](#home-desktop)
@@ -141,7 +139,7 @@ The wireframes did not change significantly during development but addition feat
 
 User stories are a key component of agile development methodologies. They are short, simple descriptions of a feature or functionality told from the perspective of the end user. User stories help to capture the requirements of the application in a way that is easy to understand and communicate. They focus on the value that the feature will bring to the user and provide a basis for planning, development, and testing.
 
-#### Example One
+#### Example
 
 ```text
 As a user, I want to create a new task so that I can keep track of my to-dos.
@@ -163,29 +161,9 @@ Tasks:
    Save the new task to the database.
 ```
 
-#### Example Two
+This user story outlines the need for a task creation feature. It specifies the user's goal (to create a new task) and the reason behind it (to keep track of to-do items). The story details the necessary criteria for fulfilling this requirement and lists the specific tasks that must be completed to implement the feature.
 
-```text
-As a user, I want to view all my tasks in a list so that I can see what needs to be done.
-
-Acceptance Criteria:
-
-   The user can view a list of all tasks.
-
-   The task list includes details such as title, description, status, priority, category, and due date.
-
-   The task list is updated in realtime.#
-
-Tasks:
-
-   Create a view for displaying the task list.
-
-   Implement realtime updates for the task list.
-
-   Ensure the task list displays all relevant details.
-```
-
-This user story captures the requirement for the task creation feature. It describes what the user wants to do (create a new task) and why it is important (to keep track of to-do items).
+You can find more user stories on the project board.
 
 By using user stories, the ToDo|Guru application ensures that the development process is user-centered and focused on delivering value to the end user.
 
@@ -208,15 +186,15 @@ The Kanban board is closely related to Agile methodologies, which emphasize iter
 
 ToDo|Guru uses PostgreSQL as its primary database. PostgreSQL is a powerful, open-source relational database management system that provides robust data storage and retrieval capabilities.
 
-### Interaction with Models
+#### Interaction with Models
 
 In Django, models are Python classes that define the structure of your database tables. Each model maps to a single table in the database. For example, the `Task` model defines the structure of the `tasks` table, including fields such as `title`, `description`, `status`, `priority`, and `due_date`. When you create, update, or delete a model instance, Django interacts with the PostgreSQL database to perform the corresponding SQL operations.
 
-### Interaction with Templates
+#### Interaction with Templates
 
 Django templates are used to render HTML pages dynamically. When you query the database for model instances (e.g., retrieving a list of tasks), the data is passed to the template context. The template then uses this data to generate the HTML content. For example, the task list page retrieves tasks from the database and displays them in a structured format using the template.
 
-### Explanation
+#### Explanation
 
 ![Task Model](readme/task-model.png)
 
@@ -242,11 +220,11 @@ Django templates are used to render HTML pages dynamically. When you query the d
      - `category`: A character field with choices for task category.
      - `user`: A foreign key linking to the `User` model.
 
-### Entity Relationship Diagram (ERD)
+#### Entity Relationship Diagram (ERD)
 
 ![ToDo|Guru Wireframe](readme/erd.png)
 
-### Relationships
+#### Relationships
 
 - **User to Profile**: One-to-One relationship.
 - **User to Task**: One-to-Many relationship.
@@ -374,31 +352,23 @@ The ToDo|Guru application uses several templates to render different parts of th
 
 ### home/home.html
 
-The `home.html` template serves as the landing page for the ToDo|Guru application. It provides an overview of the application's features and benefits, encouraging users to sign up or log in to start managing their tasks. The template is designed with a clean and modern interface, using soft pastel colours and Bootstrap for a responsive design. It includes sections that highlight key features such as task management, user authentication, and real-time updates. This welcoming and informative homepage makes it easy for new users to understand the application and get started.
+The home.html template serves as the landing page for the ToDo|Guru application. It provides an overview of the application's features and benefits, encouraging users to sign up or log in to start managing their tasks. The template is designed with a clean and modern interface, using soft pastel colours and Bootstrap for a responsive design. It includes sections that highlight key features. This welcoming and informative homepage makes it easy for new users to understand the application and get started.
 
 ### tasks/list.html
 
-The `tasks/list.html` template displays a list of tasks for a logged-in user. It allows for sorting and filtering tasks based on various criteria. The template also includes a modal with a form for creating new tasks and displays statistics about the user's tasks. It contains count of completed tasks, count by status and count by category.
+The tasks/list.html template displays a list of tasks for a logged-in user. It allows for sorting and filtering tasks based on various criteria. The template also includes a modal with a form for creating new tasks and displays statistics about the user's tasks. It contains count of completed tasks, count by status and count by category.
 
 ### tasks/board.html
 
-The `tasks/board.html` template presents a board view of tasks for the logged-in user, categorizing tasks by their status (not started, in progress, completed). This helps users to quickly assess the status of their tasks. The template allows tasks to be ordered by a specified field and displays the total count of tasks.
+The tasks/board.html template presents a board view of tasks for the logged-in user, categorizing tasks by their status (not started, in progress, completed). This helps users to quickly assess the status of their tasks. The template allows tasks to be ordered by a specified field and displays the total count of tasks.
 
 ### tasks/update_task.html
 
-The `tasks/update_task.html` template provides a form for updating an existing task for the logged-in user. It displays the current details of the task and allows the user to modify and save changes.
-
-### tasks/register.html
-
-The `tasks/register.html` template is used for registering new users. It displays a registration form where users can enter their details to create a new account. This template is crucial for onboarding new users and ensuring they can access the task management features of the application. It provides a user-friendly interface for the registration process and handles form validation and error messages.
+The tasks/update_task.html template provides a form for updating an existing task for the logged-in user. It displays the current details of the task and allows the user to modify and save changes.
 
 ### tasks/profile.html
 
-The `tasks/profile.html` template displays and allows updating the profile picture of the logged-in user. It includes a modal with a form for updating the profile picture and displays various statistics about the user's tasks. These statistics include the total count of tasks, completed tasks, pending tasks, and tasks in progress. The template also shows the date the user account was created and the last login date. It also shows the complete history of the user as recorded by the app.
-
-### tasks/login.html
-
-The `tasks/login.html` template is used for logging in users. It displays a login form where users can enter their credentials to access their accounts. The template handles form validation and displays error messages if the login attempt is unsuccessful. This template is essential for user authentication, ensuring that only authorized users can access their tasks and personal information. It provides a secure and user-friendly interface for the login process.
+The tasks/profile.html template displays and allows updating the profile picture of the logged-in user. It includes a modal with a form for updating the profile picture and displays various statistics about the user's tasks. These statistics include the total count of tasks, completed tasks, pending tasks, and tasks in progress. The template also shows the date the user account was created and the last login date. It also shows the complete history of the user as recorded by the app.
 
 ## Repository
 
@@ -418,7 +388,7 @@ The deployed Heroku project link can be found here.
 
 AI used for some code
 
-Examples from the bootstrap documentation
+Example code from the bootstrap documentation
 
 images used on home page - <https://appigo.com/>
 
@@ -497,6 +467,44 @@ To avoid too much screenshot bloat I have Included some of the most important fi
 #### urls
 
 ![urls](readme/validator/python/tasks-urls.png)
+
+## Testing Screenshots
+
+Testing Sign Out
+
+![Sign Out](<readme/Screenshots/testing/2025-03-25 13.19.12 ToDo_Guru - Home - Brave.png>)
+
+testing empty form - Sign in
+
+![empty form - Sign in](<readme/Screenshots/testing/2025-03-25 13.38.28 ToDoGuru - Brave.png>)
+
+Testing incorrect username/password
+
+![incorrect username/password](<readme/Screenshots/testing/2025-03-25 13.38.40 ToDoGuru - Brave.png>)
+
+Testing updating task
+
+![updating task](<readme/Screenshots/testing/2025-03-25 13.39.08 ToDo_Guru - Task List - Brave.png>)
+
+Testing
+
+![empty field - create task form](<readme/Screenshots/testing/2025-03-25 13.40.08 ToDo_Guru - Task List - Brave.png>)
+
+Testing alt text
+
+![alt text](<readme/Screenshots/testing/2025-03-25 13.40.31 ToDo_Guru - Task List - Brave.png>)
+
+Testing delete task
+
+![delete task](<readme/Screenshots/testing/2025-03-25 13.41.02 ToDo_Guru - Task Board - Brave.png>)
+
+Testing change status in project board
+
+![change status in project board](<readme/Screenshots/testing/2025-03-25 13.41.51 ToDo_Guru - Profile - Brave.png>)
+
+Testing change profile picture
+
+![change profile picture](<readme/Screenshots/testing/2025-03-25 13.41.51 ToDo_Guru - Profile - Brave.png>)
 
 ## Full Screenshots
 

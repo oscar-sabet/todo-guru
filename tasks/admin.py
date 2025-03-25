@@ -30,10 +30,14 @@ class ProfileInline(admin.StackedInline):
 class UserAdmin(BaseUserAdmin):
     inlines = (ProfileInline,)
 
+    def delete_model(self, request, obj):
+        Task.objects.filter(user=obj).delete()
+        super().delete_model(request, obj)
+
 
 # Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
-# Register the Profile model separately if needed
+# Register the Profile model
 admin.site.register(Profile)
