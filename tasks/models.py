@@ -47,6 +47,10 @@ class Task(models.Model):
         )
 
     def save(self, *args, **kwargs):
+        """
+        If task is marked as completed, set the completed_date to the
+        current date and time.
+        """
         if self.status == "C" and self.completed_date is None:
             self.completed_date = timezone.now()
         super().save(*args, **kwargs)

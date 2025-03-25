@@ -37,6 +37,7 @@ def list(request):
         "created"
         ]
 
+    # Validate sort_by field
     if sort_by not in valid_sort_fields:
         sort_by = "created"
 
@@ -45,6 +46,7 @@ def list(request):
 
     tasks = Task.objects.filter(user=request.user)
 
+    # Calculate statistics
     tasks.count = tasks.count()
     tasks.completed_tasks = tasks.filter(status="C").count()
     tasks.pending_tasks = tasks.filter(status="P").count()
@@ -59,6 +61,7 @@ def list(request):
     medium_priority_tasks = tasks.filter(priority="M").count()
     high_priority_tasks = tasks.filter(priority="H").count()
 
+    # Apply filters
     if status_filter:
         tasks = tasks.filter(status=status_filter)
     if category_filter:
@@ -66,9 +69,12 @@ def list(request):
     if priority_filter:
         tasks = tasks.filter(priority=priority_filter)
 
+    # Apply sorting
     tasks = tasks.order_by(sort_by)
     form = TaskForm()
 
+    # Calculate time taken for completed tasks and time until due for
+    # pending tasks
     for task in tasks:
         if task.completed_date:
             task.time_taken = task.completed_date - task.created

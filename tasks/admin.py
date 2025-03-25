@@ -26,7 +26,6 @@ class ProfileInline(admin.StackedInline):
     verbose_name_plural = "profile"
 
 
-# Define a new User admin
 class UserAdmin(BaseUserAdmin):
     inlines = (ProfileInline,)
 
