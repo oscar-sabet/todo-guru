@@ -200,7 +200,7 @@ Relationships
 
 Key Decisions
 
-AI was helpful in generating code for various parts of the ToDo|Guru application. For instance, AI-assisted in creating the initial structure of the views and templates, which significantly sped up the development process. The generated code provided a solid foundation that, in many cases, required minimal adjustments.
+AI was helpful in generating code for various parts of the ToDo|Guru application. For instance, AI-assisted in creating the initial structure of the views and templates, which significantly sped up development. The generated code provided a solid foundation that, in many cases, required minimal adjustments.
 
 Bug Identification and Resolution
 
@@ -208,7 +208,7 @@ AI can play a role identifying and resolving bugs throughout the development pro
 
 Performance and UX Improvements
 
-AI can contribute to performance and UX improvements by suggesting best practices and optimizations. For example, AI recommended using Bootstrap for responsive design, which improved the user interface across different devices. Additionally, AI-assisted in optimizing database queries, resulting in faster load times and a better user experience.
+AI can contribute to performance and UX improvements by suggesting best practices and optimizations. For example, AI could recommended using Bootstrap for responsive design, which would improve the user interface across different devices.
 
 Workflow Efficiency
 
@@ -318,7 +318,7 @@ For screenshots use the link below.
     - Helps track the progress of tasks, identify bottlenecks, and ensure a smooth flow of work.
 
 13. **Profile Page**:
-    - View and update profile information, including profile picture.
+    - View and update profile picture.
     - Display various statistics about the user's tasks, such as total count of tasks, completed tasks, pending tasks, and tasks in progress.
     - Show the date the user account was created and the last login date.
     - Display the complete history of the user as recorded by the app.
@@ -356,6 +356,8 @@ Example code from the bootstrap documentation
 images used on home page - <https://appigo.com/>
 
 Guru logo - <https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&position=1&origin=tag&related_id=3174915/>
+
+profile placeholder image - <https://www.itsecurityguru.org/>
 
 ## Future Developments
 
