@@ -18,7 +18,7 @@ Website project by Oscar Sabet
   - [AI Usage](#ai-usage)
   - [Deployment](#deployment)
   - [Testing](#testing)
-  - [Features](#features)
+  - [Key Features](#key-features)
   - [Site Contents](#site-contents)
   - [Sources](#sources)
   - [Future Developments](#future-developments)
@@ -257,7 +257,7 @@ Deploying the application to heroku involved several steps.
 | **View Profile**          | Navigate to the profile page.                                                                       | User's profile information (username, email, profile picture) is displayed correctly.                     |PASS                                                                                                     |
 | **Update Profile Picture**| On the profile page, upload a new profile picture.                                                  | Profile picture is updated and displayed correctly.                                                       |PASS                                                                                                     |
 
-## Features
+## Key Features
 
 For screenshots use the link below.
 
@@ -310,6 +310,18 @@ For screenshots use the link below.
 11. **Toast Notifications**:
     - Display toast notifications for various user actions such as task creation, update, deletion, and profile updates.
     - Provide real-time feedback to users, enhancing the user experience by confirming actions and displaying error messages when necessary.
+
+12. **Project Board**:
+    - Visualize the flow of work and manage tasks efficiently using a Kanban board.
+    - Columns represent different stages of the workflow (To Do, In Progress, Done).
+    - Cards represent individual tasks, with labels to prioritize tasks (could-have, should-have, must-have).
+    - Helps track the progress of tasks, identify bottlenecks, and ensure a smooth flow of work.
+
+13. **Profile Page**:
+    - View and update profile information, including profile picture.
+    - Display various statistics about the user's tasks, such as total count of tasks, completed tasks, pending tasks, and tasks in progress.
+    - Show the date the user account was created and the last login date.
+    - Display the complete history of the user as recorded by the app.
 
 ## Site Contents
 
