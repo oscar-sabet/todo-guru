@@ -65,11 +65,16 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",  # msg middleware
-    "django.contrib.messages.middleware.MessageMiddleware",  # msg middleware
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",  # clickjacking middleware
-    "allauth.account.middleware.AccountMiddleware",  # allauth middleware
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # whitenoise middleware
+    # msg middleware
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    # msg middleware
+    "django.contrib.messages.middleware.MessageMiddleware",
+    # clickjacking middleware
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # allauth middleware
+    "allauth.account.middleware.AccountMiddleware",
+    # whitenoise middleware
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "todo_guru.urls"
@@ -156,7 +161,7 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Session settings
-SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Use database-backed sessions
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
 SESSION_COOKIE_NAME = "sessionid"
 SESSION_COOKIE_AGE = 1209600  # Two weeks in seconds
 SESSION_SAVE_EVERY_REQUEST = True
@@ -175,12 +180,3 @@ ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_USERNAME_REQUIRED = True
-
-
-# MESSAGE_TAGS = {
-#     messages.DEBUG: "debug",
-#     messages.INFO: "info",
-#     messages.SUCCESS: "success",
-#     messages.WARNING: "warning",
-#     messages.ERROR: "danger",
-# }

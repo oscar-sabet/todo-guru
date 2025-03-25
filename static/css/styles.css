@@ -325,35 +325,11 @@ button form input {
 .sidebar select:hover {
   box-shadow: var(--shadow-hover);
 }
-/* Footer */
-footer a {
-  color: white;
-}
-@media (max-width: 576px) {
-  main {
-    text-align: center !important;
-  }
-  section {
-    height: 750px;
-  }
-}
-@media (max-width: 768px) {
-  section {
-    height: 750px;
-  }
-}
-@media (max-width: 992px) {
-  section {
-    height: 750px;
-  }
-}
-
-/* CSS TEST */
+/* Datetime info */
 .hover-card .content {
   position: relative;
   overflow: hidden;
 }
-
 .hover-card .default-content,
 .hover-card .hover-content {
   position: absolute;
@@ -379,3 +355,26 @@ footer a {
 .hover-card:hover .hover-content {
   transform: translateY(0);
 }
+/* Footer */
+footer a {
+  color: white;
+}
+@media (max-width: 576px) {
+  main {
+    text-align: center !important;
+  }
+  section {
+    height: 750px;
+  }
+}
+@media (max-width: 768px) {
+  section {
+    height: 750px;
+  }
+}
+@media (max-width: 992px) {
+  section {
+    height: 750px;
+  }
+}
+

@@ -10,6 +10,14 @@ Website project by Oscar Sabet
   - [Agile Planning](#agile-planning)
     - [UI Design](#ui-design)
       - [Wireframe](#wireframe)
+        - [home](#home)
+        - [home mobile](#home-mobile)
+        - [Task List](#task-list)
+        - [Task List mobile](#task-list-mobile)
+        - [Task Board](#task-board)
+        - [Task Board mobile](#task-board-mobile)
+        - [Profile](#profile)
+        - [Profile Mobile](#profile-mobile)
     - [User Stories](#user-stories)
     - [Project board](#project-board)
   - [Database](#database)
@@ -18,7 +26,6 @@ Website project by Oscar Sabet
     - [Explanation](#explanation)
     - [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
     - [Relationships](#relationships)
-  - [Development](#development)
   - [Deployment](#deployment)
   - [Testing](#testing)
   - [Manual Testing](#manual-testing)
@@ -26,17 +33,45 @@ Website project by Oscar Sabet
   - [Key Features](#key-features)
   - [Site Contents](#site-contents)
     - [Templates](#templates)
+    - [home/home.html](#homehomehtml)
+    - [tasks/list.html](#taskslisthtml)
+    - [tasks/board.html](#tasksboardhtml)
+    - [tasks/update\_task.html](#tasksupdate_taskhtml)
+    - [tasks/register.html](#tasksregisterhtml)
+    - [tasks/profile.html](#tasksprofilehtml)
+    - [tasks/login.html](#tasksloginhtml)
   - [Repository](#repository)
   - [Sources](#sources)
   - [Full Screenshots](#full-screenshots)
-    - [Home](#home)
-    - [Task List](#task-list)
+    - [Home](#home-1)
+      - [Home Desktop](#home-desktop)
+      - [Home Mobile](#home-mobile-1)
+    - [Task List](#task-list-1)
+      - [List Desktop](#list-desktop)
+      - [List Mobile](#list-mobile)
     - [Kanban Board](#kanban-board)
-    - [Profile](#profile)
+      - [Board Desktop](#board-desktop)
+      - [Board Mobile](#board-mobile)
+    - [Profile](#profile-1)
+      - [Profile Desktop](#profile-desktop)
+      - [Profile Mobile](#profile-mobile-1)
   - [Validation](#validation)
     - [HTML](#html)
+      - [Home](#home-2)
+      - [Task-List](#task-list-2)
+      - [Task Board](#task-board-1)
+      - [Account](#account)
     - [CSS](#css)
+    - [Jquery](#jquery)
     - [Python](#python)
+      - [views](#views)
+      - [Admin](#admin)
+      - [custom\_filters](#custom_filters)
+      - [Forms](#forms)
+      - [Models](#models)
+      - [Signals](#signals)
+      - [urls](#urls)
+      - [Views](#views-1)
     - [Create New Task](#create-new-task)
 
 ## Introduction
@@ -49,21 +84,49 @@ The application provides a scalable & modern interface which allows users to man
 
 ## Agile Planning
 
-This project utilised an agile methodoligy for the project. making use of user stories, wireframes and a kanban board.
+This project utilised an agile methodology for the project. making use of user stories, wireframes and a kanban board.
 
 ### UI Design
 
-The application provides a scalable & modern interface which uses pastel colours and rounded corners.
+The application provides a scalable & modern interface which uses pastel colours and rounded corners with a minimalist philosophy.
 
 #### Wireframe
 
 Wireframes are a crucial part of the UI/UX design process. They are simple, low-fidelity sketches or digital illustrations that outline the basic structure and layout of a web page or application. Wireframes help to visualize the placement of elements on the page and provide a clear blueprint for the design and development process.
 
-![ToDo|Guru Wireframe](readme/wireframe-desktop-list.png)
+The wireframes did not change significantly during development but addition features and details were added to enhance the application.
 
-This wireframe provides a visual representation of the layout for the ToDo|Guru task list page. It outlines the placement of elements such as the sidebar, task list, and task details.
+##### home
 
-By using wireframes, the ToDo|Guru application ensures that the design and development process is well-planned and focused on delivering a user-friendly interface.
+![home](readme/Wireframes/home.png)
+
+##### home mobile
+
+![home mobile](readme/Wireframes/home-mob.png)
+
+##### Task List
+
+![Task List](readme/Wireframes/list.png)
+
+##### Task List mobile
+
+![Task List mobile](readme/Wireframes/list-mob.png)
+
+##### Task Board
+
+![Task Board](readme/Wireframes/board.png)
+
+##### Task Board mobile
+
+![Task Board mobile](readme/Wireframes/board-mob.png)
+
+##### Profile
+
+![Profile](readme/Wireframes/profile.png)
+
+##### Profile Mobile
+
+![Profile Mobile](readme/Wireframes/profil-mob.png)
 
 ### User Stories
 
@@ -104,8 +167,6 @@ In Django, models are Python classes that define the structure of your database 
 
 Django templates are used to render HTML pages dynamically. When you query the database for model instances (e.g., retrieving a list of tasks), the data is passed to the template context. The template then uses this data to generate the HTML content. For example, the task list page retrieves tasks from the database and displays them in a structured format using the template.
 
-
-
 ### Explanation
 
 ![Task Model](readme/task-model.png)
@@ -142,8 +203,6 @@ Django templates are used to render HTML pages dynamically. When you query the d
 - **User to Task**: One-to-Many relationship.
 
 This ERD provides a visual representation of the relationships between the models in your Django project.
-
-## Development
 
 ## Deployment
 
@@ -233,21 +292,40 @@ Deploying the application to heroku involved several steps.
 
 10. **Django Admin Integration**:
     - Manage tasks and users through the Django admin interface.
-  
-- Task creation, editing, and deletion
-- Task status, priority, and category management
-- Due date setting 
-- Project board (kanban) view
-- User accounts with profile pictures
 
 ## Site Contents
 
 ### Templates
 
-The site uses multiple templates
-apps
+Sure, here is a paragraph for the `home.html` template:
 
-toast alerts
+### home/home.html
+
+The `home.html` template serves as the landing page for the ToDo|Guru application. It provides an overview of the application's features and benefits, encouraging users to sign up or log in to start managing their tasks. The template is designed with a clean and modern interface, using soft pastel colours and uses Bootstrap for a responsive design. It includes sections that highlight key features such as task management, user authentication, and real-time updates. This welcoming and informative homepage makes it easy for new users to understand the application and get started quickly.
+
+### tasks/list.html
+
+The `tasks/list.html` template displays a list of tasks for a logged-in user. It allows for sorting and filtering tasks based on various criteria. The template also includes a modal with a form for creating new tasks and displays statistics about the user's tasks. It contains count of completed tasks, count by status and count by category.
+
+### tasks/board.html
+
+The `tasks/board.html` template presents a board view of tasks for the logged-in user, categorizing tasks by their status (not started, in progress, completed). This helps users to quickly assess the status of their tasks. The template allows tasks to be ordered by a specified field and displays the total count of tasks.
+
+### tasks/update_task.html
+
+The `tasks/update_task.html` template provides a form for updating an existing task for the logged-in user. It displays the current details of the task and allows the user to modify and save changes.
+
+### tasks/register.html
+
+The `tasks/register.html` template is used for registering new users. It displays a registration form where users can enter their details to create a new account. This template is crucial for onboarding new users and ensuring they can access the task management features of the application. It provides a user-friendly interface for the registration process and handles form validation and error messages.
+
+### tasks/profile.html
+
+The `tasks/profile.html` template displays and allows updating the profile picture of the logged-in user. It includes a modal with a form for updating the profile picture and displays various statistics about the user's tasks. These statistics include the total count of tasks, completed tasks, pending tasks, and tasks in progress. The template also shows the date the user account was created and the last login date. It also shows the complete history of the user as recorded by the app.
+
+### tasks/login.html
+
+The `tasks/login.html` template is used for logging in users. It displays a login form where users can enter their credentials to access their accounts. The template handles form validation and displays error messages if the login attempt is unsuccessful. This template is essential for user authentication, ensuring that only authorized users can access their tasks and personal information. It provides a secure and user-friendly interface for the login process.
 
 ## Repository
 
@@ -271,32 +349,113 @@ Guru logo - https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&pos
 
 ### Home
 
+#### Home Desktop
+
 ![Home Desktop](readme/Screenshots/home-dt.png)
+
+#### Home Mobile
+
 ![Home Mobile](readme/Screenshots/todo-guru-2-3e966323d05c.herokuapp.com_.png)
 
 ### Task List
 
+#### List Desktop
+
 ![Task List Desktop](readme/Screenshots/task-dt.png)
+
+#### List Mobile
+
 ![Task List Mobile](readme/Screenshots/task-mob.png)
 
 ### Kanban Board
 
+#### Board Desktop
+
 ![Kanban Board Desktop](readme/Screenshots/board.png)
+
+#### Board Mobile
+
 ![Kanban Board Mobile](readme/Screenshots/board-mob.png)
 
 ### Profile
 
+#### Profile Desktop
+
 ![Profile Desktop](readme/Screenshots/account.png)
+
+#### Profile Mobile
+
 ![Profile Mobile](readme/Screenshots/profil-mob.png)
 
 ## Validation
 
-### HTML
+### HTML 
+
+#### Home
+
+![Home](readme/validator/home.png)
+
+#### Task-List
+
+![Task List](readme/validator/list.png)
+
+#### Task Board
+
+![Kanban Board](readme/validator/board.png)
+
+#### Account
+
+![Profile](readme/validator/profile.png)
 
 ### CSS
 
+![CSS Validator](readme/validator/css.png)
+
+### Jquery
+
+![Jquery](readme/validator/www.utilities-online.info_jquery-validator.png)
+
 ### Python
+
+To avoid too much screenshot bloat I have Included only the most important files.
+
+#### views
+
+![views](readme/validator/python/task-views.png)
+
+#### Admin
+
+![admin](readme/validator/python/tasks-admin.png)
+
+#### custom_filters
+
+![custom_filters](readme/validator/python/tasks-custom_filters.png)
+
+#### Forms
+
+![forms](readme/validator/python/tasks-forms.png)
+
+#### Models
+
+![models](readme/validator/python/tasks-models.png)
+
+#### Signals
+
+![signals](readme/validator/python/tasks-signals.png)
+
+#### urls
+
+![urls](readme/validator/python/tasks-urls.png)
+
+#### Views
+
+![views](readme/validator/python/tasks-views.png)
 
 ### Create New Task
 
 how you used ai for automated tests (using automated tests optional)
+
+![Home](readme/validator/home.png)
+![List](readme/validator/list.png)
+![Profile](readme/validator/profile.png)
+![Board](readme/validator/board.png)

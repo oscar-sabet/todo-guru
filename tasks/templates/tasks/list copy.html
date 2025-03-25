@@ -206,41 +206,40 @@
                         {% for t in tasks %}
                             <div class="accordion-item border-0">
 
-                                
-                                    <div class="xrow w-100">
-                                        {% comment %} <h2 class="accordion-header colors"> {% endcomment %}
-                                        <button class="m-0 my-1 accordion-button collapsed shadow-sm text-decoration-none container-fluid accordion-header colors"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#flush-collapse{{ t.id }}"
-                                                aria-expanded="false"
-                                                aria-controls="flush-collapse{{ t.id }}">
-                                            
-                                                <span class="col-lg-5 ps-4">
-                                                    {% if t.category == "W" %}
-                                                        <i class="fa-solid fa-briefcase text-danger"></i>
-                                                    {% elif t.category == "P" %}
-                                                        <i class="fa-solid fa-user text-warning"></i>
-                                                    {% elif t.category == "H" %}
-                                                        <i class="fa-solid fa-home text-success"></i>
-                                                    {% endif %}
-                                                    {{ t.title }}</span>
-                                                {% if t.status == "P" %}
-                                                    <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-p"><i class="fa-solid fa-exclamation-circle text-danger me-2 "></i>{{ t.get_status_display }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
-                                                {% elif t.status == "IP" %}
-                                                    <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-ip"><i class="fa-solid fa-exclamation-triangle text-warning me-2"></i>{{ t.get_status_display }}</span></span>
-                                                {% elif t.status == "C" %}
-                                                    <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-c"><i class="fa-solid fa-check-circle text-success me-2"></i>{{ t.get_status_display }}</span></span>
+                                <h2 class="accordion-header colors">
+                                    <button class="m-0 my-1 accordion-button collapsed shadow-sm text-decoration-none container-fluid "
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapse{{ t.id }}"
+                                            aria-expanded="false"
+                                            aria-controls="flush-collapse{{ t.id }}">
+                                        <div class="row w-100">
+                                            <span class="col-lg-5 ps-4">
+                                                {% if t.category == "W" %}
+                                                    <i class="fa-solid fa-briefcase text-danger"></i>
+                                                {% elif t.category == "P" %}
+                                                    <i class="fa-solid fa-user text-warning"></i>
+                                                {% elif t.category == "H" %}
+                                                    <i class="fa-solid fa-home text-success"></i>
                                                 {% endif %}
-                                                <span class="col-lg-4 text-end d-none d-lg-inline">
-                                                    {% if t.time_until_due|format_timedelta_days != "0d" %}
-                                                        <i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }} |  
-                                                    {% endif %}
-                                                    <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}</span>
-                                        </button>
-                                    {% comment %} </h2> {% endcomment %}
-                                </div>
-                                <!-- Task Details -->
+                                                {{ t.title }}</span>
+                                            {% if t.status == "P" %}
+                                                <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-p"><i class="fa-solid fa-exclamation-circle text-danger me-2 "></i>{{ t.get_status_display }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                                            {% elif t.status == "IP" %}
+                                                <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-ip"><i class="fa-solid fa-exclamation-triangle text-warning me-2"></i>{{ t.get_status_display }}</span></span>
+                                            {% elif t.status == "C" %}
+                                                <span class="col-lg-3 d-none d-lg-inline text-center"><span class="status status-c"><i class="fa-solid fa-check-circle text-success me-2"></i>{{ t.get_status_display }}</span></span>
+                                            {% endif %}
+                                            <span class="col-lg-4 text-end d-none d-lg-inline">
+                                                {% if t.time_until_due|format_timedelta_days != "0d" %}
+                                                    <i class="fa-solid fa-calendar-days"></i> {{ t.time_until_due|format_timedelta_days }} |  
+                                                {% endif %}
+                                                <i class="fa-solid fa-clock"></i> {{ t.time_until_due|format_timedelta_hours }}</span>
+
+                                        </div>
+                                    </button>
+                                </h2>
+
                                 <div id="flush-collapse{{ t.id }}"
                                     class="accordion-collapse collapse"
                                     data-bs-parent="#tasks-accordion">
