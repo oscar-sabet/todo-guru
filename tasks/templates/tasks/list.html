@@ -96,7 +96,7 @@
                             </div>
                         </li>
                     </ul>
-                    <h6>Status</h5>
+                    <h6>Status</h6>
                     <ul class="list-group mb-2">
                         <li class="list-group-item">
                             <div class="d-flex justify-content-between">
@@ -117,7 +117,7 @@
                             </div>
                         </li>
                     </ul>
-                    <h6>Priority</h5>
+                    <h6>Priority</h6>
                     <ul class="list-group mb-2">
                         <li class="list-group-item">
                             <div class="d-flex justify-content-between">
@@ -168,8 +168,9 @@
                                     data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <form method="post" action="{% url 'create_task' %}">
+                        <form method="post" action="{% url 'create_task' %}">
+                            <div class="modal-body">
+                            
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col-lg-12">

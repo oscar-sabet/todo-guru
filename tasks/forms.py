@@ -22,7 +22,7 @@ class TaskForm(forms.ModelForm):
                 attrs={
                     "cols": 25,
                     "placeholder": "Enter task description here",
-                    "status": forms.HiddenInput(attrs={"value": "P"}),
+                    # "status": forms.HiddenInput(attrs={"value": "P"}),
                 }
             ),
         }
