@@ -17,7 +17,7 @@ Website project by Oscar Sabet
         - [Task Board](#task-board)
         - [Task Board mobile](#task-board-mobile)
         - [Profile](#profile)
-        - [Profile Mobile](#profile-mobile)
+        - [Profile mobile](#profile-mobile)
     - [User Stories](#user-stories)
     - [Project board](#project-board)
   - [Database](#database)
@@ -26,6 +26,12 @@ Website project by Oscar Sabet
     - [Explanation](#explanation)
     - [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
     - [Relationships](#relationships)
+    - [AI Usage](#ai-usage)
+      - [Key Decisions](#key-decisions)
+      - [Bug Identification and Resolution](#bug-identification-and-resolution)
+      - [Performance and UX Improvements](#performance-and-ux-improvements)
+      - [Workflow Efficiency](#workflow-efficiency)
+      - [Negatives](#negatives)
   - [Deployment](#deployment)
   - [Testing](#testing)
   - [Manual Testing](#manual-testing)
@@ -46,20 +52,20 @@ Website project by Oscar Sabet
     - [Home](#home-1)
       - [Home Desktop](#home-desktop)
       - [Home Mobile](#home-mobile-1)
-    - [Task List](#task-list-1)
+    - [Tasks List](#tasks-list)
       - [List Desktop](#list-desktop)
       - [List Mobile](#list-mobile)
     - [Kanban Board](#kanban-board)
       - [Board Desktop](#board-desktop)
       - [Board Mobile](#board-mobile)
-    - [Profile](#profile-1)
+    - [Profile Page](#profile-page)
       - [Profile Desktop](#profile-desktop)
       - [Profile Mobile](#profile-mobile-1)
   - [Validation](#validation)
     - [HTML](#html)
-      - [Home](#home-2)
-      - [Task-List](#task-list-2)
-      - [Task Board](#task-board-1)
+      - [Home Page](#home-page)
+      - [Task-List](#task-list-1)
+      - [Tasks Board](#tasks-board)
       - [Account](#account)
     - [CSS](#css)
     - [Jquery](#jquery)
@@ -71,8 +77,6 @@ Website project by Oscar Sabet
       - [Models](#models)
       - [Signals](#signals)
       - [urls](#urls)
-      - [Views](#views-1)
-    - [Create New Task](#create-new-task)
 
 ## Introduction
 
@@ -124,7 +128,7 @@ The wireframes did not change significantly during development but addition feat
 
 ![Profile](readme/Wireframes/profile.png)
 
-##### Profile Mobile
+##### Profile mobile
 
 ![Profile Mobile](readme/Wireframes/profil-mob.png)
 
@@ -202,7 +206,27 @@ Django templates are used to render HTML pages dynamically. When you query the d
 - **User to Profile**: One-to-One relationship.
 - **User to Task**: One-to-Many relationship.
 
-This ERD provides a visual representation of the relationships between the models in your Django project.
+### AI Usage
+
+#### Key Decisions
+
+AI was helpful in generating code for various parts of the ToDo|Guru application. For instance, AI-assisted in creating the initial structure of the views and templates, which significantly sped up the development process. The generated code provided a solid foundation that, in many cases, required minimal adjustments.
+
+#### Bug Identification and Resolution
+
+AI can play a role identifying and resolving bugs throughout the development process. It can suggest potential fixes and improvements when given an issue or error code.
+
+#### Performance and UX Improvements
+
+AI can contribute to performance and UX improvements by suggesting best practices and optimizations. For example, AI recommended using Bootstrap for responsive design, which improved the user interface across different devices. Additionally, AI-assisted in optimizing database queries, resulting in faster load times and a better user experience.
+
+#### Workflow Efficiency
+
+AI influenced the workflow by automating repetitive tasks and providing intelligent code suggestions. This allowed for faster implementation of new features and a quicker resolution of issues.
+
+#### Negatives
+
+AI can have its negatives as well, which can significantly hinder development. It can generate bad code, which may be buggy and inefficient. The bad code could require several unnecessary imports or use a bad implementation which is discovered at a later point in development.
 
 ## Deployment
 
@@ -293,15 +317,19 @@ Deploying the application to heroku involved several steps.
 10. **Django Admin Integration**:
     - Manage tasks and users through the Django admin interface.
 
+11. **Toast Notifications**:
+    - Display toast notifications for various user actions such as task creation, update, deletion, and profile updates.
+    - Provide real-time feedback to users, enhancing the user experience by confirming actions and displaying error messages when necessary.
+
 ## Site Contents
 
 ### Templates
 
-Sure, here is a paragraph for the `home.html` template:
+The ToDo|Guru application uses several templates to render different parts of the site. Each template serves a specific purpose and is designed to provide a seamless user experience.
 
 ### home/home.html
 
-The `home.html` template serves as the landing page for the ToDo|Guru application. It provides an overview of the application's features and benefits, encouraging users to sign up or log in to start managing their tasks. The template is designed with a clean and modern interface, using soft pastel colours and uses Bootstrap for a responsive design. It includes sections that highlight key features such as task management, user authentication, and real-time updates. This welcoming and informative homepage makes it easy for new users to understand the application and get started quickly.
+The `home.html` template serves as the landing page for the ToDo|Guru application. It provides an overview of the application's features and benefits, encouraging users to sign up or log in to start managing their tasks. The template is designed with a clean and modern interface, using soft pastel colours and Bootstrap for a responsive design. It includes sections that highlight key features such as task management, user authentication, and real-time updates. This welcoming and informative homepage makes it easy for new users to understand the application and get started.
 
 ### tasks/list.html
 
@@ -343,7 +371,11 @@ The deployed Heroku project link can be found here.
 
 ## Sources
 
-Guru logo - https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&position=1&origin=tag&related_id=3174915
+AI used for some code
+
+images used on home page - <https://appigo.com/>
+
+Guru logo - <https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&position=1&origin=tag&related_id=3174915/>
 
 ## Full Screenshots
 
@@ -357,7 +389,7 @@ Guru logo - https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&pos
 
 ![Home Mobile](readme/Screenshots/todo-guru-2-3e966323d05c.herokuapp.com_.png)
 
-### Task List
+### Tasks List
 
 #### List Desktop
 
@@ -377,7 +409,7 @@ Guru logo - https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&pos
 
 ![Kanban Board Mobile](readme/Screenshots/board-mob.png)
 
-### Profile
+### Profile Page
 
 #### Profile Desktop
 
@@ -389,9 +421,9 @@ Guru logo - https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&pos
 
 ## Validation
 
-### HTML 
+### HTML
 
-#### Home
+#### Home Page
 
 ![Home](readme/validator/home.png)
 
@@ -399,7 +431,7 @@ Guru logo - https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&pos
 
 ![Task List](readme/validator/list.png)
 
-#### Task Board
+#### Tasks Board
 
 ![Kanban Board](readme/validator/board.png)
 
@@ -417,7 +449,7 @@ Guru logo - https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&pos
 
 ### Python
 
-To avoid too much screenshot bloat I have Included only the most important files.
+To avoid too much screenshot bloat I have Included some of the most important files.
 
 #### views
 
@@ -446,16 +478,3 @@ To avoid too much screenshot bloat I have Included only the most important files
 #### urls
 
 ![urls](readme/validator/python/tasks-urls.png)
-
-#### Views
-
-![views](readme/validator/python/tasks-views.png)
-
-### Create New Task
-
-how you used ai for automated tests (using automated tests optional)
-
-![Home](readme/validator/home.png)
-![List](readme/validator/list.png)
-![Profile](readme/validator/profile.png)
-![Board](readme/validator/board.png)
