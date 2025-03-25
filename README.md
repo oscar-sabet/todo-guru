@@ -10,41 +10,16 @@ Website project by Oscar Sabet
   - [Agile Planning](#agile-planning)
     - [UI Design](#ui-design)
       - [Wireframe](#wireframe)
-        - [home](#home)
-        - [home mobile](#home-mobile)
-        - [Task List](#task-list)
-        - [Task List mobile](#task-list-mobile)
-        - [Task Board](#task-board)
-        - [Task Board mobile](#task-board-mobile)
-        - [Profile](#profile)
-        - [Profile mobile](#profile-mobile)
     - [User Stories](#user-stories)
-      - [Example](#example)
     - [Project board](#project-board)
   - [Database](#database)
-      - [Interaction with Models](#interaction-with-models)
-      - [Interaction with Templates](#interaction-with-templates)
-      - [Explanation](#explanation)
-      - [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
-      - [Relationships](#relationships)
-    - [AI Usage](#ai-usage)
-      - [Key Decisions](#key-decisions)
-      - [Bug Identification and Resolution](#bug-identification-and-resolution)
-      - [Performance and UX Improvements](#performance-and-ux-improvements)
-      - [Workflow Efficiency](#workflow-efficiency)
-      - [Negatives](#negatives)
+    - [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
+  - [AI Usage](#ai-usage)
   - [Deployment](#deployment)
   - [Testing](#testing)
-  - [Manual Testing](#manual-testing)
   - [Features](#features)
   - [Key Features](#key-features)
   - [Site Contents](#site-contents)
-    - [Templates](#templates)
-    - [home/home.html](#homehomehtml)
-    - [tasks/list.html](#taskslisthtml)
-    - [tasks/board.html](#tasksboardhtml)
-    - [tasks/update\_task.html](#tasksupdate_taskhtml)
-    - [tasks/profile.html](#tasksprofilehtml)
   - [Repository](#repository)
   - [Sources](#sources)
   - [Future Developments](#future-developments)
@@ -52,34 +27,11 @@ Website project by Oscar Sabet
     - [Account Reset Using Email](#account-reset-using-email)
   - [Validation](#validation)
     - [HTML](#html)
-      - [Home Page](#home-page)
-      - [Task-List](#task-list-1)
-      - [Tasks Board](#tasks-board)
-      - [Account](#account)
     - [CSS](#css)
     - [Jquery](#jquery)
     - [Python](#python)
-      - [views](#views)
-      - [Admin](#admin)
-      - [custom\_filters](#custom_filters)
-      - [Forms](#forms)
-      - [Models](#models)
-      - [Signals](#signals)
-      - [urls](#urls)
   - [Testing Screenshots](#testing-screenshots)
   - [Full Screenshots](#full-screenshots)
-    - [Home](#home-1)
-      - [Home Desktop](#home-desktop)
-      - [Home Mobile](#home-mobile-1)
-    - [Tasks List](#tasks-list)
-      - [List Desktop](#list-desktop)
-      - [List Mobile](#list-mobile)
-    - [Kanban Board](#kanban-board)
-      - [Board Desktop](#board-desktop)
-      - [Board Mobile](#board-mobile)
-    - [Profile Page](#profile-page)
-      - [Profile Desktop](#profile-desktop)
-      - [Profile Mobile](#profile-mobile-1)
 
 ## Introduction
 
@@ -99,39 +51,39 @@ The application provides a scalable & modern interface which uses pastel colours
 
 #### Wireframe
 
-Wireframes are a crucial part of the UI/UX design process. They are simple, low-fidelity sketches or digital illustrations that outline the basic structure and layout of a web page or application. Wireframes help to visualize the placement of elements on the page and provide a clear blueprint for the design and development process.
+Wireframes are a important part of the UI design process. They are simple sketches that outline the basic structure and layout of a web page or application. Wireframes help to visualize the placement of elements on the page and guide the development process.
 
-The wireframes did not change significantly during development but addition features and details were added to enhance the application.
+The design did not change significantly during development but addition features, content and details were added to enhance the applicationbeyond the initial scope.
 
-##### home
+home
 
 ![home](readme/Wireframes/home.png)
 
-##### home mobile
+home mobile
 
 ![home mobile](readme/Wireframes/home-mob.png)
 
-##### Task List
+Task List
 
 ![Task List](readme/Wireframes/list.png)
 
-##### Task List mobile
+Task List mobile
 
 ![Task List mobile](readme/Wireframes/list-mob.png)
 
-##### Task Board
+Task Board
 
 ![Task Board](readme/Wireframes/board.png)
 
-##### Task Board mobile
+Task Board mobile
 
 ![Task Board mobile](readme/Wireframes/board-mob.png)
 
-##### Profile
+Profile
 
 ![Profile](readme/Wireframes/profile.png)
 
-##### Profile mobile
+Profile mobile
 
 ![Profile Mobile](readme/Wireframes/profil-mob.png)
 
@@ -139,7 +91,7 @@ The wireframes did not change significantly during development but addition feat
 
 User stories are a key component of agile development methodologies. They are short, simple descriptions of a feature or functionality told from the perspective of the end user. User stories help to capture the requirements of the application in a way that is easy to understand and communicate. They focus on the value that the feature will bring to the user and provide a basis for planning, development, and testing.
 
-#### Example
+Example
 
 ```text
 As a user, I want to create a new task so that I can keep track of my to-dos.
@@ -186,15 +138,15 @@ The Kanban board is closely related to Agile methodologies, which emphasize iter
 
 ToDo|Guru uses PostgreSQL as its primary database. PostgreSQL is a powerful, open-source relational database management system that provides robust data storage and retrieval capabilities.
 
-#### Interaction with Models
+Interaction with Models
 
 In Django, models are Python classes that define the structure of your database tables. Each model maps to a single table in the database. For example, the `Task` model defines the structure of the `tasks` table, including fields such as `title`, `description`, `status`, `priority`, and `due_date`. When you create, update, or delete a model instance, Django interacts with the PostgreSQL database to perform the corresponding SQL operations.
 
-#### Interaction with Templates
+Interaction with Templates
 
 Django templates are used to render HTML pages dynamically. When you query the database for model instances (e.g., retrieving a list of tasks), the data is passed to the template context. The template then uses this data to generate the HTML content. For example, the task list page retrieves tasks from the database and displays them in a structured format using the template.
 
-#### Explanation
+Explanation
 
 ![Task Model](readme/task-model.png)
 
@@ -220,34 +172,34 @@ Django templates are used to render HTML pages dynamically. When you query the d
      - `category`: A character field with choices for task category.
      - `user`: A foreign key linking to the `User` model.
 
-#### Entity Relationship Diagram (ERD)
+### Entity Relationship Diagram (ERD)
 
 ![ToDo|Guru Wireframe](readme/erd.png)
 
-#### Relationships
+Relationships
 
 - **User to Profile**: One-to-One relationship.
 - **User to Task**: One-to-Many relationship.
 
-### AI Usage
+## AI Usage
 
-#### Key Decisions
+Key Decisions
 
 AI was helpful in generating code for various parts of the ToDo|Guru application. For instance, AI-assisted in creating the initial structure of the views and templates, which significantly sped up the development process. The generated code provided a solid foundation that, in many cases, required minimal adjustments.
 
-#### Bug Identification and Resolution
+Bug Identification and Resolution
 
 AI can play a role identifying and resolving bugs throughout the development process. It can suggest potential fixes and improvements when given an issue or error code.
 
-#### Performance and UX Improvements
+Performance and UX Improvements
 
 AI can contribute to performance and UX improvements by suggesting best practices and optimizations. For example, AI recommended using Bootstrap for responsive design, which improved the user interface across different devices. Additionally, AI-assisted in optimizing database queries, resulting in faster load times and a better user experience.
 
-#### Workflow Efficiency
+Workflow Efficiency
 
 AI influenced the workflow by automating repetitive tasks and providing intelligent code suggestions. This allowed for faster implementation of new features and a quicker resolution of issues.
 
-#### Negatives
+Negatives
 
 AI can have its negatives as well, which can significantly hinder development. It can generate bad code, which may be buggy and inefficient. The bad code could require several unnecessary imports or use a bad implementation which is discovered at a later point in development.
 
@@ -271,8 +223,6 @@ Deploying the application to heroku involved several steps.
    - Deploy the application
 
 ## Testing
-
-## Manual Testing
 
 | **Feature**               | **Test Case**                                                                                       | **Expected Result**                                                                                       | **Result**                                                                                       |
 |---------------------------|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
@@ -346,27 +296,25 @@ Deploying the application to heroku involved several steps.
 
 ## Site Contents
 
-### Templates
-
 The ToDo|Guru application uses several templates to render different parts of the site. Each template serves a specific purpose and is designed to provide a seamless user experience.
 
-### home/home.html
+home/home.html
 
 The home.html template serves as the landing page for the ToDo|Guru application. It provides an overview of the application's features and benefits, encouraging users to sign up or log in to start managing their tasks. The template is designed with a clean and modern interface, using soft pastel colours and Bootstrap for a responsive design. It includes sections that highlight key features. This welcoming and informative homepage makes it easy for new users to understand the application and get started.
 
-### tasks/list.html
+tasks/list.html
 
 The tasks/list.html template displays a list of tasks for a logged-in user. It allows for sorting and filtering tasks based on various criteria. The template also includes a modal with a form for creating new tasks and displays statistics about the user's tasks. It contains count of completed tasks, count by status and count by category.
 
-### tasks/board.html
+tasks/board.html
 
 The tasks/board.html template presents a board view of tasks for the logged-in user, categorizing tasks by their status (not started, in progress, completed). This helps users to quickly assess the status of their tasks. The template allows tasks to be ordered by a specified field and displays the total count of tasks.
 
-### tasks/update_task.html
+tasks/update_task.html
 
 The tasks/update_task.html template provides a form for updating an existing task for the logged-in user. It displays the current details of the task and allows the user to modify and save changes.
 
-### tasks/profile.html
+tasks/profile.html
 
 The tasks/profile.html template displays and allows updating the profile picture of the logged-in user. It includes a modal with a form for updating the profile picture and displays various statistics about the user's tasks. These statistics include the total count of tasks, completed tasks, pending tasks, and tasks in progress. The template also shows the date the user account was created and the last login date. It also shows the complete history of the user as recorded by the app.
 
@@ -410,23 +358,27 @@ Another important feature is the ability to reset account passwords using email.
 
 ### HTML
 
-There are several errors that were flagged by the validator, however all of these appear to be caused by either django or third party libraries.
+There were no HTML errors but the lighthouse report did show some room for improvement.
 
-#### Home Page
+Home Page
 
 ![Home](readme/validator/home.png)
 
-#### Task-List
+Task-List
 
 ![Task List](readme/validator/list.png)
 
-#### Tasks Board
+Tasks Board
 
 ![Kanban Board](readme/validator/board.png)
 
-#### Account
+Account
 
 ![Profile](readme/validator/profile.png)
+
+Lighthouse
+
+![Lighthouse](readme/validator/lighthouse-report.png)
 
 ### CSS
 
@@ -440,31 +392,31 @@ There are several errors that were flagged by the validator, however all of thes
 
 To avoid too much screenshot bloat I have Included some of the most important files.
 
-#### views
+views
 
 ![views](readme/validator/python/task-views.png)
 
-#### Admin
+Admin
 
 ![admin](readme/validator/python/tasks-admin.png)
 
-#### custom_filters
+custom_filters
 
 ![custom_filters](readme/validator/python/tasks-custom_filters.png)
 
-#### Forms
+Forms
 
 ![forms](readme/validator/python/tasks-forms.png)
 
-#### Models
+Models
 
 ![models](readme/validator/python/tasks-models.png)
 
-#### Signals
+Signals
 
 ![signals](readme/validator/python/tasks-signals.png)
 
-#### urls
+urls
 
 ![urls](readme/validator/python/tasks-urls.png)
 
@@ -486,21 +438,17 @@ Testing updating task
 
 ![updating task](<readme/Screenshots/testing/2025-03-25 13.39.08 ToDo_Guru - Task List - Brave.png>)
 
-Testing
+Testing empty field - create task form
 
 ![empty field - create task form](<readme/Screenshots/testing/2025-03-25 13.40.08 ToDo_Guru - Task List - Brave.png>)
 
-Testing alt text
-
-![alt text](<readme/Screenshots/testing/2025-03-25 13.40.31 ToDo_Guru - Task List - Brave.png>)
-
 Testing delete task
 
-![delete task](<readme/Screenshots/testing/2025-03-25 13.41.02 ToDo_Guru - Task Board - Brave.png>)
+![delete task](<readme/Screenshots/testing/2025-03-25 13.40.31 ToDo_Guru - Task List - Brave.png>)
 
 Testing change status in project board
 
-![change status in project board](<readme/Screenshots/testing/2025-03-25 13.41.51 ToDo_Guru - Profile - Brave.png>)
+![change status in project board](<readme/Screenshots/testing/2025-03-25 13.41.02 ToDo_Guru - Task Board - Brave.png>)
 
 Testing change profile picture
 
@@ -508,42 +456,34 @@ Testing change profile picture
 
 ## Full Screenshots
 
-### Home
-
-#### Home Desktop
+Home Desktop
 
 ![Home Desktop](readme/Screenshots/home-dt.png)
 
-#### Home Mobile
+Home Mobile
 
 ![Home Mobile](readme/Screenshots/todo-guru-2-3e966323d05c.herokuapp.com_.png)
 
-### Tasks List
-
-#### List Desktop
+Tasks List Desktop
 
 ![Task List Desktop](readme/Screenshots/task-dt.png)
 
-#### List Mobile
+Tasks List Mobile
 
 ![Task List Mobile](readme/Screenshots/task-mob.png)
 
-### Kanban Board
-
-#### Board Desktop
+Board Desktop
 
 ![Kanban Board Desktop](readme/Screenshots/board.png)
 
-#### Board Mobile
+Board Mobile
 
 ![Kanban Board Mobile](readme/Screenshots/board-mob.png)
 
-### Profile Page
-
-#### Profile Desktop
+Profile Desktop
 
 ![Profile Desktop](readme/Screenshots/account.png)
 
-#### Profile Mobile
+Profile Mobile
 
 ![Profile Mobile](readme/Screenshots/profil-mob.png)

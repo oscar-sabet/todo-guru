@@ -15,14 +15,13 @@ class TaskForm(forms.ModelForm):
             "category",
             "status"
             ]
-        exclude = ["user", "created", "completed_date"]  # , "status"]
+        exclude = ["user", "created", "completed_date"]
         widgets = {
             "due_date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
             "description": forms.Textarea(
                 attrs={
                     "cols": 25,
                     "placeholder": "Enter task description here",
-                    # "status": forms.HiddenInput(attrs={"value": "P"}),
                 }
             ),
         }
