@@ -2,25 +2,25 @@
 {% load static %}
 {% block title %}ToDo|Guru - Task Board{% endblock %}
 {% block content %}
-        <div class="container xmy-5">
-            <h2 class="text-center my-2">Task Lists by Status</h2>
-            <div class="row">
-                    <div class="col-md-4">
-                        <h3 class="text-center">Not Started</h3>
-                        <ul class="list-group rounded">
-                            {% for task in not_started_tasks %}
-                                <li class="list-group-item list-group-flush bg-7">
-                                    <h5>
-                                        {% if task.category == "W" %}
-                                            <i class="fa-solid fa-briefcase text-danger"></i>
-                                        {% elif task.category == "P" %}
-                                            <i class="fa-solid fa-user text-warning"></i>
-                                        {% elif task.category == "H" %}
-                                            <i class="fa-solid fa-home text-success"></i>
-                                        {% endif %}
-                                        {{ task.title }}
-                                    </h5>
-                                    <div class="row">
+    <div class="container">
+        <h2 class="text-center my-2">Task Lists by Status</h2>
+        <div class="row">
+                <div class="col-md-4">
+                    <h3 class="text-center">Not Started</h3>
+                    <ul class="list-group rounded">
+                        {% for task in not_started_tasks %}
+                            <li class="list-group-item list-group-flush bg-7">
+                                <h5>
+                                    {% if task.category == "W" %}
+                                        <i class="fa-solid fa-briefcase text-danger"></i>
+                                    {% elif task.category == "P" %}
+                                        <i class="fa-solid fa-user text-warning"></i>
+                                    {% elif task.category == "H" %}
+                                        <i class="fa-solid fa-home text-success"></i>
+                                    {% endif %}
+                                    {{ task.title }}
+                                </h5>
+                                <div class="row">
                                     <form method="post" action="{% url 'update_task_status' task.id %}" class="p-0 text-end">
                                         {% csrf_token %}
                                         <select name="status" onchange="this.form.submit()" class="xp-0 m-0">
@@ -29,71 +29,71 @@
                                             <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
                                         </select>
                                     </form>
-                                    
-                                </li>
-                            {% endfor %}
-                        </ul> 
-                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul> 
+                </div>
 
-                    <div class="col-md-4">
-                        <h3 class="text-center">In Progress</h3>
-                        <ul class="list-group rounded">
-                            {% for task in in_progress_tasks %}
-                                <li class="list-group-item list-group-flush bg-1">
-                                    <h5>
-                                        {% if task.category == "W" %}
-                                            <i class="fa-solid fa-briefcase text-danger"></i>
-                                        {% elif task.category == "P" %}
-                                            <i class="fa-solid fa-user text-warning"></i>
-                                        {% elif task.category == "H" %}
-                                            <i class="fa-solid fa-home text-success"></i>
-                                        {% endif %}
-                                        {{ task.title }}
-                                    </h5>
-                                    <div class="row">
-                                    <form method="post" action="{% url 'update_task_status' task.id %}" class="p-0 text-end">
-                                        {% csrf_token %}
-                                        <select name="status" onchange="this.form.submit()" class="xp-0 m-0">
-                                            <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
-                                            <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
-                                            <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
-                                        </select>
-                                    </form>
-                                    
-                                </li>
-                            {% endfor %}
-                        </ul> 
-                    </div>
+                <div class="col-md-4">
+                    <h3 class="text-center">In Progress</h3>
+                    <ul class="list-group rounded">
+                        {% for task in in_progress_tasks %}
+                            <li class="list-group-item list-group-flush bg-1">
+                                <h5>
+                                    {% if task.category == "W" %}
+                                        <i class="fa-solid fa-briefcase text-danger"></i>
+                                    {% elif task.category == "P" %}
+                                        <i class="fa-solid fa-user text-warning"></i>
+                                    {% elif task.category == "H" %}
+                                        <i class="fa-solid fa-home text-success"></i>
+                                    {% endif %}
+                                    {{ task.title }}
+                                </h5>
+                                <div class="row">
+                                <form method="post" action="{% url 'update_task_status' task.id %}" class="p-0 text-end">
+                                    {% csrf_token %}
+                                    <select name="status" onchange="this.form.submit()" class="xp-0 m-0">
+                                        <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
+                                        <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
+                                        <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
+                                    </select>
+                                </form>
+                                
+                            </li>
+                        {% endfor %}
+                    </ul> 
+                </div>
 
-                    <div class="col-md-4">
-                        <h3 class="text-center">Completed</h3>
-                        <ul class="list-group rounded">
-                            {% for task in completed_tasks %}
-                                <li class="list-group-item list-group-flush bg-2">
-                                    <h5>
-                                        {% if task.category == "W" %}
-                                            <i class="fa-solid fa-briefcase text-danger"></i>
-                                        {% elif task.category == "P" %}
-                                            <i class="fa-solid fa-user text-warning"></i>
-                                        {% elif task.category == "H" %}
-                                            <i class="fa-solid fa-home text-success"></i>
-                                        {% endif %}
-                                        {{ task.title }}
-                                    </h5>
-                                    <div class="row">
-                                    <form method="post" action="{% url 'update_task_status' task.id %}" class="p-0 text-end">
-                                        {% csrf_token %}
-                                        <select name="status" onchange="this.form.submit()" class="xp-0 m-0">
-                                            <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
-                                            <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
-                                            <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
-                                        </select>
-                                    </form>
-                                    
-                                </li>
-                            {% endfor %}
-                        </ul> 
-                    </div>
-
-        </div>
+                <div class="col-md-4">
+                    <h3 class="text-center">Completed</h3>
+                    <ul class="list-group rounded">
+                        {% for task in completed_tasks %}
+                            <li class="list-group-item list-group-flush bg-2">
+                                <h5>
+                                    {% if task.category == "W" %}
+                                        <i class="fa-solid fa-briefcase text-danger"></i>
+                                    {% elif task.category == "P" %}
+                                        <i class="fa-solid fa-user text-warning"></i>
+                                    {% elif task.category == "H" %}
+                                        <i class="fa-solid fa-home text-success"></i>
+                                    {% endif %}
+                                    {{ task.title }}
+                                </h5>
+                                <div class="row">
+                                <form method="post" action="{% url 'update_task_status' task.id %}" class="p-0 text-end">
+                                    {% csrf_token %}
+                                    <select name="status" onchange="this.form.submit()" class="xp-0 m-0">
+                                        <option value="P" {% if task.status == 'P' %}selected{% endif %}>Not Started</option>
+                                        <option value="IP" {% if task.status == 'IP' %}selected{% endif %}>In Progress</option>
+                                        <option value="C" {% if task.status == 'C' %}selected{% endif %}>Completed</option>
+                                    </select>
+                                </form>
+                                
+                            </li>
+                        {% endfor %}
+                    </ul> 
+                </div>
+            </div>
+    </div>
 {% endblock %}
