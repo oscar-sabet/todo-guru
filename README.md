@@ -19,6 +19,8 @@ Website project by Oscar Sabet
         - [Profile](#profile)
         - [Profile mobile](#profile-mobile)
     - [User Stories](#user-stories)
+      - [Example One](#example-one)
+      - [Example Two](#example-two)
     - [Project board](#project-board)
   - [Database](#database)
     - [Interaction with Models](#interaction-with-models)
@@ -48,19 +50,9 @@ Website project by Oscar Sabet
     - [tasks/login.html](#tasksloginhtml)
   - [Repository](#repository)
   - [Sources](#sources)
-  - [Full Screenshots](#full-screenshots)
-    - [Home](#home-1)
-      - [Home Desktop](#home-desktop)
-      - [Home Mobile](#home-mobile-1)
-    - [Tasks List](#tasks-list)
-      - [List Desktop](#list-desktop)
-      - [List Mobile](#list-mobile)
-    - [Kanban Board](#kanban-board)
-      - [Board Desktop](#board-desktop)
-      - [Board Mobile](#board-mobile)
-    - [Profile Page](#profile-page)
-      - [Profile Desktop](#profile-desktop)
-      - [Profile Mobile](#profile-mobile-1)
+  - [Future Developments](#future-developments)
+    - [Email Notifications](#email-notifications)
+    - [Account Reset Using Email](#account-reset-using-email)
   - [Validation](#validation)
     - [HTML](#html)
       - [Home Page](#home-page)
@@ -77,6 +69,19 @@ Website project by Oscar Sabet
       - [Models](#models)
       - [Signals](#signals)
       - [urls](#urls)
+  - [Full Screenshots](#full-screenshots)
+    - [Home](#home-1)
+      - [Home Desktop](#home-desktop)
+      - [Home Mobile](#home-mobile-1)
+    - [Tasks List](#tasks-list)
+      - [List Desktop](#list-desktop)
+      - [List Mobile](#list-mobile)
+    - [Kanban Board](#kanban-board)
+      - [Board Desktop](#board-desktop)
+      - [Board Mobile](#board-mobile)
+    - [Profile Page](#profile-page)
+      - [Profile Desktop](#profile-desktop)
+      - [Profile Mobile](#profile-mobile-1)
 
 ## Introduction
 
@@ -136,8 +141,48 @@ The wireframes did not change significantly during development but addition feat
 
 User stories are a key component of agile development methodologies. They are short, simple descriptions of a feature or functionality told from the perspective of the end user. User stories help to capture the requirements of the application in a way that is easy to understand and communicate. They focus on the value that the feature will bring to the user and provide a basis for planning, development, and testing.
 
+#### Example One
+
 ```text
 As a user, I want to create a new task so that I can keep track of my to-dos.
+
+Acceptance Criteria:
+
+   The user can access a form to create a new task.
+
+   The form includes fields for title, description, status, priority, category, and due date.
+
+   The task is saved to the database and appears in the task list.
+
+Tasks:
+
+   Create a form for adding new tasks.
+
+   Implement form validation.
+
+   Save the new task to the database.
+```
+
+#### Example Two
+
+```text
+As a user, I want to view all my tasks in a list so that I can see what needs to be done.
+
+Acceptance Criteria:
+
+   The user can view a list of all tasks.
+
+   The task list includes details such as title, description, status, priority, category, and due date.
+
+   The task list is updated in realtime.#
+
+Tasks:
+
+   Create a view for displaying the task list.
+
+   Implement realtime updates for the task list.
+
+   Ensure the task list displays all relevant details.
 ```
 
 This user story captures the requirement for the task creation feature. It describes what the user wants to do (create a new task) and why it is important (to keep track of to-do items).
@@ -373,55 +418,29 @@ The deployed Heroku project link can be found here.
 
 AI used for some code
 
+Examples from the bootstrap documentation
+
 images used on home page - <https://appigo.com/>
 
 Guru logo - <https://www.flaticon.com/free-icon/guru_3174915?term=guru&page=1&position=1&origin=tag&related_id=3174915/>
 
-## Full Screenshots
+## Future Developments
 
-### Home
+ToDo|Guru aims to continuously improve and expand its features to enhance user experience and functionality. Here are some of the planned future developments:
 
-#### Home Desktop
+### Email Notifications
 
-![Home Desktop](readme/Screenshots/home-dt.png)
+One of the key features planned for future development is the integration of email notifications. Users will be able to receive email reminders for upcoming due dates, task deadlines, and important updates. Additionally, users could also have the option to customize the frequency and type of notifications they wish to receive.
 
-#### Home Mobile
+### Account Reset Using Email
 
-![Home Mobile](readme/Screenshots/todo-guru-2-3e966323d05c.herokuapp.com_.png)
-
-### Tasks List
-
-#### List Desktop
-
-![Task List Desktop](readme/Screenshots/task-dt.png)
-
-#### List Mobile
-
-![Task List Mobile](readme/Screenshots/task-mob.png)
-
-### Kanban Board
-
-#### Board Desktop
-
-![Kanban Board Desktop](readme/Screenshots/board.png)
-
-#### Board Mobile
-
-![Kanban Board Mobile](readme/Screenshots/board-mob.png)
-
-### Profile Page
-
-#### Profile Desktop
-
-![Profile Desktop](readme/Screenshots/account.png)
-
-#### Profile Mobile
-
-![Profile Mobile](readme/Screenshots/profil-mob.png)
+Another important feature is the ability to reset account passwords using email. The process will involve sending a password reset link to the user's registered email address, allowing them to set a new password. This feature will enhance the security and user-friendliness of the application, ensuring that users can easily regain access to their accounts.
 
 ## Validation
 
 ### HTML
+
+There are several errors that were flagged by the validator, however all of these appear to be caused by either django or third party libraries.
 
 #### Home Page
 
@@ -478,3 +497,45 @@ To avoid too much screenshot bloat I have Included some of the most important fi
 #### urls
 
 ![urls](readme/validator/python/tasks-urls.png)
+
+## Full Screenshots
+
+### Home
+
+#### Home Desktop
+
+![Home Desktop](readme/Screenshots/home-dt.png)
+
+#### Home Mobile
+
+![Home Mobile](readme/Screenshots/todo-guru-2-3e966323d05c.herokuapp.com_.png)
+
+### Tasks List
+
+#### List Desktop
+
+![Task List Desktop](readme/Screenshots/task-dt.png)
+
+#### List Mobile
+
+![Task List Mobile](readme/Screenshots/task-mob.png)
+
+### Kanban Board
+
+#### Board Desktop
+
+![Kanban Board Desktop](readme/Screenshots/board.png)
+
+#### Board Mobile
+
+![Kanban Board Mobile](readme/Screenshots/board-mob.png)
+
+### Profile Page
+
+#### Profile Desktop
+
+![Profile Desktop](readme/Screenshots/account.png)
+
+#### Profile Mobile
+
+![Profile Mobile](readme/Screenshots/profil-mob.png)

@@ -263,12 +263,8 @@ def delete_task(request, task_id):
         HttpResponseRedirect: Redirects to the list view after deleting the
         task.
     """
-    print(f"Delete task -> {task_id}")
-    print(f"User -> {request.user}")
-    print(f"Task -> {Task.objects.filter(id=task_id, user=request.user)}")
-
     task = get_object_or_404(Task, id=task_id, user=request.user)
-    print(f"Task -> {task}")
+
     if request.method == "POST":
         task.delete()
         messages.success(request, "Task deleted successfully.")
