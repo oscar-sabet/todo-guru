@@ -30,7 +30,9 @@ class TaskForm(forms.ModelForm):
     def clean_title(self):
         title = self.cleaned_data.get('title')
         if len(title) > 60:
-            raise forms.ValidationError("The title must be 60 characters or less.")
+            raise forms.ValidationError(
+                "The title must be 60 characters or less."
+                )
         return title
 
 
