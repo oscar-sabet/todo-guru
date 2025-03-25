@@ -19,7 +19,6 @@ Website project by Oscar Sabet
   - [Deployment](#deployment)
   - [Testing](#testing)
   - [Features](#features)
-  - [Key Features](#key-features)
   - [Site Contents](#site-contents)
   - [Sources](#sources)
   - [Future Developments](#future-developments)
@@ -42,6 +41,8 @@ The application provides a scalable & modern interface which allows users to man
 ![ToDo|Guru Site](readme/demo.png)
 
 ## Repository
+
+You can use username: `test` password: `password021` since it has some tasks already added.
 
 The Github repo can be found here.
 
@@ -258,7 +259,9 @@ Deploying the application to heroku involved several steps.
 
 ## Features
 
-## Key Features
+For screenshots use the link below.
+
+[Full Screenshots](#full-screenshots)
 
 1. **User Authentication**:
    - Secure user registration and login.
