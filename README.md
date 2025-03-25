@@ -7,6 +7,7 @@ Website project by Oscar Sabet
 - [todo-guru](#todo-guru)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
+  - [Repository](#repository)
   - [Agile Planning](#agile-planning)
     - [UI Design](#ui-design)
       - [Wireframe](#wireframe)
@@ -20,7 +21,6 @@ Website project by Oscar Sabet
   - [Features](#features)
   - [Key Features](#key-features)
   - [Site Contents](#site-contents)
-  - [Repository](#repository)
   - [Sources](#sources)
   - [Future Developments](#future-developments)
     - [Email Notifications](#email-notifications)
@@ -40,6 +40,20 @@ ToDo|Guru is task management application coded in html/css, utilising the bootst
 The application provides a scalable & modern interface which allows users to manage their tasks easily and contains advanced features which allow users to organise & filter tasks.
 
 ![ToDo|Guru Site](readme/demo.png)
+
+## Repository
+
+The Github repo can be found here.
+
+[Github Repo](https://github.com/oscar-sabet/todo-guru)
+
+The project Board can be found here.
+
+[Github Project Board](https://github.com/users/oscar-sabet/projects/4)
+
+The deployed Heroku project link can be found here.
+
+[Deployed Link](https://todo-guru-2-3e966323d05c.herokuapp.com/)
 
 ## Agile Planning
 
@@ -317,20 +331,6 @@ The tasks/update_task.html template provides a form for updating an existing tas
 tasks/profile.html
 
 The tasks/profile.html template displays and allows updating the profile picture of the logged-in user. It includes a modal with a form for updating the profile picture and displays various statistics about the user's tasks. These statistics include the total count of tasks, completed tasks, pending tasks, and tasks in progress. The template also shows the date the user account was created and the last login date. It also shows the complete history of the user as recorded by the app.
-
-## Repository
-
-The Github repo can be found here.
-
-[Github Repo](https://github.com/oscar-sabet/todo-guru)
-
-The project Board can be found here.
-
-[Github Project Board](https://github.com/users/oscar-sabet/projects/4)
-
-The deployed Heroku project link can be found here.
-
-[Deployed Link](https://todo-guru-2-3e966323d05c.herokuapp.com/)
 
 ## Sources
 
