@@ -68,7 +68,7 @@ The application provides a scalable & modern interface which uses pastel colours
 
 Wireframes are a important part of the UI design process. They are simple sketches that outline the basic structure and layout of a web page or application. Wireframes help to visualize the placement of elements on the page and guide the development process.
 
-The design did not change significantly during development but addition features, content and details were added to enhance the applicationbeyond the initial scope.
+The design did not change significantly during development but addition features, content and details were added to enhance the application beyond the initial scope.
 
 home
 
