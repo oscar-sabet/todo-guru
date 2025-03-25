@@ -173,17 +173,15 @@ def create_task(request):
     """
     if request.method == "POST":
         form = TaskForm(request.POST)
-        # print("Form is valid2")
         if form.is_valid():
-            # print("Form is valid")
             task = form.save(commit=False)
             task.user = request.user
             task.status = "P"
             task.save()
             messages.success(request, "Task created successfully.")
         else:
-            print(form.errors)
-            messages.error(request, "Failed to create task.")
+            for error in form.errors.values():
+                messages.error(request, error)
         return redirect("list")
     return redirect("list")
 
@@ -213,9 +211,8 @@ def update_task(request, task_id):
             messages.success(request, "Task updated successfully.")
             return redirect("list")
         else:
-            print(request.POST)
-            print(form.errors)
-            messages.error(request, "Failed to update task.")
+            for error in form.errors.values():
+                messages.error(request, error)
             return redirect("list")
     else:
         form = TaskForm(instance=task)

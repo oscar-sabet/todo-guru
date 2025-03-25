@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        # fields = "__all__"
         fields = [
             "title",
             "description",
@@ -27,6 +26,12 @@ class TaskForm(forms.ModelForm):
                 }
             ),
         }
+
+    def clean_title(self):
+        title = self.cleaned_data.get('title')
+        if len(title) > 60:
+            raise forms.ValidationError("The title must be 60 characters or less.")
+        return title
 
 
 class RegistrationForm(UserCreationForm):
